@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.papyrus.infra.ui.emf.providers.EMFGraphicalContentProvider_history__platform:/resource/Assignment1_Team5/Assignment1_Team5.uml:uml:Type:type">
+	</section>
+	<section name="org.eclipse.papyrus.infra.ui.emf.providers.EMFGraphicalContentProvider_history__platform:/resource/Assignment1_Team5/Assignment1_Team5.uml:uml:Constraint:bodyCondition">
+	</section>
+	<section name="org.eclipse.papyrus.infra.ui.emf.providers.EMFGraphicalContentProvider_null">
+		<section name="History">
+			<list key="PreviousSelection">
+				<item value="platform:/resource/Assignment1_Team5/Assignment1_Team5.uml#_m85ccPexEfC5C-JN9uvAYA"/>
+				<item value="platform:/resource/Assignment1_Team5/Assignment1_Team5.uml#_a0BUMPezEfC5C-JN9uvAYA"/>
+				<item value="platform:/resource/Assignment1_Team5/Assignment1_Team5.uml#_uKTbIPetEfCEQ9UiIXPEGw"/>
+			</list>
+		</section>
+	</section>
+	<section name="org.eclipse.papyrus.infra.ui.emf.providers.EMFGraphicalContentProvider_history__pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml:uml:UseCase:useCase">
+	</section>
+</section>
