@@ -1,4 +1,3 @@
-package Assignment1_Team5;
 
 /**
  * Represents a Settlement building in the game.

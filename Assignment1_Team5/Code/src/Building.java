@@ -1,4 +1,3 @@
-package Assignment1_Team5;
 
 /**
  * Abstract class representing a Building in the game.

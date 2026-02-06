@@ -1,4 +1,3 @@
-package Assignment1_Team5;
 
 /**
  * Represents a City building in the game.
