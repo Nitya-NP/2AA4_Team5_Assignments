@@ -3,67 +3,121 @@
 // --------------------------------------------------------
 
 
-/************************************************************/
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+
 /**
  * 
  */
 public class Player {
-	/**
-	 * 
-	 */
+	
 	private int playerId;
-	/**
-	 * 
-	 */
 	private int points;
-	/**
-	 * 
-	 */
-	private BuildingToIntegerMapEntry[] buildingsMap;
-	/**
-	 * 
-	 */
-	private ResourcesToIntegerMapEntry[] resourcesMap;
-
-	/**
-	 * 
-	 * @param id 
-	 */
-	public void Player(int id) {
+	private Map<Resources, Integer> resources;
+	private Map<Building, Integer> buildings;
+	
+	public Player(int playerId) {
+		this.playerId=playerId;
+		this.points=0;
+		this.resources=new HashMap<>();
+		this.buildings=new HashMap<>();
+		initResources();
+		initBuildings();
 	}
-
-	/**
-	 * 
-	 * @param points 
-	 */
-	public void addPoints(int points) {
+	
+	private void initResources() {
+		for(Resources r: Resources.values()) {
+			this.resources.put(r, 0);
+		}
 	}
+	
+	private void initBuildings() {
+		Building c, s,r;
+		c= new Cities();
+		this.buildings.put(c, 0);
+		s= new Settlement();
+		this.buildings.put(s, 0);
+		r= new Roads();
+		this.buildings.put(r, 0);
 
-	/**
-	 * 
-	 * @return 
-	 */
-	public int getPoints() {
 	}
-
-	/**
-	 * 
-	 * @return 
-	 */
+	
 	public int getPlayerId() {
+		return this.playerId ;
 	}
-
-	/**
-	 * 
-	 * @param resource 
-	 * @return 
-	 */
+	
+	public int getPoints() {
+		return this.points;
+	}
+	
+	public void addPoints(int points) {
+		this.points+=points;
+	}
+	
 	public int getResource(Resources resource) {
+		return resources.getOrDefault(resource,0);
+	}
+	
+	public void addResource(Resources res, int amount) {
+		resources.put(res, resources.getOrDefault(res, 0)+amount);
+	}
+	
+	public boolean removeResource(Resources res, int amount) {
+		int cur= resources.getOrDefault(res, 0);
+		if(cur>=amount) {
+			resources.put(res, cur-amount);
+			return true;
+		}
+		return false;
 	}
 
-	/**
-	 * 
-	 */
+	public void addBuilding(Building buil) {
+		buildings.put(buil, buildings.getOrDefault(buil, 0)+1);
+		
+	}
+	
+	public int getBuilding(Building buil) {
+		return buildings.getOrDefault(buil, 0);
+	}
+	
+	public String toString() {
+		return "Player "+ playerId + "| Points: "+ points + "| Resources: " +resources + "| Buildings: " +buildings;
+	}
+	
 	public void takeTurn() {
+		Random rand= new Random();
+		int action= rand.nextInt(3);
+
+		switch (action) {
+			case 0:
+				Resources[] allResources= Resources.values();
+				Resources r= allResources[rand.nextInt(allResources.length)];
+				addResource(r, 1);
+				System.out.println("Player " + playerId+" gained 1" +r);
+				break;
+			
+			case 1:
+				for(Building b: buildings.keySet()){
+					addBuilding(b);
+					addPoints(1);
+
+					System.out.println("Player " +playerId+ " built a " + b.getClass().getSimpleName());
+					return;
+				}
+
+				System.out.println("Player "+playerId+ " could not build anything");
+				break;
+			
+			case 2:
+				System.out.println("Player " +playerId + " passed the turn");
+				break;
+		
+			default:
+				break;
+		}
+		
+		
 	}
 }
