@@ -25,7 +25,7 @@ public class Game {
 	/**
 	 * The list of player participating in the game, contains null if less than 6.
 	 */
-	private Player[6] players;
+	private Player[] players;
 
 	/**
 	 * The board for the game.
