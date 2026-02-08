@@ -7,13 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * The Player classs represents an player participating in Catan simulation.
+ * A Player owns resources, buildings, and winning points, and can take a turn.
+ * 
+ * It track resources, track buildings owned, track winning points and exceute a random action during a turn
+ */
 public class Player {
 	
-	private int playerId;
-	private int points;
-	private Map<Resources, Integer> resources;
-	private Map<Building, Integer> buildings;
+	private int playerId; //Unique identifier of the player
+	private int points; //Current winning points
+	private Map<Resources, Integer> resources; //Stores the number of resources player owns
+	private Map<Class<?,extends Building>, Integer> buildings; //Stores buildings owned by the player (Roads,Settlement, Cities)
 	
+	/**
+	 * Constructs a new Player with empty resources and buildings
+	 * 
+	 * @param playerId the player's unique ID
+	 */
 	public Player(int playerId) {
 		this.playerId=playerId;
 		this.points=0;
@@ -23,43 +34,64 @@ public class Player {
 		initBuildings();
 	}
 	
+	/**
+	 * Initializes all resources to 0
+	 */
 	private void initResources() {
 		for(Resources r: Resources.values()) {
 			this.resources.put(r, 0);
 		}
 	}
 	
+	/**
+	 * Initializes building counts to 0
+	 */
 	private void initBuildings() {
-		Building c, s,r;
-		c= new Cities();
-		this.buildings.put(c, 0);
-		s= new Settlement();
-		this.buildings.put(s, 0);
-		r= new Roads();
-		this.buildings.put(r, 0);
+		buildings.put(Roads.class,0); 
+		buildings.put(Settlement.class,0);
+		buildings.put(Cities.class,0);
 
 	}
 	
+	/**
+	 * @return the player's id
+	 */
 	public int getPlayerId() {
 		return this.playerId ;
 	}
 	
+	/**
+	 *  @return the player's winning points
+	 */
 	public int getPoints() {
 		return this.points;
 	}
 	
+	/**
+	 * Adds points to the player
+	 */
 	public void addPoints(int points) {
 		this.points+=points;
 	}
 	
+	/**
+	 *  @return the amount of specific resource
+	 */
 	public int getResource(Resources resource) {
 		return resources.getOrDefault(resource,0);
 	}
 	
+	/**
+	 * Adds resources to player
+	 */
 	public void addResource(Resources res, int amount) {
 		resources.put(res, resources.getOrDefault(res, 0)+amount);
 	}
 	
+	/**
+	 * Removes resources if possible
+	 *  @return either true or false 
+	 */
 	public boolean removeResource(Resources res, int amount) {
 		int cur= resources.getOrDefault(res, 0);
 		if(cur>=amount) {
@@ -69,49 +101,78 @@ public class Player {
 		return false;
 	}
 
+	/**
+	 * Adds a building to the player based on its class name
+	 * Also updates points where applicable
+	 */
 	public void addBuilding(Building buil) {
-		buildings.put(buil, buildings.getOrDefault(buil, 0)+1);
+		Class<? extends Building> type = buil.getClass();
+		buildings.put(type,buildings.getOrDefault(type,0)+1);
+		
+		//Add points according to rules
+		if(buil instanceof Settlement) {
+			addPoints(1);
+		}
+		else if(buil instanceof Cities) {
+			addPoints(2);
+		}
 		
 	}
 	
-	public int getBuilding(Building buil) {
-		return buildings.getOrDefault(buil, 0);
+	/**
+	 *  @return how many buildings of given type the player owns
+	 */
+	public int getBuilding(Class<? extends Building> type) {
+		return buildings.getOrDefault(type, 0);
 	}
 	
+	/**
+	 *  @return a summary of the player
+	 */
 	public String toString() {
 		return "Player "+ playerId + "| Points: "+ points + "| Resources: " +resources + "| Buildings: " +buildings;
 	}
 	
-	public void takeTurn() {
+	/**
+	 * Simulater a player's turn
+	 * 
+	 * 0: gain random resource
+	 * 1: build a random building
+	 * 2: pass
+	 * 
+	 * @param roundNum current round number
+	 * @Return actions taken during the round
+	 */
+	public void takeTurn(int roundNum) {
 		Random rand= new Random();
 		int action= rand.nextInt(3);
 
 		switch (action) {
 			case 0:
+				//Gain a random resource
 				Resources[] allResources= Resources.values();
 				Resources r= allResources[rand.nextInt(allResources.length)];
 				addResource(r, 1);
-				System.out.println("Player " + playerId+" gained 1" +r);
+				return roundNum + ": Player " + playerId+" have gained 1 " +r);
 				break;
 			
 			case 1:
-				for(Building b: buildings.keySet()){
-					addBuilding(b);
-					addPoints(1);
-
-					System.out.println("Player " +playerId+ " built a " + b.getClass().getSimpleName());
-					return;
-				}
-
-				System.out.println("Player "+playerId+ " could not build anything");
-				break;
-			
-			case 2:
-				System.out.println("Player " +playerId + " passed the turn");
-				break;
-		
+				//Build a random building
+				Building buil;
+				int choice= rand.nextInt(3);
+				
+				if(choice ==0) buil= new Roads();
+				else if(choice ==1) buil= new Settlement();
+				else buil= new Cities()
+						
+				addBuilding(buil);
+				return roundNum + ":Player " +playerId+ " built a " + buil.getClass().getSimpleName());
+				
+			case 2: 
+				return roundNum+ ":Player "+playerId+ " passes");
+	
 			default:
-				break;
+				return "";
 		}
 		
 		
