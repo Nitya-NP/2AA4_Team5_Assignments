@@ -27,8 +27,4 @@ public abstract class Building {
 	public Player getOwner() {
 		return owner;
 	}
-
-	
-	//abstract method to be implemented in subclasses
-	public abstract int getPoints();
 }
