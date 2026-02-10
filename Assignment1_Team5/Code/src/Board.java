@@ -6,6 +6,7 @@
  * The board class represents the game board in the Catan game
  * This mainly stores the board elements and provides access to them through getter methods
  * 
+ * @author Nitya Patel
  */
 public class Board {
 	private Tile[] tiles; //Tiles on board
@@ -46,3 +47,6 @@ public class Board {
 		return this.roads;
 	}
 }
+
+
+
