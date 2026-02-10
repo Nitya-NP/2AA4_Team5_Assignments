@@ -8,7 +8,6 @@ import java.util.Random;
 /**
  * The Player classs represents an player participating in Catan simulation.
  * A Player owns resources, buildings, and winning points, and can take a turn.
- * 
  * It track resources, track buildings owned, track winning points and exceute a random action during a turn
  * 
  * @author Nitya Patel
