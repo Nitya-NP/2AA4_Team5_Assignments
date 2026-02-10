@@ -40,7 +40,7 @@ public class Game {
 	 */
 	public Game(Player[] players, Board board) {
 		this.roundsPlayed = 0;
-		this.maxRounds = 20;
+		this.maxRounds = 8192;
 		this.players = players;
 		this.board = board;
 	}
@@ -72,7 +72,7 @@ public class Game {
 	public void playRound() {
 		for (Player p : players) {
 			if (p != null) {
-				p.takeTurn();
+				p.takeTurn(roundsPlayed, board.getNode());
 			}
 		}
 	}
