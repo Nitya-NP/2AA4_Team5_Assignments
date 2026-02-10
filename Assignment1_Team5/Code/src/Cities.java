@@ -23,7 +23,7 @@ public class Cities extends Building {
 	 * 
 	 * @param owner - the player which owns the city
 	 */
-	public void Cities(Player owner) {
+	public Cities(Player owner) {
 		super(owner);
 		points = 2;
 	}
