@@ -5,11 +5,14 @@
 
 /************************************************************/
 /**
- * 
+ * Represents the different resources present in a Catan Game
+ * (Wool, Brick, Lumber, Grain, Ore, and Nothing)
  */
 public enum Resources {
-	/**
-	 * 
-	 */
-	WOOL;
+	WOOL,
+	BRICK,
+	LUMBER,
+	GRAIN,
+	ORE,
+	NOTHING;
 }
