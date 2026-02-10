@@ -46,6 +46,3 @@ public class Board {
 		return this.roads;
 	}
 }
-
-
-}
