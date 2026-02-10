@@ -145,7 +145,7 @@ public class Player {
 	 * @param nodes a list of available nodes on the board that buildings can use
 	 * 
 	 */
-	public void takeTurn(int roundNum, List<Node> nodes) {
+	public void takeTurn(int roundNum, Node []nodes) {
 		Random rand= new Random();
 		int action= rand.nextInt(3);
 		
@@ -165,11 +165,11 @@ public class Player {
 				int choice= rand.nextInt(3);
 				
 				//change it 
-				if(choice ==0 && nodes.size()>=2){
+				if(choice ==0 && nodes.length>=2){
 
 					//Select 2 random nodes for the road
-					Node n1 = nodes.get(rand.nextInt(nodes.size()));
-                	Node n2 = nodes.get(rand.nextInt(nodes.size()));
+					Node n1 = nodes[rand.nextInt(nodes.length)];
+                	Node n2 = nodes[rand.nextInt(nodes.length)];
                 	Node[] roadNodes = { n1, n2 };
 
 					buil= new Roads(roadNodes, this);
