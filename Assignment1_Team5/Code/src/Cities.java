@@ -14,7 +14,6 @@ public class Cities extends Building {
 	 * 
 	 * @return points - each city is worth 2 victory points
 	 */
-	@Override
 	public int getPoints() {
 		return points;
 	}
