@@ -23,7 +23,7 @@ public class Settlement extends Building {
 	 * 
 	 * @param owner - the player who owns the settlement
 	 */
-	public void Settlement(Player owner) {
+	public Settlement(Player owner) {
 		super(owner);
 		this.points = 1;
 	}
