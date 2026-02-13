@@ -6,6 +6,7 @@ public class Node {
 	// Private attributes of the node class
 	private int nodeId;
 	private Building building;
+	private List<Node> adjacentNodes= new ArrayList<>();
 
 	/**
 	 * Constructs a new Node with the given ID
@@ -43,5 +44,14 @@ public class Node {
 	 */
 	public void setBuilding(Building building) {
 		this.building = building;
+	}
+
+	
+	public void addAdjacentNode(Node node){
+		adjacentNodes.add(node);
+	}
+
+	public List<Node> getAdjacentNodes(){
+		return adjacentNodes;
 	}
 }
