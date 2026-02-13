@@ -273,7 +273,7 @@
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_xu7bYP0yEfCpcYr7ez_t7A" name="board" type="_kKc_cPewEfCEQ9UiIXPEGw"/>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_Qu6RwAiQEfG5lbs7Ytc6mw" name="rollMultiDice">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_V7aL0AiQEfG5lbs7Ytc6mw" name="">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_V7aL0AiQEfG5lbs7Ytc6mw" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
       </ownedOperation>

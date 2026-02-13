@@ -33,6 +33,11 @@ public class Game {
 	private Board board;
 
 	/**
+	 * The Dice to play the game.
+	 */
+	private Dice dice;
+
+	/**
 	 * Constructs a new game with the players and board.
 	 * 
 	 * @param players the players in the game
@@ -43,6 +48,7 @@ public class Game {
 		this.maxRounds = 8192;
 		this.players = players;
 		this.board = board;
+		this.dice = new MultiDice();
 	}
 
 	/**
@@ -70,12 +76,22 @@ public class Game {
 	 * Plays a single round of the game
 	 */
 	public void playRound() {
+		int diceValue = rollMultiDice(); // To roll the dice.
+
+		// To play a single round.
 		for (Player p : players) {
 			if (p != null) {
-				p.takeTurn(roundsPlayed, board.getNode());
+				board.takeTurn(p, diceValue);
 			}
 		}
 	}
 
-	public 
+	/**
+	 * To roll multiple dices.
+	 * 
+	 * @return sum of all dices rolled.
+	 */
+	public int rollMultiDice() {
+		return dice.roll();
+	}
 }
