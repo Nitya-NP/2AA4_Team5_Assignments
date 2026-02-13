@@ -124,69 +124,189 @@ public class Board {
 	public Roads[] getRoad() {
 		return this.roads;
 	}
+ 	
+	private boolean settlementDistance(Node node){
+        for(Node n: node.getAdjacentNodes()){
+            if(n.isOccupied()){
+                return true;
+            }
+        }
+        return false; 
+    }
+    /**
+     * Checks if a road connecting two nodes can be built by a player.
+     * The proposed road or building is already connected with player's exiting
+     * road.
+     * 
+     * @param player the player attempting to build
+     * @param n1     the first node of proposed road
+     * @param n2     second node of the proposed road
+     * @return true if the road can be built, false otherwise
+     */
+    private boolean isRoadConnected(Player player, Node n1, Node n2) {
+        // Check if either node has a player owned building
+        if ((n1.isOccupied() && n1.getBuilding().getOwner() == player) || (n2.isOccupied() && n2.getBuilding().getOwner() == player))
+            return true;
 
-	/**
-	 * Simulates a player's turn
-	 * Handles dice roll, resource gain, and random building action.
-	 * 
-	 * @param player the player whose turn it is 
-	 * @param diceValue the dice value (2-12)
-	 */
-	public void takeTurn(Player player, int diceValue) {
-		Random rand = new Random();
-	    System.out.println("Player " + player.getPlayerId()+ " rolled " + diceValue);
-	    if (diceValue != 7) {
-	        Resources[] allResources = Resources.values();
-	        Resources r = allResources[rand.nextInt(allResources.length)];
-	        player.addResource(r, 1);
-	
-	        System.out.println("Player " + player.getPlayerId() + " gained 1 " + r);
-	    } else {
-	        System.out.println("Player " + player.getPlayerId() + " rolled 7 (no resources)");
-	    }
-	
-	    //Choose Random Action
-	    int action = rand.nextInt(4); // 0=road, 1=settlement, 2=city, 3=pass
-	
-	    switch (action) {
-	
-	        case 0: // Build Road
-	            Node[] nodes = getNode();
-	            if (nodes.length >= 2) {
-	                Node n1 = nodes[rand.nextInt(nodes.length)];
-	                Node n2; 
-					do{
-						n2= nodes[rand.nextInt(nodes.length)];
-					}while (n1==n2);
-	
-	                Node[] roadNodes = { n1, n2 };
-	
-	                Building road = new Roads(roadNodes, player);
-	                player.addBuilding(road);
-	
-	                System.out.println("Player " + player.getPlayerId() + " built Road");
-	            }
-	            break;
-	
-	        case 1: // Build Settlement
-	            Building settlement = new Settlement(player);
-	            player.addBuilding(settlement);
-	            System.out.println("Player " + player.getPlayerId() + " built Settlement");
-	            break;
-	
-	        case 2: // Build City
-	            Building city = new Cities(player);
-	            player.addBuilding(city);
-	            System.out.println("Player " + player.getPlayerId() + " built City");
-	            break;
-	
-	        case 3: // Pass
-	            System.out.println("Player " + player.getPlayerId() + " passes");
-	            break;
-	    }
-	}
-    	
+        // check if the road is connected to an exiting player owned road
+        for (Roads road : roads) {
+            if (road != null && road.getOwner() == player && (road.isConnected(n1) || road.isConnected(n2))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a new road to the board's road array
+     * add the road to the empty slot.
+     * 
+     * @param road the road to add
+     */
+    private void addRoadToBoard(Roads road) {
+        for (int i = 0; i < roads.length; i++) {
+            if (roads[i] == null) {
+                roads[i] = road;
+                break;
+            }
+        }
+    }
+
+    /**
+     * Simulates the player's turn
+     * Handles dice roll, resource production and builds a raod, settlement, or city
+     * If player has more than 7 resources, only building actions are attempted
+     * 
+     * @param player    the player whose turn it is
+     * @param diceValue the dice value (2-12)
+     */
+    public void takeTurn(Player player, int diceValue) {
+        Random rand = new Random();
+        System.out.println("Player " + player.getPlayerId() + " rolled " + diceValue);
+
+        // Resource gain
+        produceResource(player, diceValue);
+
+        // Determine action
+        int action = (player.getTotalResources() > 7) ? rand.nextInt(3) : rand.nextInt(4);
+
+        if (action == 0)
+            buildRoad(player); // Build Road
+        else if (action == 1)
+            buildSettlement(player); // Build Settlement
+        else if (action == 2)
+            buildCity(player); // Build City
+        else
+            System.out.println("Player " + player.getPlayerId() + " passes"); // Pass
+    }
+
+    /**
+     * Helper method
+     * Handles resouce production for the player based on the dice roll
+     * if dice value is 7, no resouce are gained
+     * 
+     * @param player    the player gaining resource
+     * @param diceValue dice roll value
+     */
+    private void produceResource(Player player, int diceValue) {
+        Random rand = new Random();
+        if (diceValue != 7) {
+            Resources[] allResources = Resources.values();
+            Resources r = allResources[rand.nextInt(allResources.length)];
+            player.addResource(r, 1);
+            System.out.println("Player " + player.getPlayerId() + " gained 1 " + r);
+        } else {
+            System.out.println("Player " + player.getPlayerId() + " rolled 7 (no resources)");
+        }
+    }
+
+    /**
+     * Helper method
+     * Attempts to build a road for the player.
+     * Randomly selects two nodes and checks if the road can be legally built.
+     * adds road to the board if successful and in the player's building
+     * 
+     * @param player the player
+     */
+    private void buildRoad(Player player) {
+        Random rand = new Random();
+        Node[] allNodes = getNode();
+        Node n1, n2;
+        boolean validRoad = false;
+        int attempts = 0;
+
+        do {
+            n1 = allNodes[rand.nextInt(allNodes.length)];
+            n2 = allNodes[rand.nextInt(allNodes.length)];
+            attempts++;
+            if (n1 != n2 && isRoadConnected(player, n1, n2)) {
+                validRoad = true;
+                break;
+            }
+        } while (attempts < 10);
+
+        if (validRoad) {
+            Roads road = new Roads(new Node[] { n1, n2 }, player);
+            player.addBuilding(road);
+            addRoadToBoard(road);
+            System.out.println("Player " + player.getPlayerId() + " built Road between Node " + n1.getNodeId()+ " and Node " + n2.getNodeId());
+        } else {
+            System.out.println("Player " + player.getPlayerId() + " failed to build a valid road.");
+        }
+
+    }
+
+    /**
+     * helper method
+     * Attempts to build a City for the player by upgrading the settlement.
+     * Randomly selects a node and checks if it is settlement.
+     * upgrades the settlement into city to the player's buildings and the board
+     * 
+     * @param player
+     */
+    private void buildCity(Player player) {
+        Random rand = new Random();
+        Node n = getNode()[rand.nextInt(nodes.length)];
+        if (n.isOccupied() && n.getBuilding() instanceof Settlement && n.getBuilding().getOwner()==player)  {
+            Building city = new Cities(player);
+            n.setBuilding(city);
+            player.addBuilding(city);
+            System.out.println("Player " + player.getPlayerId() + " upgraded to City at Node " + n.getNodeId());
+        } else {
+            System.out.println("City upgrade failed.");
+        }
+
+    }
+
+    /**
+     * Attempts to build a Settlement for the player.
+     * Randomly selects a node and checks if it is empty.
+     * adds the settlement to the player's buildings and the board
+     * 
+     * @param player
+     */
+    private void buildSettlement(Player player) {
+        Random rand = new Random();
+        Node n = getNode()[rand.nextInt(nodes.length)];
+        if (!n.isOccupied() && !settlementDistance(n)) {
+            Building settlement = new Settlement(player);
+            n.setBuilding(settlement);
+            player.addBuilding(settlement);
+            System.out.println("Player " + player.getPlayerId() + " built Settlement at Node " + n.getNodeId());
+        } else {
+            System.out.println("Settlement failed");
+        }
+
+    }
+
+
 }
+
+
+
+
+
+
 
 
 
