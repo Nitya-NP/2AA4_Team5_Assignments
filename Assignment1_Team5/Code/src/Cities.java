@@ -3,6 +3,8 @@
  * Represents a City building in the game.
  * 
  * A City is type of building that provides 2 victory points to its owner.
+ *
+ *  @author Krisha Patel
  */
 public class Cities extends Building {
 	/**
