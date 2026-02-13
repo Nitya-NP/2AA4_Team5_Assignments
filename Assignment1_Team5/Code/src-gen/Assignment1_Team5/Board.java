@@ -111,4 +111,10 @@ public class Board {
 	 */
 	private void buildSettlement(Player player) {
 	}
+
+	/**
+	 * 
+	 */
+	private void assignResources() {
+	}
 }
