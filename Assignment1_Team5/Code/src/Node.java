@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * The Node class represents a node on the board. 
  * It has an ID and can hold a building.
