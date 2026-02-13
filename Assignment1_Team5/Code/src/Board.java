@@ -90,62 +90,61 @@ public class Board {
 	 * 
 	 * @param player the player whose turn it is 
 	 * @param diceValue the dice value (2-12)
-	 * 
 	 */
 	public void takeTurn(Player player, int diceValue) {
-
-    Random rand = new Random();
-    System.out.println("Player " + player.getPlayerId()+ " rolled " + diceValue);
-    if (diceValue != 7) {
-        Resources[] allResources = Resources.values();
-        Resources r = allResources[rand.nextInt(allResources.length)];
-        player.addResource(r, 1);
-
-        System.out.println("Player " + player.getPlayerId() + " gained 1 " + r);
-    } else {
-        System.out.println("Player " + player.getPlayerId() + " rolled 7 (no resources)");
-    }
-
-    //Choose Random Action
-    int action = rand.nextInt(4); // 0=road, 1=settlement, 2=city, 3=pass
-
-    switch (action) {
-
-        case 0: // Build Road
-            Node[] nodes = getNode();
-            if (nodes.length >= 2) {
-                Node n1 = nodes[rand.nextInt(nodes.length)];
-                Node n2; 
-				do{
-					n2= nodes[rand.nextInt(nodes.length)];
-				}while (n1==n2);
-
-                Node[] roadNodes = { n1, n2 };
-
-                Building road = new Roads(roadNodes, player);
-                player.addBuilding(road);
-
-                System.out.println("Player " + player.getPlayerId() + " built Road");
-            }
-            break;
-
-        case 1: // Build Settlement
-            Building settlement = new Settlement(player);
-            player.addBuilding(settlement);
-            System.out.println("Player " + player.getPlayerId() + " built Settlement");
-            break;
-
-        case 2: // Build City
-            Building city = new Cities(player);
-            player.addBuilding(city);
-            System.out.println("Player " + player.getPlayerId() + " built City");
-            break;
-
-        case 3: // Pass
-            System.out.println("Player " + player.getPlayerId() + " passes");
-            break;
-    }
-}
+		Random rand = new Random();
+	    System.out.println("Player " + player.getPlayerId()+ " rolled " + diceValue);
+	    if (diceValue != 7) {
+	        Resources[] allResources = Resources.values();
+	        Resources r = allResources[rand.nextInt(allResources.length)];
+	        player.addResource(r, 1);
+	
+	        System.out.println("Player " + player.getPlayerId() + " gained 1 " + r);
+	    } else {
+	        System.out.println("Player " + player.getPlayerId() + " rolled 7 (no resources)");
+	    }
+	
+	    //Choose Random Action
+	    int action = rand.nextInt(4); // 0=road, 1=settlement, 2=city, 3=pass
+	
+	    switch (action) {
+	
+	        case 0: // Build Road
+	            Node[] nodes = getNode();
+	            if (nodes.length >= 2) {
+	                Node n1 = nodes[rand.nextInt(nodes.length)];
+	                Node n2; 
+					do{
+						n2= nodes[rand.nextInt(nodes.length)];
+					}while (n1==n2);
+	
+	                Node[] roadNodes = { n1, n2 };
+	
+	                Building road = new Roads(roadNodes, player);
+	                player.addBuilding(road);
+	
+	                System.out.println("Player " + player.getPlayerId() + " built Road");
+	            }
+	            break;
+	
+	        case 1: // Build Settlement
+	            Building settlement = new Settlement(player);
+	            player.addBuilding(settlement);
+	            System.out.println("Player " + player.getPlayerId() + " built Settlement");
+	            break;
+	
+	        case 2: // Build City
+	            Building city = new Cities(player);
+	            player.addBuilding(city);
+	            System.out.println("Player " + player.getPlayerId() + " built City");
+	            break;
+	
+	        case 3: // Pass
+	            System.out.println("Player " + player.getPlayerId() + " passes");
+	            break;
+	    }
+	}
+    	
 }
 
 
