@@ -65,6 +65,51 @@ public class Player {
 	/**
 	 * 
 	 */
-	public void takeTurn() {
+	private void initBuildings() {
+	}
+
+	/**
+	 * 
+	 */
+	private void initResources() {
+	}
+
+	/**
+	 * 
+	 * @param resource 
+	 * @param amount 
+	 */
+	public void addResource(Resources resource, int amount) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 * @param resource 
+	 * @param amount 
+	 */
+	public boolean removeResource(Resources resource, int amount) {
+	}
+
+	/**
+	 * 
+	 * @param building 
+	 */
+	public void addBuilding(Building building) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 * @param building 
+	 */
+	public int getBuilding(Building building) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public String toString() {
 	}
 }

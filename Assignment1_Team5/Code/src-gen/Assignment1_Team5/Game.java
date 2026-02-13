@@ -25,6 +25,10 @@ public class Game {
 	 * 
 	 */
 	private Board board;
+	/**
+	 * 
+	 */
+	public Dice dice;
 
 	/**
 	 * 

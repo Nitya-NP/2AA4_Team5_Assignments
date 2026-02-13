@@ -8,15 +8,13 @@ package Assignment1_Team5;
 /**
  * 
  */
-public abstract class Building {
+public class tileToNodesMapEntry {
 	/**
 	 * 
 	 */
-	private Player owner;
-
+	private Node[] value;
 	/**
 	 * 
 	 */
-	public void Building() {
-	}
+	private Tile key;
 }

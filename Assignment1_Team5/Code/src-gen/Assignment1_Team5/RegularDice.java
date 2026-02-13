@@ -8,15 +8,5 @@ package Assignment1_Team5;
 /**
  * 
  */
-public abstract class Building {
-	/**
-	 * 
-	 */
-	private Player owner;
-
-	/**
-	 * 
-	 */
-	public void Building() {
-	}
+public class RegularDice {
 }

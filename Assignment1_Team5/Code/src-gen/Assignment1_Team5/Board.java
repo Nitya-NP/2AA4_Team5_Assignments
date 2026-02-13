@@ -21,6 +21,10 @@ public class Board {
 	 * 
 	 */
 	private Tile[] tiles;
+	/**
+	 * 
+	 */
+	public tileToNodesMapEntry tiletonodes;
 
 	/**
 	 * 
@@ -50,5 +54,19 @@ public class Board {
 	 * @return 
 	 */
 	public Roads getRoad() {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param tile 
+	 */
+	public void takeTurn(Player player, Tile tile) {
+	}
+
+	/**
+	 * 
+	 */
+	private void connectNodeToTiles() {
 	}
 }

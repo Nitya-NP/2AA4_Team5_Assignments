@@ -8,15 +8,10 @@ package Assignment1_Team5;
 /**
  * 
  */
-public abstract class Building {
+public interface Dice {
 	/**
 	 * 
+	 * @return 
 	 */
-	private Player owner;
-
-	/**
-	 * 
-	 */
-	public void Building() {
-	}
+	public int roll();
 }

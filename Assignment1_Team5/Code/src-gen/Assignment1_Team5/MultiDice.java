@@ -8,15 +8,22 @@ package Assignment1_Team5;
 /**
  * 
  */
-public abstract class Building {
+public class MultiDice {
 	/**
 	 * 
 	 */
-	private Player owner;
+	public Dice[] dice;
+
+	/**
+	 * 
+	 * @param dice 
+	 */
+	public void addDice(undef dice) {
+	}
 
 	/**
 	 * 
 	 */
-	public void Building() {
+	public void MultiDice() {
 	}
 }
