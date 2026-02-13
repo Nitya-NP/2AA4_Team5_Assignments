@@ -3,6 +3,8 @@
  * Represents a Settlement building in the game.
  * 
  * A Settlement is type of building that provides 1 victory point to its owner.
+ *
+ *  @author Krisha Patel
  */
 public class Settlement extends Building {
 	/**
