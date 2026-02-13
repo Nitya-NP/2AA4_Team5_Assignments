@@ -5,6 +5,8 @@
  * Building serves as the foundation for all types of buildings 
  * such as Settlements and Cities. Each building is owned by a Player
  * and has a specific point value associated with it.
+ *
+ *  @author Krisha Patel
  */
 public abstract class Building {
 	/**
