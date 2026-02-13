@@ -4,10 +4,12 @@
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * The board class represents the game board in the Catan game
- * This mainly stores the board elements and provides access to them through getter methods
+ * This mainly stores the board elements and provides access to them through getter methods.
+ * It also manages the turns of players. 
  * 
  * @author Nitya Patel
  */
@@ -16,7 +18,8 @@ public class Board {
 	private Node[] nodes; //Nodes on board
 	private Roads[] roads; //Roads on board
 
-	private Map<Tile,Node[]> tileToNodes= new HashMap<>();
+	private Map<Tile,Node[]> tileToNodes= new HashMap<>(); //Mapping of tiles to their nodes
+
 	
 	/**
 	 * Constructs a Board with tiles, nodes and roads
@@ -34,7 +37,7 @@ public class Board {
 	}
 	
 	/**
-	 * Connecting tiles to nodes 
+	 * Connects each tile to its nodes (simplified mapping)
 	 */
     private void connectNodesToTiles() {
         for (int i = 0; i < tiles.length; i++) {
@@ -80,7 +83,73 @@ public class Board {
 	public Roads[] getRoad() {
 		return this.roads;
 	}
+
+	/**
+	 * Simulates a player's turn
+	 * Handles dice roll, resource gain, and random building action.
+	 * 
+	 * @param player the player whose turn it is 
+	 * @param diceValue the dice value (2-12)
+	 * 
+	 */
+	public void takeTurn(Player player, int diceValue) {
+
+    Random rand = new Random();
+    System.out.println("Player " + player.getPlayerId()+ " rolled " + diceValue);
+    if (diceValue != 7) {
+        Resources[] allResources = Resources.values();
+        Resources r = allResources[rand.nextInt(allResources.length)];
+        player.addResource(r, 1);
+
+        System.out.println("Player " + player.getPlayerId() + " gained 1 " + r);
+    } else {
+        System.out.println("Player " + player.getPlayerId() + " rolled 7 (no resources)");
+    }
+
+    //Choose Random Action
+    int action = rand.nextInt(4); // 0=road, 1=settlement, 2=city, 3=pass
+
+    switch (action) {
+
+        case 0: // Build Road
+            Node[] nodes = getNode();
+            if (nodes.length >= 2) {
+                Node n1 = nodes[rand.nextInt(nodes.length)];
+                Node n2; 
+				do{
+					n2= nodes[rand.nextInt(nodes.length)];
+				}while (n1==n2);
+
+                Node[] roadNodes = { n1, n2 };
+
+                Building road = new Roads(roadNodes, player);
+                player.addBuilding(road);
+
+                System.out.println("Player " + player.getPlayerId() + " built Road");
+            }
+            break;
+
+        case 1: // Build Settlement
+            Building settlement = new Settlement(player);
+            player.addBuilding(settlement);
+            System.out.println("Player " + player.getPlayerId() + " built Settlement");
+            break;
+
+        case 2: // Build City
+            Building city = new Cities(player);
+            player.addBuilding(city);
+            System.out.println("Player " + player.getPlayerId() + " built City");
+            break;
+
+        case 3: // Pass
+            System.out.println("Player " + player.getPlayerId() + " passes");
+            break;
+    }
 }
+}
+
+
+
 
 
 
