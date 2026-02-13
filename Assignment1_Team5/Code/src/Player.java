@@ -7,8 +7,7 @@ import java.util.Random;
 
 /**
  * The Player classs represents an player participating in Catan simulation.
- * A Player owns resources, buildings, and winning points, and can take a turn.
- * It track resources, track buildings owned, track winning points and exceute a random action during a turn
+ * A Player owns resources, buildings, and winning point. 
  * 
  * @author Nitya Patel
  */
@@ -131,64 +130,5 @@ public class Player {
 	public String toString() {
 		return "Player "+ playerId + "| Points: "+ points + "| Resources: " +resources + "| Buildings: " +buildings;
 	}
-	
-	/**
-	 * Simulater a player's turn
-	 * 
-	 * 0: gain random resource
-	 * 1: build a random building
-	 * 2: pass
-	 * 
-	 * actions taken during the round
-	 * 
-	 * @param roundNum current round number
-	 * @param nodes a list of available nodes on the board that buildings can use
-	 * 
-	 */
-	public void takeTurn(int roundNum, Node []nodes) {
-		Random rand= new Random();
-		int action= rand.nextInt(3);
-		
 
-		switch (action) {
-			case 0:
-				//Gain a random resource
-				Resources[] allResources= Resources.values();
-				Resources r= allResources[rand.nextInt(allResources.length)];
-				addResource(r, 1);
-				System.out.println(roundNum + ": Player " + playerId+" have gained 1 " +r);
-				break;
-			
-			case 1:
-				//Build a random building
-				Building buil;
-				int choice= rand.nextInt(3);
-				
-				//change it 
-				if(choice ==0 && nodes.length>=2){
-
-					//Select 2 random nodes for the road
-					Node n1 = nodes[rand.nextInt(nodes.length)];
-                	Node n2 = nodes[rand.nextInt(nodes.length)];
-                	Node[] roadNodes = { n1, n2 };
-
-					buil= new Roads(roadNodes, this);
-				}
-				else if(choice ==1) buil= new Settlement(this);
-				else buil= new Cities(this);
-						
-				addBuilding(buil);
-				System.out.println(roundNum + ":Player " +playerId+ " built a " + buil.getClass().getSimpleName());
-				break;
-				
-			case 2: 
-				System.out.println(roundNum+ ":Player "+playerId+ " passes");
-				break;
-	
-			default:
-				return;
-		}
-		
-		
-	}
 }
