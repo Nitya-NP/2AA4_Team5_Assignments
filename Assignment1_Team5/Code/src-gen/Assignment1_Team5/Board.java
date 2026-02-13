@@ -59,9 +59,9 @@ public class Board {
 	/**
 	 * 
 	 * @param player 
-	 * @param tile 
+	 * @param diceValue 
 	 */
-	public void takeTurn(Player player, Tile tile) {
+	public void takeTurn(Player player, int diceValue) {
 	}
 
 	/**

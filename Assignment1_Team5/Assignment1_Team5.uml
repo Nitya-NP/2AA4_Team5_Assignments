@@ -80,7 +80,9 @@
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_wkN6oAiJEfG5lbs7Ytc6mw" name="takeTurn">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_yDGTcAiJEfG5lbs7Ytc6mw" name="player" type="_a0BUMPezEfC5C-JN9uvAYA"/>
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_1xJSgAiJEfG5lbs7Ytc6mw" name="tile" type="_GLQvMPetEfCEQ9UiIXPEGw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_1xJSgAiJEfG5lbs7Ytc6mw" name="diceValue">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_TwlP0AiMEfG5lbs7Ytc6mw" name="connectNodeToTiles" visibility="private"/>
     </packagedElement>
@@ -269,6 +271,11 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_tH0GUP0yEfCpcYr7ez_t7A" name="Game">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_vVhUAP0yEfCpcYr7ez_t7A" name="players" type="_a0BUMPezEfC5C-JN9uvAYA"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_xu7bYP0yEfCpcYr7ez_t7A" name="board" type="_kKc_cPewEfCEQ9UiIXPEGw"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Qu6RwAiQEfG5lbs7Ytc6mw" name="rollMultiDice">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_V7aL0AiQEfG5lbs7Ytc6mw" name="">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_R37GIP35EfCpcYr7ez_t7A" name="ResourcesToIntegerMapEntry">

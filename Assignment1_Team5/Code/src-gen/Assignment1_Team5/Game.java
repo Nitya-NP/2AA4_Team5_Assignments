@@ -49,4 +49,11 @@ public class Game {
 	 */
 	public void Game(Player players, Board board) {
 	}
+
+	/**
+	 * 
+	 * @param  
+	 */
+	public void rollMultiDice(int ) {
+	}
 }
