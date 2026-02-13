@@ -33,6 +33,7 @@ public class Board {
 
 		assignResources();
 		connectNodesToTiles();
+		connectAdjacentNodes();
 	}
 
 	private void assignResources() {
@@ -102,6 +103,31 @@ public class Board {
 			}
 			tiles[i].setNodes(tileNodes);
 		}
+    }
+
+	  private void connectAdjacentNodes(){
+        // Define adjacency for each node
+        int[][] adjacency = {
+            {1, 2, 3},      
+            {0, 2, 4},    
+            {0, 1, 5},     
+            {0, 5, 6},   
+            {1, 5, 7},    
+            {2, 3, 4, 6},   
+            {3, 5, 8},      
+            {4, 5, 9},   
+            {6, 9, 10},     
+            {7, 8, 11},     
+            {8, 11},      
+            {9, 10}        
+        };
+
+        // Add adjacent nodes
+        for (int i = 0; i < nodes.length; i++) {
+            for (int neighborIndex : adjacency[i]) {
+                nodes[i].addAdjacentNode(nodes[neighborIndex]);
+            }
+        }
     }
 
 	/**
