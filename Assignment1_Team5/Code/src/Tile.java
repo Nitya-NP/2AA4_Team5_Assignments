@@ -7,6 +7,7 @@ public class Tile {
 	private int tileID;
 	private int token;
 	private Resources resource;
+	private Node[] nodes;
 
 	/**
 	 * Initializes a tile with the given resource, ID, and token number
@@ -19,6 +20,7 @@ public class Tile {
 		this.resource = resource;
 		this.tileID = id;
 		this.token = token;
+		nodes = new Node[6];
 	}
 
 	/**
@@ -40,5 +42,20 @@ public class Tile {
 	 */
 	public int getToken() {
 		return this.token;
+	}
+
+	/**
+	 * @return the nodes that are adjacent to the tile
+	 */
+	public Node[] getNodes() {
+		return this.nodes;
+	}
+
+	/**
+	 * Sets the nodes that are adjacent to the tile
+	 * @param nodes An array of nodes that are adjacent to the tile
+	 */
+	public void setNodes(Node[] nodes) {
+		this.nodes = nodes;
 	}
 }

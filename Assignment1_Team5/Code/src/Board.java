@@ -18,9 +18,6 @@ public class Board {
 	private Node[] nodes; //Nodes on board
 	private Roads[] roads; //Roads on board
 
-	private Map<Tile,Node[]> tileToNodes= new HashMap<>(); //Mapping of tiles to their nodes
-
-	
 	/**
 	 * Constructs a Board with tiles, nodes and roads
 	 * 
@@ -28,39 +25,54 @@ public class Board {
 	 * @param nodes array of Node
 	 * @param roads array of Roads
 	 */
-	public Board(Tile[] tiles, Node[] nodes, Roads[] roads) {
-		this.tiles=tiles;
-		this.nodes= nodes;
-		this.roads= roads;
+	public Board() {
+		// Initialize the board with 19 tiles and 54 nodes
+		this.tiles = new Tile[19];
+		this.nodes = new Node[54];
 
+		// Loop to create nodes and assign IDs
+		for (int i = 0; i < 54; i++) {
+			nodes[i] = new Node(i);
+		}
+
+		assignResources();
 		connectNodesToTiles();
 	}
+
+	private void assignResources() {
+		Resources[] resourceOrder = {
+			Resources.LUMBER,
+			Resources.GRAIN,
+			Resources.BRICK,
+			Resources.ORE,
+			Resources.WOOL,
+			Resources.WOOL,
+			Resources.WOOL,
+			Resources.GRAIN,
+			Resources.ORE,
+			Resources.LUMBER,
+			Resources.ORE,
+			Resources.GRAIN,
+			Resources.LUMBER,
+			Resources.BRICK,
+			Resources.BRICK,
+			Resources.GRAIN,
+			Resources.NOTHING,
+			Resources.LUMBER,
+			Resources.WOOL
+		};
+		
+		// Loop to create tiles and assign IDs and token numbers
+		for (int i = 0; i < 19; i++) {
+			tiles[i] = new Tile(resourceOrder[i], i, 0);
+		}
+	}	
 	
 	/**
 	 * Connects each tile to its nodes (simplified mapping)
 	 */
     private void connectNodesToTiles() {
-        for (int i = 0; i < tiles.length; i++) {
-            Node[] tileNodes = new Node[6]; // each tile has 6 nodes
 
-            for (int j = 0; j < 6; j++) {
-                // just pick some nodes to assign to this tile
-                int nodeIndex = (i * 3 + j) % nodes.length;
-                tileNodes[j] = nodes[nodeIndex];
-            }
-
-            // store the mapping
-            tileToNodes.put(tiles[i], tileNodes);
-        }
-    }
-
-    /**
-	 * Get nodes for that tile 
-	 * @param tile 
-	 * @return array of nodes
-	 */
-    public Node[] getNodesForTile(Tile tile) {
-        return tileToNodes.get(tile);
     }
 
 	/**
