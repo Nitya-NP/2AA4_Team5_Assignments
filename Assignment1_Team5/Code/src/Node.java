@@ -11,7 +11,7 @@ public class Node {
 	 * Constructs a new Node with the given ID
 	 * @param id The ID of the node
 	 */
-	public void Node(int id) {
+	public Node(int id) {
 		this.nodeId = id;
 	}
 

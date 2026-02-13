@@ -14,7 +14,7 @@ public class Tile {
 	 * @param id The tile's ID number
 	 * @param token The token number that is associated with the tile
 	 */
-	public void Tile(Resources resource, int id, int token) {
+	public Tile(Resources resource, int id, int token) {
 		// Initialize private attributes with the given parameters
 		this.resource = resource;
 		this.tileID = id;
