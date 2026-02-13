@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * MultiDice implements the Dice interface and allows for multiple dice to be rolled together. 
@@ -13,6 +14,8 @@ public class MultiDice implements Dice {
 	 * Constructor for MultiDice to initialize an inital list of dice with 2 regular dice
 	 */
 	public MultiDice() {
+		// Initialize the dice list as an ArrayList
+		diceList = new ArrayList<>();
 		// Start with 2 regular dice
 		diceList.add(new RegularDice());
 		diceList.add(new RegularDice());
