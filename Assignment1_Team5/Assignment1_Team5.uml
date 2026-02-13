@@ -25,7 +25,7 @@
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_Kw_kMPetEfCEQ9UiIXPEGw" name="getResource">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_QsOFIPewEfCEQ9UiIXPEGw" name="" type="_YGj3IPetEfCEQ9UiIXPEGw" direction="return"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_QsOFIPewEfCEQ9UiIXPEGw" name="" type="_uKTbIPetEfCEQ9UiIXPEGw" direction="return"/>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ayZq8PewEfCEQ9UiIXPEGw" name="getTileId">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_cVf1YPewEfCEQ9UiIXPEGw" name="" direction="return">
@@ -37,9 +37,6 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
       </ownedOperation>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Enumeration" xmi:id="_YGj3IPetEfCEQ9UiIXPEGw" name="Resources">
-      <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_k-rZEPetEfCEQ9UiIXPEGw" name="WOOL"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_uKTbIPetEfCEQ9UiIXPEGw" name="Resources" useCase="_qrfjMPezEfC5C-JN9uvAYA">
       <ownedUseCase xmi:type="uml:UseCase" xmi:id="_qrfjMPezEfC5C-JN9uvAYA" name="UseCase1" subject="_uKTbIPetEfCEQ9UiIXPEGw"/>
@@ -111,7 +108,7 @@
         </ownedParameter>
       </ownedOperation>
       <nestedClassifier xmi:type="uml:DataType" xmi:id="_wU_F0Pe0EfC5C-JN9uvAYA" name="DataType1">
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_eZVjIPe1EfC5C-JN9uvAYA" name="resource" type="_YGj3IPetEfCEQ9UiIXPEGw"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_eZVjIPe1EfC5C-JN9uvAYA" name="resource"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_hvBskPe1EfC5C-JN9uvAYA" name="">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedAttribute>
@@ -183,7 +180,7 @@
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_e49wUPezEfC5C-JN9uvAYA" name="getResource">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_P_eFIPe2EfC5C-JN9uvAYA" name="resource" type="_YGj3IPetEfCEQ9UiIXPEGw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_P_eFIPe2EfC5C-JN9uvAYA" name="resource" type="_uKTbIPetEfCEQ9UiIXPEGw"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_TrLh4Pe2EfC5C-JN9uvAYA" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
@@ -191,7 +188,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_UJbDEAiLEfG5lbs7Ytc6mw" name="initBuildings" visibility="private"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_WJXhkAiLEfG5lbs7Ytc6mw" name="initResources" visibility="private"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_beCgMAiLEfG5lbs7Ytc6mw" name="addResource">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dcB24AiLEfG5lbs7Ytc6mw" name="resource" type="_YGj3IPetEfCEQ9UiIXPEGw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dcB24AiLEfG5lbs7Ytc6mw" name="resource" type="_uKTbIPetEfCEQ9UiIXPEGw"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_hBBnoAiLEfG5lbs7Ytc6mw" name="amount">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
@@ -200,7 +197,7 @@
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_n1qkMAiLEfG5lbs7Ytc6mw" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qQ4CYAiLEfG5lbs7Ytc6mw" name="resource" type="_YGj3IPetEfCEQ9UiIXPEGw"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qQ4CYAiLEfG5lbs7Ytc6mw" name="resource" type="_uKTbIPetEfCEQ9UiIXPEGw"/>
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_sbCz4AiLEfG5lbs7Ytc6mw" name="amount">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
@@ -275,7 +272,7 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_R37GIP35EfCpcYr7ez_t7A" name="ResourcesToIntegerMapEntry">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_ayFkwP35EfCpcYr7ez_t7A" name="key" visibility="private" type="_YGj3IPetEfCEQ9UiIXPEGw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ayFkwP35EfCpcYr7ez_t7A" name="key" visibility="private" type="_uKTbIPetEfCEQ9UiIXPEGw"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_fuJ2IP35EfCpcYr7ez_t7A" name="value" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
@@ -346,7 +343,7 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9n9oUAiKEfG5lbs7Ytc6mw" name="LiteralUnlimitedNatural1" value="*"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_LfgcYAiKEfG5lbs7Ytc6mw" name="addDice">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_NByHcAiKEfG5lbs7Ytc6mw" name="dice"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_NByHcAiKEfG5lbs7Ytc6mw" name="dice" type="_lHyeIAiKEfG5lbs7Ytc6mw"/>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_IttNsAiLEfG5lbs7Ytc6mw" name="MultiDice"/>
     </packagedElement>

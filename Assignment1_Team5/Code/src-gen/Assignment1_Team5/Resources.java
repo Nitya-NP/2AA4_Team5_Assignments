@@ -12,5 +12,25 @@ public enum Resources {
 	/**
 	 * 
 	 */
-	WOOL;
+	WOOL,
+	/**
+	 * 
+	 */
+	BRICK,
+	/**
+	 * 
+	 */
+	LUMBER,
+	/**
+	 * 
+	 */
+	GRAIN,
+	/**
+	 * 
+	 */
+	ORE,
+	/**
+	 * 
+	 */
+	NOTHING;
 }

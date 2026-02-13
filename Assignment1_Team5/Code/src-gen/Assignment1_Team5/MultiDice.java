@@ -18,7 +18,7 @@ public class MultiDice {
 	 * 
 	 * @param dice 
 	 */
-	public void addDice(undef dice) {
+	public void addDice(Dice dice) {
 	}
 
 	/**
