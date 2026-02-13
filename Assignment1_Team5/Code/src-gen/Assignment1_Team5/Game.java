@@ -45,15 +45,14 @@ public class Game {
 	/**
 	 * 
 	 * @param players 
-	 * @param board 
 	 */
-	public void Game(Player players, Board board) {
+	public void Game(Player players) {
 	}
 
 	/**
 	 * 
-	 * @param  
+	 * @return 
 	 */
-	public void rollMultiDice(int ) {
+	public int rollMultiDice() {
 	}
 }

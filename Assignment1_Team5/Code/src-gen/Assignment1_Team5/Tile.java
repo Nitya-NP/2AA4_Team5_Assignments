@@ -21,6 +21,10 @@ public class Tile {
 	 * 
 	 */
 	private Resources resource;
+	/**
+	 * 
+	 */
+	public Node[] node;
 
 	/**
 	 * 
@@ -50,5 +54,12 @@ public class Tile {
 	 * @return 
 	 */
 	public int getToken() {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public Node[] getNodes() {
 	}
 }

@@ -45,4 +45,11 @@ public class Node {
 	 */
 	public int getNodeId() {
 	}
+
+	/**
+	 * 
+	 * @param nodes 
+	 */
+	public void setNodes(Node nodes) {
+	}
 }

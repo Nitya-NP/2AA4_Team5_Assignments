@@ -56,14 +56,6 @@ public class Player {
 
 	/**
 	 * 
-	 * @param resource 
-	 * @return 
-	 */
-	public int getResource(Resources resource) {
-	}
-
-	/**
-	 * 
 	 */
 	private void initBuildings() {
 	}
@@ -84,15 +76,6 @@ public class Player {
 
 	/**
 	 * 
-	 * @return 
-	 * @param resource 
-	 * @param amount 
-	 */
-	public boolean removeResource(Resources resource, int amount) {
-	}
-
-	/**
-	 * 
 	 * @param building 
 	 */
 	public void addBuilding(Building building) {
@@ -101,15 +84,7 @@ public class Player {
 	/**
 	 * 
 	 * @return 
-	 * @param building 
 	 */
-	public int getBuilding(Building building) {
-	}
-
-	/**
-	 * 
-	 * @return 
-	 */
-	public String toString() {
+	public int getTotalResources() {
 	}
 }

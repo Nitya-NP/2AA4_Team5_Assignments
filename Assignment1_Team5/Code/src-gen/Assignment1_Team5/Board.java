@@ -28,11 +28,8 @@ public class Board {
 
 	/**
 	 * 
-	 * @param tiles 
-	 * @param nodes 
-	 * @param roads 
 	 */
-	public void Board(Tile tiles, Node nodes, Roads roads) {
+	public void Board() {
 	}
 
 	/**
@@ -68,5 +65,50 @@ public class Board {
 	 * 
 	 */
 	private void connectNodeToTiles() {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param n1 
+	 * @param n2 
+	 */
+	private void isRoadConnected(Player player, Node n1, Node n2) {
+	}
+
+	/**
+	 * 
+	 * @param road 
+	 */
+	private void addRoadToBoard(Roads road) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param diceValue 
+	 */
+	private void produceResource(Player player, int diceValue) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void buildRoad(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void buildCity(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void buildSettlement(Player player) {
 	}
 }
