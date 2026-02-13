@@ -8,11 +8,11 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class MultiDice {
+public class MultiDice implements Dice {
 	/**
 	 * 
 	 */
-	public Dice[] dice;
+	private Dice[] dice;
 
 	/**
 	 * 

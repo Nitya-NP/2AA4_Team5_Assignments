@@ -8,5 +8,5 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class RegularDice {
+public class RegularDice implements Dice {
 }

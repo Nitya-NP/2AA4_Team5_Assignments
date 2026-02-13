@@ -52,8 +52,8 @@ public class Game {
 
 	/**
 	 * 
-	 * @return 
+	 * @param  
 	 */
-	public int rollMultiDice() {
+	public void rollMultiDice(int ) {
 	}
 }

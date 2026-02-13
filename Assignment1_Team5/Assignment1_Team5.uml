@@ -345,16 +345,19 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_yKJZ4P4FEfCZoZgr-OpBSQ" name="board" type="_kKc_cPewEfCEQ9UiIXPEGw" association="_yKFIcP4FEfCZoZgr-OpBSQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_YQHdkAiJEfG5lbs7Ytc6mw" name="MultiDice">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_3a9TgAiKEfG5lbs7Ytc6mw" name="dice" type="_lHyeIAiKEfG5lbs7Ytc6mw" aggregation="composite" association="_3a5CEAiKEfG5lbs7Ytc6mw">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_3a9TgAiKEfG5lbs7Ytc6mw" name="dice" visibility="private" type="_lHyeIAiKEfG5lbs7Ytc6mw" aggregation="composite" association="_3a5CEAiKEfG5lbs7Ytc6mw">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9n9BQAiKEfG5lbs7Ytc6mw" name="LiteralInteger1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9n9oUAiKEfG5lbs7Ytc6mw" name="LiteralUnlimitedNatural1" value="*"/>
       </ownedAttribute>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_iZRjoAjxEfGBmJ7I1Y2MdQ" client="_YQHdkAiJEfG5lbs7Ytc6mw" supplier="_lHyeIAiKEfG5lbs7Ytc6mw" contract="_lHyeIAiKEfG5lbs7Ytc6mw"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_LfgcYAiKEfG5lbs7Ytc6mw" name="addDice">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_NByHcAiKEfG5lbs7Ytc6mw" name="dice" type="_lHyeIAiKEfG5lbs7Ytc6mw"/>
       </ownedOperation>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_IttNsAiLEfG5lbs7Ytc6mw" name="MultiDice"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_fGiGUAiKEfG5lbs7Ytc6mw" name="RegularDice"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_fGiGUAiKEfG5lbs7Ytc6mw" name="RegularDice">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_lokxMAjxEfGBmJ7I1Y2MdQ" client="_fGiGUAiKEfG5lbs7Ytc6mw" supplier="_lHyeIAiKEfG5lbs7Ytc6mw" contract="_lHyeIAiKEfG5lbs7Ytc6mw"/>
+    </packagedElement>
     <packagedElement xmi:type="uml:Interface" xmi:id="_lHyeIAiKEfG5lbs7Ytc6mw" name="Dice">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_l_neAAiKEfG5lbs7Ytc6mw" name="roll">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_mzys8AiKEfG5lbs7Ytc6mw" name="" direction="return">
@@ -362,8 +365,6 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_sVh3MAiKEfG5lbs7Ytc6mw" client="_fGiGUAiKEfG5lbs7Ytc6mw" supplier="_lHyeIAiKEfG5lbs7Ytc6mw"/>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_zy610AiKEfG5lbs7Ytc6mw" client="_YQHdkAiJEfG5lbs7Ytc6mw" supplier="_lHyeIAiKEfG5lbs7Ytc6mw"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_3a5CEAiKEfG5lbs7Ytc6mw" memberEnd="_3a9TgAiKEfG5lbs7Ytc6mw _3a_vwAiKEfG5lbs7Ytc6mw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3a8FYAiKEfG5lbs7Ytc6mw" source="org.eclipse.papyrus">
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3a8FYQiKEfG5lbs7Ytc6mw" key="nature" value="UML_Nature"/>
