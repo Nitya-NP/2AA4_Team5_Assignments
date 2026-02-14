@@ -445,9 +445,6 @@
       <ownedEnd xmi:type="uml:Property" xmi:id="_M3h_AQkpEfG1Ho8LzY7dFA" name="tile" type="_GLQvMPetEfCEQ9UiIXPEGw" association="_M3dGgAkpEfG1Ho8LzY7dFA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_QPSz8AlIEfG7YPFQnEXf6w" name="GameLogger">
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_YB2KQAlIEfG7YPFQnEXf6w" name="players" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_YIRiYAlIEfG7YPFQnEXf6w" name="rounds" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>

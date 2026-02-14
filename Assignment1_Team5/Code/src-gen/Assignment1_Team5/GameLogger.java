@@ -12,10 +12,6 @@ public class GameLogger {
 	/**
 	 * 
 	 */
-	private int players;
-	/**
-	 * 
-	 */
 	private int rounds;
 
 	/**

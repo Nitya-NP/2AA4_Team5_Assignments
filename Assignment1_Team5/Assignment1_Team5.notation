@@ -730,10 +730,6 @@
       <layoutConstraint xmi:type="notation:Location" xmi:id="_QPhdcglIEfG7YPFQnEXf6w" y="15"/>
     </children>
     <children xmi:type="notation:BasicCompartment" xmi:id="_QPiEgAlIEfG7YPFQnEXf6w" type="Class_AttributeCompartment">
-      <children xmi:type="notation:Shape" xmi:id="_YCPL0AlIEfG7YPFQnEXf6w" type="Property_ClassAttributeLabel">
-        <element xmi:type="uml:Property" href="Assignment1_Team5.uml#_YB2KQAlIEfG7YPFQnEXf6w"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_YCPL0QlIEfG7YPFQnEXf6w"/>
-      </children>
       <children xmi:type="notation:Shape" xmi:id="_YIfk0AlIEfG7YPFQnEXf6w" type="Property_ClassAttributeLabel">
         <element xmi:type="uml:Property" href="Assignment1_Team5.uml#_YIRiYAlIEfG7YPFQnEXf6w"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_YIfk0QlIEfG7YPFQnEXf6w"/>
