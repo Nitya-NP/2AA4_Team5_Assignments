@@ -11,20 +11,22 @@ public class Settlement extends Building {
 	 */
 	private int points;
 
+	
 	/**
-	 * 
-	 * @return points - each settlement is worth 1 victory point
-	 */
-	public int getPoints() {
-		return points;
-	}
-
-	/**
-	 * 
+	 * Constructs a Settlement owned by a Player and sets points to 1
 	 * @param owner - the player who owns the settlement
 	 */
 	public Settlement(Player owner) {
 		super(owner);
 		this.points = 1;
 	}
+	
+	/**
+	 * Returns the points
+	 * @return points - each settlement is worth 1 victory point
+	 */
+	public int getPoints() {
+		return points;
+	}
+
 }
