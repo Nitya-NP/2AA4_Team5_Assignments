@@ -13,6 +13,8 @@ public class Board {
 	private Node[] nodes; //Nodes on board
 	private Roads[] roads; //Roads on board
 
+    private GameLogger logger; // Logger for game events
+
 	/**
 	 * Constructs a Board with tiles, nodes and roads
 	 * 
@@ -20,11 +22,13 @@ public class Board {
 	 * @param nodes array of Node
 	 * @param roads array of Roads
 	 */
-	public Board() {
+	public Board(GameLogger logger) {
 		// Initialize the board with 19 tiles and 54 nodes
 		this.tiles = new Tile[19];
 		this.nodes = new Node[54];
         this.roads=new Roads[72];
+
+        this.logger = logger; // Initialize the logger
 
 		// Loop to create nodes and assign IDs
 		for (int i = 0; i < 54; i++) {
@@ -211,7 +215,7 @@ public class Board {
      */
     public void takeTurn(Player player, int diceValue) {
         Random rand = new Random();
-        System.out.println("Player " + player.getPlayerId() + " rolled " + diceValue);
+        logger.log(player.getPlayerId(), "rolled " + diceValue);
 
         // Resource gain
         produceResource(player, diceValue);
@@ -226,7 +230,9 @@ public class Board {
         else if (action == 2)
             buildCity(player); // Build City
         else
-            System.out.println("Player " + player.getPlayerId() + ": passes"); // Pass
+            logger.log(player.getPlayerId(), "passes"); // Pass
+
+        logger.endTurn();
     }
 
     /**
@@ -243,9 +249,9 @@ public class Board {
             Resources[] allResources = Resources.values();
             Resources r = allResources[rand.nextInt(allResources.length)];
             player.addResource(r, 1);
-            System.out.println("Player " + player.getPlayerId() + ": gained 1 " + r);
+            logger.log(player.getPlayerId(), "gained 1 " + r);
         } else {
-            System.out.println("Player " + player.getPlayerId() + ": rolled 7 (no resources)");
+            logger.log(player.getPlayerId(), "rolled 7 (no resources)");
         }
     }
 
@@ -278,9 +284,9 @@ public class Board {
             Roads road = new Roads(new Node[] { n1, n2 }, player);
             player.addBuilding(road);
             addRoadToBoard(road);
-            System.out.println("Player " + player.getPlayerId() + ": built Road between Node " + n1.getNodeId()+ " and Node " + n2.getNodeId());
+            logger.log(player.getPlayerId(), "built Road between Node " + n1.getNodeId() + " and Node " + n2.getNodeId());
         } else {
-            System.out.println("Player " + player.getPlayerId() + ": failed to build a valid road.");
+            logger.log(player.getPlayerId(), "failed to build a valid road.");
         }
 
     }
@@ -300,9 +306,9 @@ public class Board {
             Building city = new Cities(player);
             n.setBuilding(city);
             player.addBuilding(city);
-            System.out.println("Player " + player.getPlayerId() + ": upgraded to City at Node " + n.getNodeId());
+            logger.log(player.getPlayerId(), "upgraded to City at Node " + n.getNodeId());
         } else {
-            System.out.println("Player " + player.getPlayerId() + ": City upgrade failed.");
+            logger.log(player.getPlayerId(), "City upgrade failed.");
         }
 
     }
@@ -321,13 +327,12 @@ public class Board {
             Building settlement = new Settlement(player);
             n.setBuilding(settlement);
             player.addBuilding(settlement);
-            System.out.println("Player " + player.getPlayerId() + ": built Settlement at Node " + n.getNodeId());
+            logger.log(player.getPlayerId(), "built Settlement at Node " + n.getNodeId());
         } else {
-            System.out.println("Player " + player.getPlayerId() + ": Settlement failed");
+            logger.log(player.getPlayerId(), "Settlement failed");
         }
 
     }
-
 
 }
 
