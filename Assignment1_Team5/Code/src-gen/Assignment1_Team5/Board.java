@@ -25,11 +25,16 @@ public class Board {
 	 * 
 	 */
 	public tileToNodesMapEntry tiletonodes;
-
 	/**
 	 * 
 	 */
-	public void Board() {
+	public GameLogger gamelogger;
+
+	/**
+	 * 
+	 * @param gameLogger 
+	 */
+	public void Board(GameLogger gameLogger) {
 	}
 
 	/**
