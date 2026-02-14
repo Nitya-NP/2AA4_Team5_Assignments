@@ -105,7 +105,10 @@ public class Board {
 		}
     }
 
-	  private void connectAdjacentNodes(){
+	/**
+     * Connects each node on the board to its adjacent nodes.
+     */
+	private void connectAdjacentNodes(){
         // Define adjacency for each node
         int[][] adjacency = {
             {1, 2, 3},      
