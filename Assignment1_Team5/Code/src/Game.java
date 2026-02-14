@@ -63,6 +63,8 @@ public class Game {
 					break;
 				}
 			}
+
+			System.out.println("Current Round: " + roundsPlayed);
 		}
 	}
 
