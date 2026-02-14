@@ -41,7 +41,6 @@ public class Game {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
-		this.board = new Board(new GameLogger());
 		this.dice = new MultiDice();
 	}
 
@@ -49,6 +48,9 @@ public class Game {
 	 * Starts the game and runs till a player wins or max number of rounds is reached
 	 */
 	public void start() {
+		GameLogger logger = new GameLogger();
+		this.board = new Board(logger);
+
 		boolean gameOver = false; // to check if game over
 
 		// Continue to play rounds till the game ends
@@ -63,6 +65,7 @@ public class Game {
 					break;
 				}
 			}
+			logger.endTurn(); // To end the turn and increment the round counter in the logger.
 		}
 	}
 

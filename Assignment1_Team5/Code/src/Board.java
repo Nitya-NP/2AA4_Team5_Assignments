@@ -234,8 +234,6 @@ public class Board {
             buildCity(player); // Build City
         else
             logger.log(player.getPlayerId(), "passes"); // Pass
-
-        logger.endTurn();
     }
 
     /**
