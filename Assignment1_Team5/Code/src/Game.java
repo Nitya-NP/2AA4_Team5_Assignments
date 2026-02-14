@@ -41,7 +41,7 @@ public class Game {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
-		this.board = new Board();
+		this.board = new Board(new GameLogger(players.length));
 		this.dice = new MultiDice();
 	}
 
@@ -53,7 +53,6 @@ public class Game {
 
 		// Continue to play rounds till the game ends
 		while (!gameOver && roundsPlayed < maxRounds) {
-			System.out.println("\nCurrent Round: " + (roundsPlayed+1));
 			playRound();
 			roundsPlayed++;
 
