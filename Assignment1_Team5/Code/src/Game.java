@@ -41,7 +41,7 @@ public class Game {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
-		this.board = new Board(new GameLogger(players.length));
+		this.board = new Board(new GameLogger());
 		this.dice = new MultiDice();
 	}
 

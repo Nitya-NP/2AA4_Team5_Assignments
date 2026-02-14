@@ -1,19 +1,16 @@
 /**
  * The GameLogger class is responsible for logging the actions of players during the game. 
- * It keeps track of the number of players and rounds, and provides a method to log player actions in required format.
+ * It keeps track of the number of rounds, and provides a method to log player actions in required format.
  * @author Ranica Chawla
  */
 public class GameLogger {
-    // Private attributes to keep track of the number of players and rounds
-    private int players;
+    // Private attributes to keep track of the number of rounds
     private int rounds;
 
     /**
-     * Constructor for the GameLogger class that initializes the number of players and sets the rounds to 1.
-     * @param players the number of players in the game
+     * Constructor for the GameLogger class that sets the rounds to 1.
      */
-    public GameLogger(int players) {
-        this.players = players;
+    public GameLogger() {
         this.rounds = 1;
     }
 
