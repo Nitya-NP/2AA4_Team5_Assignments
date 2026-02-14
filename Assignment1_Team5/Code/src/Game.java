@@ -55,6 +55,7 @@ public class Game {
 		while (!gameOver && roundsPlayed < maxRounds) {
 			playRound();
 			roundsPlayed++;
+			System.out.println("Current Round: " + roundsPlayed);
 
 			// Check if any player (not null) has reached the score to win
 			for (Player p : players) {
@@ -63,8 +64,6 @@ public class Game {
 					break;
 				}
 			}
-
-			System.out.println("Current Round: " + roundsPlayed);
 		}
 	}
 
