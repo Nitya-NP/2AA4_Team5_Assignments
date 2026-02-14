@@ -3,6 +3,7 @@ import java.util.List;
 /**
  * The Node class represents a node on the board. 
  * It has an ID and can hold a building.
+ * @author Ranica Chawla, Nitya Patel
  */
 public class Node {
 	// Private attributes of the node class
@@ -64,6 +65,4 @@ public class Node {
 	public List<Node> getAdjacentNodes(){
 		return adjacentNodes;
 	}
-}
-
 }

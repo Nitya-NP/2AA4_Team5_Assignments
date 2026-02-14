@@ -1,6 +1,7 @@
 /**
  * A Tile class that represents a tile on the board. 
  * It has a resource, an ID, and a token number. 
+ * @author Ranica Chawla
  */
 public class Tile {
 	// Private attributes of the tile class

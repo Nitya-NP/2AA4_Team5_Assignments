@@ -1,4 +1,3 @@
-
 /**
  * Represents a Settlement building in the game.
  * 

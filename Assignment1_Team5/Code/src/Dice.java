@@ -1,6 +1,7 @@
 /************************************************************/
 /**
  * Dice interface for the game which defines the method for rolling a die.
+ * @author Ranica Chawla
  */
 public interface Dice {
 	/**

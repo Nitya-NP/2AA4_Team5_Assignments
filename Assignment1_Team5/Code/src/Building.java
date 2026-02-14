@@ -1,4 +1,3 @@
-
 /**
  * Abstract class representing a Building in the game.
  * 

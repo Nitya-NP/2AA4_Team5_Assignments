@@ -1,6 +1,7 @@
 import java.util.Random;
 /**
  * A RegularDice class is able to roll a six sided die.
+ * @author Ranica Chawla
  */
 public class RegularDice implements Dice {
     /**
