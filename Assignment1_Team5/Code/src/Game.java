@@ -37,9 +37,9 @@ public class Game {
 	 * @param players the players in the game
 	 * @param board   the board on which the game will be played
 	 */
-	public Game(Player[] players) {
+	public Game(Player[] players, int maxRounds) {
 		this.roundsPlayed = 0;
-		this.maxRounds = 8192;
+		this.maxRounds = maxRounds;
 		this.players = players;
 		this.board = new Board();
 		this.dice = new MultiDice();

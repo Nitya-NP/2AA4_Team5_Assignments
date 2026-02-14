@@ -114,6 +114,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_Yk1wIAkoEfG1Ho8LzY7dFA" name="buildSettlement" visibility="private">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_fmLr8AkoEfG1Ho8LzY7dFA" name="player" type="_a0BUMPezEfC5C-JN9uvAYA"/>
       </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HgwN8AkxEfGkCqdwnqGgsQ" name="assignResources" visibility="private"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_m85ccPexEfC5C-JN9uvAYA" name="Node">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_oQLpQPexEfC5C-JN9uvAYA" name="nodeId" visibility="private">

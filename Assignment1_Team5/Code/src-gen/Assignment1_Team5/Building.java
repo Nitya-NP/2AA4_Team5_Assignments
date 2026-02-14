@@ -16,7 +16,15 @@ public abstract class Building {
 
 	/**
 	 * 
+	 * @param building 
 	 */
-	public void Building() {
+	public void Building(Building building) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public Player getOwner() {
 	}
 }

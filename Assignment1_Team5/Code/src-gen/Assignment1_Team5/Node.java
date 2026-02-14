@@ -17,6 +17,10 @@ public class Node {
 	 * 
 	 */
 	private Building building;
+	/**
+	 * 
+	 */
+	private Node[] adjacentNodes;
 
 	/**
 	 * 
@@ -48,8 +52,22 @@ public class Node {
 
 	/**
 	 * 
-	 * @param nodes 
+	 * @param Building 
 	 */
-	public void setNodes(Node nodes) {
+	public void setBuilding(Building Building) {
+	}
+
+	/**
+	 * 
+	 * @param node 
+	 */
+	public void addAdjacentNode(Node node) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public Node getAdjacentNodes() {
 	}
 }
