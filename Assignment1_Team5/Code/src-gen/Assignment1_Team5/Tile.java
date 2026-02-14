@@ -62,4 +62,11 @@ public class Tile {
 	 */
 	public Node[] getNodes() {
 	}
+
+	/**
+	 * 
+	 * @param nodes 
+	 */
+	public void setNodes(Node nodes) {
+	}
 }

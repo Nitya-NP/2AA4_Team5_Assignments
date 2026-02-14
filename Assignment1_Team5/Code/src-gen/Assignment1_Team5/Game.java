@@ -45,8 +45,9 @@ public class Game {
 	/**
 	 * 
 	 * @param players 
+	 * @param maxRounds 
 	 */
-	public void Game(Player players) {
+	public void Game(Player players, int maxRounds) {
 	}
 
 	/**

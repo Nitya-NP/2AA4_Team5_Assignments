@@ -72,8 +72,9 @@ public class Board {
 	 * @param player 
 	 * @param n1 
 	 * @param n2 
+	 * @param  
 	 */
-	private void isRoadConnected(Player player, Node n1, Node n2) {
+	private void isRoadConnected(Player player, Node n1, Node n2, boolean ) {
 	}
 
 	/**
@@ -116,5 +117,19 @@ public class Board {
 	 * 
 	 */
 	private void assignResources() {
+	}
+
+	/**
+	 * 
+	 */
+	private void connectAdjacentNodes() {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 * @param node 
+	 */
+	private boolean settlementDistance(Node node) {
 	}
 }
