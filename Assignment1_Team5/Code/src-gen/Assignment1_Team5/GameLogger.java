@@ -16,9 +16,8 @@ public class GameLogger {
 
 	/**
 	 * 
-	 * @return 
 	 */
-	public int GameLogger() {
+	public void GameLogger() {
 	}
 
 	/**
