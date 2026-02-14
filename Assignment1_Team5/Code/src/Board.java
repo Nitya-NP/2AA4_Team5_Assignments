@@ -123,7 +123,7 @@ public class Board {
         };
 
         // Add adjacent nodes
-        for (int i = 0; i < nodes.length; i++) {
+        for (int i = 0; i < adjacency.length; i++) {
             for (int neighborIndex : adjacency[i]) {
                 nodes[i].addAdjacentNode(nodes[neighborIndex]);
             }
