@@ -221,7 +221,10 @@ public class Board {
         produceResource(player, diceValue);
 
         // Determine action
-        int action = (player.getTotalResources() > 7) ? rand.nextInt(3) : rand.nextInt(4);
+         // Determine action
+        int action = 0;
+        if (player.getTotalResources() > 7) action= rand.nextInt(3); //player have to build something
+        else action= rand.nextInt(4); //player can pass it 
 
         if (action == 0)
             buildRoad(player); // Build Road
