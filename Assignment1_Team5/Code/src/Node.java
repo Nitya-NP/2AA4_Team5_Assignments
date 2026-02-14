@@ -49,11 +49,21 @@ public class Node {
 	}
 
 	
+	/**
+	 * Adds a negiboring node to this node's adhacency list
+	 * @param node the node object to mark as adjacent
+	 */
 	public void addAdjacentNode(Node node){
 		adjacentNodes.add(node);
 	}
 
+	/**
+	 * @return a list of all nodes adjacent to this node. 
+	 * Adjacent nodes are used to check settlement distance rules and road connections.
+	 */
 	public List<Node> getAdjacentNodes(){
 		return adjacentNodes;
 	}
+}
+
 }
