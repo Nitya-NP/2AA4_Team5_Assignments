@@ -53,9 +53,9 @@ public class Game {
 
 		// Continue to play rounds till the game ends
 		while (!gameOver && roundsPlayed < maxRounds) {
+			System.out.println("\nCurrent Round: " + (roundsPlayed+1));
 			playRound();
 			roundsPlayed++;
-			System.out.println("Current Round: " + roundsPlayed);
 
 			// Check if any player (not null) has reached the score to win
 			for (Player p : players) {
