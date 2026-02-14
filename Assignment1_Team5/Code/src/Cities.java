@@ -13,19 +13,20 @@ public class Cities extends Building {
 	private int points;
 
 	/**
-	 * 
-	 * @return points - each city is worth 2 victory points
-	 */
-	public int getPoints() {
-		return points;
-	}
-
-	/**
-	 * 
+	 * Constructs a City owned by a player and sets points to 2
 	 * @param owner - the player which owns the city
 	 */
 	public Cities(Player owner) {
 		super(owner);
 		points = 2;
 	}
+	
+	/**
+	 * Returns the points
+	 * @return points - each city is worth 2 victory points
+	 */
+	public int getPoints() {
+		return points;
+	}
+
 }
