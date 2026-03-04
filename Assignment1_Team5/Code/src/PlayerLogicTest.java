@@ -1,6 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * Player logic test cases 
@@ -12,14 +11,14 @@ import org.junit.jupiter.api.Test;
  * 
  * @author Nitya Patel 
  */
-class PlayerLogicTest {
+public class PlayerLogicTest {
 
 
 	/**
 	 * Test switching turns doesnt break the game.
 	 */
 	@Test
-	void testPlayerSwitchingTurns() {
+	public void testPlayerSwitchingTurns() {
 		Player[] players= new Player[2];
 		players[0] =new Player(1);
 		players[1]=new Player(2);
@@ -47,7 +46,7 @@ class PlayerLogicTest {
 	 * Test Resouce production when dice roll is not seven
 	 */
 	@Test
-	void testProduceResourceDiceNotSeven(){
+	public void testProduceResourceDiceNotSeven(){
 		GameLogger l= new GameLogger();
 		Board b= new Board(l);
 
@@ -63,7 +62,7 @@ class PlayerLogicTest {
 	 * Test Resouce production when dice roll is seven
 	 */
 	@Test
-	void testProduceResourceDiceSeven(){
+	public void testProduceResourceDiceSeven(){
 		GameLogger l= new GameLogger();
 		Board b= new Board(l);
 
@@ -80,7 +79,7 @@ class PlayerLogicTest {
 	 * Test that adding a settlement increases player's points by 1
 	 */
 	@Test
-	void testSettlementAddsOnePoint(){
+	public void testSettlementAddsOnePoint(){
 		Player player=new Player(1);
 		Building s=new Settlement(player);
 		player.addBuilding(s);
@@ -93,7 +92,7 @@ class PlayerLogicTest {
 	 * Test that adding a cities increases player's points by 2
 	 */
 	@Test
-	void testCityAddsTwoPoint(){
+	public void testCityAddsTwoPoint(){
 		Player player=new Player(1);
 		Building c=new Cities(player);
 		player.addBuilding(c);
@@ -106,7 +105,7 @@ class PlayerLogicTest {
 	 * Test that adding a road does NOT give points
 	 */
 	@Test
-	void testRoadAddsZeroPoint(){
+	public void testRoadAddsZeroPoint(){
 		Player player=new Player(1);
 		Node n1= new Node(1);
 		Node n2= new Node(2);
@@ -122,7 +121,7 @@ class PlayerLogicTest {
 	 * Test that points after taking a turn are at least as much as before
 	 */
 	@Test
-	void testPointsAfterBuilding() {
+	public void testPointsAfterBuilding() {
 		GameLogger logger = new GameLogger();
 		Board board = new Board(logger);
 
