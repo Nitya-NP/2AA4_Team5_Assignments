@@ -25,7 +25,7 @@ jobs:
       - name: Compile Java files
         run: |
           mkdir out
-          javac -d out $(Get-ChildItem -Recurse -Filter *.java src | ForEach-Object { $_.FullName })
+          javac -d out $(Get-ChildItem -Recurse -Filter *.java Assignment1_Team5/Code/src | ForEach-Object { $_.FullName })
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v7
