@@ -33,7 +33,7 @@ jobs:
           args: >
             -Dsonar.projectKey=Nitya-NP_2AA4_Team5_Assignment1
             -Dsonar.organization=nitya-np
-            -Dsonar.sources=src
+            -Dsonar.sources=Assignment1_Team5/Code/src
             -Dsonar.java.binaries=out
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
