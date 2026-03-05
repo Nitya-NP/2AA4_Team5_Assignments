@@ -25,14 +25,14 @@ jobs:
       - name: Compile Java files
         run: |
           mkdir out
-          javac -d out $(Get-ChildItem -Recurse -Path Assignment1_Team5/Code/src -Filter *.java | ForEach-Object { $_.FullName })
+          javac -d out $(Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName })
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
             -Dsonar.projectKey=Nitya-NP_2AA4_Team5_Assignment1
-            -Dsonar.organization=YOUR_ORG_NAME
+            -Dsonar.organization=nitya-np
             -Dsonar.sources=src
             -Dsonar.java.binaries=out
         env:
