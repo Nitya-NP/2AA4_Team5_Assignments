@@ -82,4 +82,64 @@ public class BuildingLogicTest {
         // Test the road is owned by the player
         assertEquals(player, board.getRoad()[0].getOwner());
     }
+
+    /**
+     * Tests that upgrading a settlement to a city replaces
+     * the existing settlement at the node.
+     */
+    @Test
+    public void shouldUpgradeSettlementToCity() {
+        // Build board and player
+        Board board = new Board(new GameLogger());
+        Player player = new Player(1);
+
+        Node[] nodes = board.getNode();
+
+        // Occupy all nodes with settlements
+        for (int i = 0; i < nodes.length; i++) {
+            nodes[i].setBuilding(new Settlement(player));
+        }
+
+        // Give player resources to force doing an action
+        player.addResource(Resources.BRICK, 8);
+
+        boolean upgraded = false;
+
+        // Take a significant amount of turns to ensure that the city upgrade action occurs at least once
+        for (int i = 0; i < 30; i++) {
+            board.takeTurn(player, 3);
+            player.addResource(Resources.BRICK, 8);
+
+            // Check if the settlement was upgraded on this iteration
+            for (Node node: nodes) {
+                if (node.isOccupied() && node.getBuilding() instanceof Cities && node.getBuilding().getOwner() == player) {
+                    upgraded = true;
+                }
+            }
+
+            if (upgraded) {
+                break;
+            }
+        }
+
+        // Ensure the upgrade happened
+        assertTrue(upgraded);
+    }
+
+    /**
+     * To test if at board creation, all the nodes begin unoccupied.
+     */
+    @Test
+    public void nodesShouldStartEmpty() {
+        // Build a new board
+        Board board = new Board(new GameLogger());
+        Node[] nodes = board.getNode();
+
+        // Loop through all nodes in the board
+        for (Node node : nodes) {
+            // Ensure all nodes remain unoccupied
+            assertFalse(node.isOccupied());
+        }
+    }
+
 }
