@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * 4. Validation: Correct resources after building
  * 5. Validation: Player builds if >=7 resources
  * 
- * @author Nitya Patel 
+ * @author Nitya Patel, Krisha Patel
  */
 public class PlayerLogicTest {
 
@@ -135,6 +135,29 @@ public class PlayerLogicTest {
 		int after = player.getPoints();
 
 		assertTrue(after >= before);
+	}
+
+	/**
+ 	* Tests that players take building actions when resource > 7
+	 */
+	@Test
+	public void testPlayerBuildsIfResourcesHigh() {
+    	GameLogger logger = new GameLogger();
+    	Board board = new Board(logger);
+    
+    	Player player = new Player(1);
+
+    	player.addResource(Resources.LUMBER, 4);
+    	player.addResource(Resources.BRICK, 4);
+    	player.addResource(Resources.WOOL, 2);
+    
+    	int beforePoints = player.getPoints();
+    
+    	board.takeTurn(player, 6);
+    
+    	int afterPoints = player.getPoints();
+
+    	assertTrue(afterPoints >= beforePoints);
 	}
  
 
