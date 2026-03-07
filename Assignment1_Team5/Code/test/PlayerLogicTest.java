@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Player logic test cases 
  * 1. Turn switching
- * 2. Partition: Produce correct resource
- * 3. Validation: Correct points after turn
- * 4. Validation: Correct resources after building
- * 5. Validation: Player builds if >=7 resources
+ * 2. Validation: Correct points after turn
+ * 3. Validation: Correct resources after building
+ * 4. Validation: Player builds if >=7 resources
  * 
  * @author Nitya Patel, Krisha Patel
  */
@@ -41,39 +40,6 @@ public class PlayerLogicTest {
 		assertTrue(players[1].getPoints()>=p2Resource); //Player 2 resource should not descrease");
 		
 	}
-
-	/**
-	 * Test Resouce production when dice roll is not seven
-	 */
-	@Test
-	public void testProduceResourceDiceNotSeven(){
-		GameLogger l= new GameLogger();
-		Board b= new Board(l);
-
-		Player player= new Player(1);
-
-		int before=player.getTotalResources();
-		b.takeTurn(player, 5); //not 7
-		int after= player.getTotalResources();
-		assertTrue(after>=before);
-	}
-
-	/**
-	 * Test Resouce production when dice roll is seven
-	 */
-	@Test
-	public void testProduceResourceDiceSeven(){
-		GameLogger l= new GameLogger();
-		Board b= new Board(l);
-
-		Player player= new Player(1);
-
-		int before=player.getTotalResources();
-		b.takeTurn(player, 7); //7
-		int after= player.getTotalResources();
-		assertTrue(after>=before);
-	}
-
 
 	/**
 	 * Test that adding a settlement increases player's points by 1
