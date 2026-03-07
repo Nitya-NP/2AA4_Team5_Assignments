@@ -85,7 +85,7 @@ public class GameLogicTest {
         board.takeTurn(player, 8);
         int curr = player.getTotalResources();
 
-        assertTrue(curr >= prev);
+        assertTrue(curr >= prev); 
     }
 
     /**
