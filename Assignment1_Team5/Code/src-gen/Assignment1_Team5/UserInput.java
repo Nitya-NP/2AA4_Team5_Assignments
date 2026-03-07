@@ -8,34 +8,21 @@ package Assignment1_Team5;
 /**
  * 
  */
-public abstract class Building {
+public enum UserInput {
 	/**
 	 * 
 	 */
-	private Player owner;
+	ROLL,
 	/**
 	 * 
 	 */
-	private int points;
-
+	GO,
 	/**
 	 * 
-	 * @param building 
 	 */
-	public void Building(Building building) {
-	}
-
+	BUILD,
 	/**
 	 * 
-	 * @return 
 	 */
-	public Player getOwner() {
-	}
-
-	/**
-	 * 
-	 * @return 
-	 */
-	public int getPoints() {
-	}
+	LIST;
 }

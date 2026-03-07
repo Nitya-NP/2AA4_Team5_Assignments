@@ -12,13 +12,13 @@ public enum TurnManagerStates {
 	/**
 	 * 
 	 */
-	startTurn,
+	START_TURN,
 	/**
 	 * 
 	 */
-	doAction,
+	DO_ACTION,
 	/**
 	 * 
 	 */
-	endTurn;
+	END_TURN;
 }

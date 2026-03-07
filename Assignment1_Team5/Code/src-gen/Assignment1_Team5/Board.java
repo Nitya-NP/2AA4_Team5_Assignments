@@ -16,7 +16,7 @@ public class Board {
 	/**
 	 * 
 	 */
-	private Roads[] roads;
+	private Road[] roads;
 	/**
 	 * 
 	 */
@@ -55,7 +55,7 @@ public class Board {
 	 * 
 	 * @return 
 	 */
-	public Roads getRoad() {
+	public Road getRoad() {
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Board {
 	 * 
 	 * @param road 
 	 */
-	private void addRoadToBoard(Roads road) {
+	private void addRoadToBoard(Road road) {
 	}
 
 	/**

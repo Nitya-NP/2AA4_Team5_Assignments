@@ -8,7 +8,7 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Player {
+public abstract class Player {
 	/**
 	 * 
 	 */
@@ -86,5 +86,13 @@ public class Player {
 	 * @return 
 	 */
 	public int getTotalResources() {
+	}
+
+	/**
+	 * 
+	 * @param Player 
+	 * @param diceValue 
+	 */
+	public void takeTurn(Player Player, int diceValue) {
 	}
 }
