@@ -8,49 +8,36 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Game {
+public class TurnManager {
 	/**
 	 * 
 	 */
-	private int roundsPlayed;
+	public TurnManagerStates currentState;
 	/**
 	 * 
 	 */
-	private int maxRounds;
+	public TurnManagerStates turnmanagerstates;
 	/**
 	 * 
 	 */
-	private Player[] players;
-	/**
-	 * 
-	 */
-	private Board board;
-	/**
-	 * 
-	 */
-	public Dice dice;
-	/**
-	 * 
-	 */
-	public TurnManager turnmanager;
+	public RobberActionsManager robberactionsmanager;
 
 	/**
 	 * 
 	 */
-	public void start() {
+	public void TurnManager() {
 	}
 
 	/**
 	 * 
 	 */
-	public void playRound() {
+	public void manageTurn() {
 	}
 
 	/**
 	 * 
-	 * @param players 
-	 * @param maxRounds 
+	 * @return 
 	 */
-	public void Game(Player players, int maxRounds) {
+	public int rollMultiDice() {
 	}
 }

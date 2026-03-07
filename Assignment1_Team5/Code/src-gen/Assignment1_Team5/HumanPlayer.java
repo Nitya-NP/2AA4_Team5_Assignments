@@ -8,11 +8,13 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Settlement extends Building {
+public class HumanPlayer extends Player {
 	/**
 	 * 
-	 * @param owner 
 	 */
-	public void Settlement(Player owner) {
-	}
+	private String scanner;
+	/**
+	 * 
+	 */
+	public UserInput userinput;
 }

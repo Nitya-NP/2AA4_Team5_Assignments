@@ -60,14 +60,6 @@ public class Board {
 
 	/**
 	 * 
-	 * @param player 
-	 * @param diceValue 
-	 */
-	public void takeTurn(Player player, int diceValue) {
-	}
-
-	/**
-	 * 
 	 */
 	private void connectNodeToTiles() {
 	}
@@ -79,7 +71,7 @@ public class Board {
 	 * @param n2 
 	 * @param  
 	 */
-	private void isRoadConnected(Player player, Node n1, Node n2, boolean isConnected) {
+	private void isRoadConnected(Player player, Node n1, Node n2, boolean ) {
 	}
 
 	/**

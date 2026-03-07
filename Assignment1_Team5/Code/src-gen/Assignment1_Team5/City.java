@@ -8,11 +8,11 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Settlement extends Building {
+public class City extends Building {
 	/**
 	 * 
 	 * @param owner 
 	 */
-	public void Settlement(Player owner) {
+	public void Cities(Player owner) {
 	}
 }

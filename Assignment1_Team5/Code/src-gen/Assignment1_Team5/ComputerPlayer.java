@@ -8,11 +8,9 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Settlement extends Building {
+public class ComputerPlayer extends Player {
 	/**
 	 * 
-	 * @param owner 
 	 */
-	public void Settlement(Player owner) {
-	}
+	private int randomInt;
 }

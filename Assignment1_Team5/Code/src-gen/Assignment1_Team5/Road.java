@@ -8,11 +8,32 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class Settlement extends Building {
+public class Road {
 	/**
 	 * 
+	 */
+	private Node[] connectedNodes;
+
+	/**
+	 * 
+	 * @param node 
+	 * @return 
+	 */
+	public boolean isConnected(Node node) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public Node[] getConnectedNodes() {
+	}
+
+	/**
+	 * 
+	 * @param nodes 
 	 * @param owner 
 	 */
-	public void Settlement(Player owner) {
+	public void Roads(Node nodes, Player owner) {
 	}
 }
