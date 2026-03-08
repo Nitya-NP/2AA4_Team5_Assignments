@@ -38,9 +38,10 @@ public class Demonstrator {
 
         // Create 4 players
         Player[] players = new Player[4];
-        for (int i = 0; i < 4; i++) {
-            players[i] = new Player(i + 1);
-        }
+        players[0] = new HumanPlayer(1);
+        players[1] = new HumanPlayer(2);
+        players[2] = new ComputerPlayer(3);
+        players[3] = new ComputerPlayer(4);
 
         // Create game with players and rounds
         Game game = new Game(players, rounds);
@@ -56,5 +57,6 @@ public class Demonstrator {
     }
 }
  
+
 
 
