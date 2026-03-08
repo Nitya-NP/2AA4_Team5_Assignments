@@ -247,7 +247,7 @@ public class Board {
      * @param player    the player gaining resource
      * @param diceValue dice roll value
      */
-    private void produceResource(Player player, int diceValue) {
+    public void produceResource(Player player, int diceValue) {
        if(diceValue==7){
             logger.log(player.getPlayerId(), "rolled 7 (no resources)");
             return;
