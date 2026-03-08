@@ -1,7 +1,7 @@
 /**
  * The road class represents a road build by a player that is connected to two nodes on the board.
  * 
- * @author Raadhikka Gupta
+ * @author Raadhikka Gupta, Nitya Patel
  */
 public class Road {
 	/**

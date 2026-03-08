@@ -1,3 +1,7 @@
+
+/**
+ * @author Nitya Patel
+ */
 public class ComputerPlayer extends Player{
 
     public ComputerPlayer(int playerId) {

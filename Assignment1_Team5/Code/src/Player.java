@@ -1,4 +1,3 @@
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,6 +140,14 @@ public abstract class Player {
 
 	public boolean hasResources(Resources r, int amount) {
 		return resources.getOrDefault(r, 0) >= amount;
+	}
+
+	public void listResources(){
+		System.out.println("Player "+ playerId + " Resources: ");
+
+		for(Map.Entry<Resources, Integer> entry: resources.entrySet()){
+			System.out.println(entry.getKey()+": "+ entry.getValue());
+		}
 	}
 
 	//Abstract method to be implemented by Human & Computer 
