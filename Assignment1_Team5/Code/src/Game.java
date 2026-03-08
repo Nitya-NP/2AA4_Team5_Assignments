@@ -82,9 +82,7 @@ public class Game {
 		// To play a single round.
 		for (Player p : players) {
 			if (p != null) {
-				// maybe do smth like this?
-				//UserInput input = p.takeTurn();
-				//manager.manageTurn(p, input);
+				manager.executeTurn(p);
 			}
 		}
 	}

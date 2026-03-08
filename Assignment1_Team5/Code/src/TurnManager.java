@@ -10,11 +10,20 @@ public class TurnManager {
         this.board = board;
         this.logger = logger;
         this.dice = dice;
-
-        currState = TurnState.START_TURN;
     }
 
-    public void manageTurn(Player player, UserInput input) {
+    public void executeTurn(Player player) {
+        currState = TurnState.START_TURN;
+    
+        while (currState != TurnState.END_TURN) {
+            // we want takeTurn to essentially get the users input (either go, build_city, etc.) <- it should return one of these enums
+            // u could also rename it maybe to match its functionality better
+            //UserInput input = player.takeTurn();
+            //manageTurn(player, input);
+        }
+    }
+
+    private void manageTurn(Player player, UserInput input) {
         switch(input) {
             case ROLL:
                 if (currState != TurnState.START_TURN) {
