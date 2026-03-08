@@ -6,7 +6,7 @@ public class HumanPlayer extends Player{
     }
 
     @Override
-    public void takeTurn(Board board, int diceValue) {
+    public UserInput takeTurn() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'takeTurn'");
     }

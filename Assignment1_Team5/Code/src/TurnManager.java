@@ -40,8 +40,7 @@ public class TurnManager {
                 board.produceResource(player, diceValue);
                 break;
             case LIST:
-                // to implement
-                //player.listResources();
+                player.listResources();
                 break;
             case GO:
                 if (currState == TurnState.DO_ACTION) {

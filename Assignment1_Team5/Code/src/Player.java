@@ -138,10 +138,19 @@ public abstract class Player {
 		return true;
 	}
 
+	/**
+	 * Checks whether the player has atleast a specified amount of resources to build something
+	 * @param r the resource type to check
+	 * @param amount minimum amount required 
+	 * @return true if player has enough, false otherwise
+	 */
 	public boolean hasResources(Resources r, int amount) {
 		return resources.getOrDefault(r, 0) >= amount;
 	}
 
+	/**
+	 * Displays all resources currently owned by the player
+	 */
 	public void listResources(){
 		System.out.println("Player "+ playerId + " Resources: ");
 
@@ -151,6 +160,6 @@ public abstract class Player {
 	}
 
 	//Abstract method to be implemented by Human & Computer 
-	public abstract void takeTurn(Board board, int diceValue);
+	public abstract UserInput takeTurn();
 
 }
