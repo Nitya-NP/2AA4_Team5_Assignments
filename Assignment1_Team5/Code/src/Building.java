@@ -9,7 +9,7 @@
  */
 public abstract class Building {
 	/**
-	 * 
+	 * Owner of that building
 	 */
 	private Player owner;
 	

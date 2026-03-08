@@ -3,11 +3,16 @@
  * 
  * @author Raadhikka Gupta
  */
-public class Roads extends Building {
+public class Road {
 	/**
 	 * The two nodes connected to the road.
 	 */
 	private Node[] connectedNodes;
+
+	/**
+	 * Owner of that building
+	 */
+	private Player owner;
 
 	/**
 	 * Constructs a Road connecting to two nodes and owned by a player.
@@ -15,8 +20,7 @@ public class Roads extends Building {
 	 * @param nodes the nodes connected
 	 * @param owner the player who owns the road
 	 */
-	public Roads(Node[] nodes, Player owner) {
-		super(owner);
+	public Road(Node[] nodes, Player owner) {
 		this.connectedNodes = new Node[2];
 		this.connectedNodes[0] = nodes[0];
 		this.connectedNodes[1] = nodes[1];
@@ -41,5 +45,13 @@ public class Roads extends Building {
 	 */
 	public Node[] getConnectedNodes() {
 		return connectedNodes;
+	}
+
+	/**
+	 * 
+	 * @return owner - the player who owns the building
+	 */
+	public Player getOwner() {
+		return owner;
 	}
 }

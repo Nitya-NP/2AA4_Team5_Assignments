@@ -11,9 +11,10 @@ import java.util.Random;
 public class Board {
 	private Tile[] tiles; //Tiles on board
 	private Node[] nodes; //Nodes on board
-	private Roads[] roads; //Roads on board
+	private Road[] roads; //Roads on board
 
     private GameLogger logger; // Logger for game events
+    Random rand = new Random();
 
 	/**
 	 * Constructs a Board with tiles, nodes and roads
@@ -26,7 +27,7 @@ public class Board {
 		// Initialize the board with 19 tiles and 54 nodes
 		this.tiles = new Tile[19];
 		this.nodes = new Node[54];
-        this.roads=new Roads[72];
+        this.roads=new Road[72];
 
         this.logger = logger; // Initialize the logger
 
@@ -40,6 +41,9 @@ public class Board {
 		connectAdjacentNodes();
 	}
 
+    /**
+     * Assign resources to each tile
+     */
 	private void assignResources() {
 		Resources[] resourceOrder = {
 			Resources.LUMBER,
@@ -63,9 +67,10 @@ public class Board {
 			Resources.WOOL
 		};
 		
+        int[] tokenNum= {5,2,6,3,8,10,9,12,11,4,8,10,9,4,5,6,3,11,0};
 		// Loop to create tiles and assign IDs and token numbers
 		for (int i = 0; i < 19; i++) {
-			tiles[i] = new Tile(resourceOrder[i], i, 0);
+			tiles[i] = new Tile(resourceOrder[i], i, tokenNum[i]);
 		}
 	}	
 	
@@ -154,7 +159,7 @@ public class Board {
 	/**
 	 * @return all roads on the board
 	 */
-	public Roads[] getRoad() {
+	public Road[] getRoad() {
 		return this.roads;
 	}
  	
@@ -182,7 +187,7 @@ public class Board {
             return true;
 
         // check if the road is connected to an exiting player owned road
-        for (Roads road : roads) {
+        for (Road road : roads) {
             if (road != null && road.getOwner() == player && (road.isConnected(n1) || road.isConnected(n2))) {
                 return true;
             }
@@ -196,7 +201,7 @@ public class Board {
      * 
      * @param road the road to add
      */
-    private void addRoadToBoard(Roads road) {
+    private void addRoadToBoard(Road road) {
         for (int i = 0; i < roads.length; i++) {
             if (roads[i] == null) {
                 roads[i] = road;
@@ -214,14 +219,12 @@ public class Board {
      * @param diceValue the dice value (2-12)
      */
     public void takeTurn(Player player, int diceValue) {
-        Random rand = new Random();
         logger.log(player.getPlayerId(), "rolled " + diceValue);
 
         // Resource gain
         produceResource(player, diceValue);
 
         // Determine action
-         // Determine action
         int action = 0;
         if (player.getTotalResources() > 7) action= rand.nextInt(3); //player have to build something
         else action= rand.nextInt(4); //player can pass it 
@@ -245,14 +248,22 @@ public class Board {
      * @param diceValue dice roll value
      */
     private void produceResource(Player player, int diceValue) {
-        Random rand = new Random();
-        if (diceValue != 7) {
-            Resources[] allResources = Resources.values();
-            Resources r = allResources[rand.nextInt(allResources.length)];
-            player.addResource(r, 1);
-            logger.log(player.getPlayerId(), "gained 1 " + r);
-        } else {
+       if(diceValue==7){
             logger.log(player.getPlayerId(), "rolled 7 (no resources)");
+            return;
+        }
+
+        for(Tile t: tiles){
+            if(t.getToken()==diceValue){
+                for(Node n: t.getNodes()){
+                    if(n.isOccupied()){
+                        Player p= n.getBuilding().getOwner();
+                        Resources r= t.getResource();
+                        p.addResource(r, 1);
+                        logger.log(p.getPlayerId(), "gained 1 " + r + " from Node " + n.getNodeId());
+                    }
+                }
+            }
         }
     }
 
@@ -265,7 +276,15 @@ public class Board {
      * @param player the player
      */
     private void buildRoad(Player player) {
-        Random rand = new Random();
+
+        //Check if player has that resources to build road
+        if(!player.hasResources(Resources.BRICK,1) ||
+           !player.hasResources(Resources.LUMBER,1)){
+
+            logger.log(player.getPlayerId(),"Not enough resources for road");
+            return;
+        }
+
         Node[] allNodes = getNode();
         Node n1, n2;
         boolean validRoad = false;
@@ -282,8 +301,13 @@ public class Board {
         } while (attempts < 10);
 
         if (validRoad) {
-            Roads road = new Roads(new Node[] { n1, n2 }, player);
-            player.addBuilding(road);
+
+            //remove resources 
+            player.removeResource(Resources.BRICK, 1);
+            player.removeResource(Resources.LUMBER, 1);
+
+            Road road = new Road(new Node[] { n1, n2 }, player);
+            player.addRoad();
             addRoadToBoard(road);
             logger.log(player.getPlayerId(), "built Road between Node " + n1.getNodeId() + " and Node " + n2.getNodeId());
         } else {
@@ -301,9 +325,20 @@ public class Board {
      * @param player
      */
     private void buildCity(Player player) {
-        Random rand = new Random();
+        //check if player has this resources to build city
+        if(!player.hasResources(Resources.ORE,3) ||
+           !player.hasResources(Resources.GRAIN,2)){
+
+            logger.log(player.getPlayerId(),"Not enough resources for city");
+            return;
+        }
+        
         Node n = getNode()[rand.nextInt(nodes.length)];
         if (n.isOccupied() && n.getBuilding() instanceof Settlement && n.getBuilding().getOwner()==player)  {
+            
+            player.removeResource(Resources.ORE,3);
+            player.removeResource(Resources.GRAIN,2);
+            
             Building city = new Cities(player);
             n.setBuilding(city);
             player.addBuilding(city);
@@ -322,9 +357,26 @@ public class Board {
      * @param player
      */
     private void buildSettlement(Player player) {
-        Random rand = new Random();
+
+        //check if player has this resources to build settlement
+        if(!player.hasResources(Resources.BRICK,1) ||
+           !player.hasResources(Resources.LUMBER,1) ||
+           !player.hasResources(Resources.WOOL,1) ||
+           !player.hasResources(Resources.GRAIN,1)){
+
+            logger.log(player.getPlayerId(),"Not enough resources for settlement");
+            return;
+        }
+
         Node n = getNode()[rand.nextInt(nodes.length)];
         if (!n.isOccupied() && !settlementDistance(n)) {
+
+            //remove resources
+            player.removeResource(Resources.BRICK,1);
+            player.removeResource(Resources.LUMBER,1);
+            player.removeResource(Resources.WOOL,1);
+            player.removeResource(Resources.GRAIN,1);
+
             Building settlement = new Settlement(player);
             n.setBuilding(settlement);
             player.addBuilding(settlement);

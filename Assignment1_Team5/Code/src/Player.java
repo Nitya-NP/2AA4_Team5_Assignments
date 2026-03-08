@@ -10,12 +10,13 @@ import java.util.Map;
  * 
  * @author Nitya Patel
  */
-public class Player {
+public abstract class Player {
 
 	private int playerId; // Unique identifier of the player
 	private int points; // Current points
 	private Map<Resources, Integer> resources; // Stores the number of resources player owns
-	private Map<Class<? extends Building>, Integer> buildings; // Stores buildings owned by the player (Roads,Settlement, Cities)
+	private Map<Class<? extends Building>, Integer> buildings; // Stores buildings owned by the player (Settlement, Cities)
+	private int roads;
 
 	/**
 	 * Constructs a new Player with empty resources and buildings
@@ -44,7 +45,7 @@ public class Player {
 	 * Initializes building (Road, City, Settlement) counts to 0 at the start
 	 */
 	private void initBuildings() {
-		buildings.put(Roads.class, 0);
+		this.roads = 0;
 		buildings.put(Settlement.class, 0);
 		buildings.put(Cities.class, 0);
 
@@ -73,8 +74,6 @@ public class Player {
 		this.points += points;
 	}
 
-
-
 	/**
 	 * @return total number of resources the player owns
 	 */
@@ -96,7 +95,6 @@ public class Player {
 		resources.put(resource, resources.getOrDefault(resource, 0) + amount);
 	}
 
-
 	/**
 	 * Adds a building to the player based on its class name
 	 * Also updates points where applicable
@@ -116,5 +114,36 @@ public class Player {
 
 	}
 
+	/**
+	 * Adds a road to player count
+	 */
+	public void addRoad() {
+		this.roads++;
+	}
+
+	/**
+	 * Removes a specific amount of a resource from the player
+	 * 
+	 * @param resource the resource type
+	 * @param amount   the number to remove
+	 * @return true if removal was successful, false if not enough resources
+	 */
+	public boolean removeResource(Resources resource, int amount) {
+		int current = resources.getOrDefault(resource, 0);
+
+		if (current < amount) {
+			return false; // not enough resources
+		}
+
+		resources.put(resource, current - amount);
+		return true;
+	}
+
+	public boolean hasResources(Resources r, int amount) {
+		return resources.getOrDefault(r, 0) >= amount;
+	}
+
+	//Abstract method to be implemented by Human & Computer 
+	public abstract void takeTurn(Board board, int diceValue);
 
 }
