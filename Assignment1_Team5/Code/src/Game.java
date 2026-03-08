@@ -45,17 +45,19 @@ public class Game {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
-
 		this.dice = new MultiDice();
 		this.logger = new GameLogger();
-		this.manager = new TurnManager(board, logger, dice);
 	}
 
 	/**
 	 * Starts the game and runs till a player wins or max number of rounds is reached
 	 */
 	public void start() {
+		// build the board, robber, and turn manager
 		this.board = new Board(this.logger);
+		RobberActionsManager robberManager = new RobberActionsManager(board, players);
+		board.setRobberManager(robberManager);
+		this.manager = new TurnManager(board, logger, dice, robberManager);
 
 		boolean gameOver = false; // to check if game over
 

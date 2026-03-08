@@ -4,6 +4,8 @@
  * @author Raadhikka Gupta
  */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RobberActionsManager {
@@ -11,6 +13,11 @@ public class RobberActionsManager {
 	 * To store the robber's current location.
 	 */
 	private Tile currentTile;
+
+	/**
+	 * To store all players
+	 */
+	private Player[] players;
 
 	/**
 	 * Random number generator.
@@ -25,8 +32,16 @@ public class RobberActionsManager {
 	/**
 	 * To initialize the robber to be on the desert tile initially
 	 */
-	public RobberActionsManager(Tile desertTile) {
-		this.currentTile = desertTile;
+	public RobberActionsManager(Board board, Player[] players) {
+		this.players = players;
+
+		// to find the desert tile
+		for (Tile t : board.getTile()) {
+			if (t.getResource() == Resources.NOTHING) {
+				currentTile = t;
+				break;
+			}
+		}
 	}
 
 	/**
@@ -34,7 +49,7 @@ public class RobberActionsManager {
 	 * 
 	 * @return True if discarded
 	 */
-	public boolean discardResourceCards(Player[] players) {
+	public boolean discardResourceCards() {
 		// to validate
 		if (players == null)
 			return false;
@@ -68,19 +83,56 @@ public class RobberActionsManager {
 	}
 
 	/**
+	 * To choose a random victim player to steal from.
+	 * 
+	 * @param currentPlayer the current player
+	 */
+	public Player chooseVictim(Player currentPlayer) {
+		// to validate tile
+		if(currentTile == null) {
+			return null;
+		}
+
+		Node[] nodes = currentTile.getNodes(); // nodes on all tiles
+		List<Player> possibleVictims = new ArrayList<>(); // list of victims
+
+		// find all the possible victims to steal from
+		for(Node n : nodes){
+			if(n.isOccupied()){
+				Player p = n.getBuilding().getOwner();
+
+				// add if it's not the current player and has resources
+				if(p != currentPlayer && p.getTotalResources() > 0){
+					possibleVictims.add(p);
+				}
+			}
+		}
+
+		// if no possible victims
+		if(possibleVictims.isEmpty())
+			return null;
+
+		return possibleVictims.get(rand.nextInt(possibleVictims.size()));
+	}
+
+	/**
 	 * To move the robber to a new tile
 	 * 
 	 * @param newTile the new tile to move to
 	 * @return True when moved
 	 */
-	public boolean moveRobber(Tile newTile) {
-		// valid tile
-		if (newTile == null)
+	public boolean moveRobber(Board board) {
+		// valid tile or if it's the same tile
+		if (board == null)
 			return false;
-		
-		// if it's the same tile
-		if (newTile == currentTile)
-			return false;
+
+		Tile[] tiles = board.getTile();
+		Tile newTile;
+
+		// choose a different tile
+		do {
+			newTile = tiles[rand.nextInt(tiles.length)];
+		} while (newTile == currentTile);
 		
 		currentTile = newTile;
 		return true;
@@ -111,19 +163,19 @@ public class RobberActionsManager {
 	/**
 	 * To steal a resource from a player
 	 * 
-	 * @param currentPlayer the player to steal from
+	 * @param victimPlayer the player to steal from
 	 */
-	public void stealResource(Player currentPlayer) {
+	public void stealResource(Player victimPlayer) {
 		// if they don't have resources
-		if (currentPlayer == null || currentPlayer.getTotalResources() == 0)
+		if (victimPlayer == null || victimPlayer.getTotalResources() == 0)
 			return;
 
 		// to find a resource that's available and then remove it
 		Resources toRemove;
 		do { 
 			toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
-		} while (!currentPlayer.hasResources(toRemove, 1));
+		} while (!victimPlayer.hasResources(toRemove, 1));
 
-		currentPlayer.removeResource(toRemove, 1);
+		victimPlayer.removeResource(toRemove, 1);
 	}
 }

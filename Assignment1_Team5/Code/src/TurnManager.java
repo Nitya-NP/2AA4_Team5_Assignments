@@ -1,3 +1,10 @@
+/**
+ * This class controls the actions that occurs during a player's turn in the game.
+ * 
+ * @author Ranica Chawla, Raadhikka Gupta
+ */
+
+import java.util.Random;
 
 public class TurnManager {
     private TurnState currState;
@@ -6,10 +13,21 @@ public class TurnManager {
     private GameLogger logger;
     private Dice dice;
 
-    public TurnManager(Board board, GameLogger logger, Dice dice) {
+    /**
+     * To manage the robber actions when activated
+     */
+    private RobberActionsManager robberManager;
+
+    /**
+	 * Random number generator.
+	 */
+	private final Random rand = new Random();
+
+    public TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager) {
         this.board = board;
         this.logger = logger;
         this.dice = dice;
+        this.robberManager = robberManager;
     }
 
     public void executeTurn(Player player) {
@@ -33,11 +51,26 @@ public class TurnManager {
 
                 int diceValue = roll(player);
 
+                // when current state is robber
                 if (currState == TurnState.ROBBER) {
-                    // do robber stuff here
+                    // to discard half the cards
+                    robberManager.discardResourceCards();
+
+                    // to move the robber
+                    robberManager.moveRobber(board);
+
+                    // to steal resource
+                    Player victim = robberManager.chooseVictim(player);
+                    if (victim != null) {
+                        robberManager.stealResource(victim);
+                    }
                 }
                 
-                board.produceResource(player, diceValue);
+                // resources can be produced
+                else {
+                    board.produceResource(player, diceValue);
+                }
+
                 break;
             case LIST:
                 player.listResources();

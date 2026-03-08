@@ -6,7 +6,7 @@ import java.util.Random;
  * This mainly stores the board elements and provides access to them through getter methods.
  * It also manages the turns of players. 
  * 
- * @author Nitya Patel, Ranica Chawla
+ * @author Nitya Patel, Ranica Chawla, Raadhikka Gupta
  */
 public class Board {
 	private Tile[] tiles; //Tiles on board
@@ -14,6 +14,7 @@ public class Board {
 	private Road[] roads; //Roads on board
 
     private GameLogger logger; // Logger for game events
+    private RobberActionsManager robberManager; // Robber on board
     private final Random rand = new Random();
 
 	/**
@@ -40,6 +41,15 @@ public class Board {
 		connectNodesToTiles();
 		connectAdjacentNodes();
 	}
+
+    /**
+     * To set the robber manager up
+     * 
+     * @param robberManager robber manager
+     */
+    public void setRobberManager(RobberActionsManager robberManager) {
+        this.robberManager = robberManager;
+    }
 
     /**
      * Assign resources to each tile
@@ -225,12 +235,20 @@ public class Board {
         }
 
         for(Tile t: tiles){
+            // robber blocks resources to be built
+            if (robberManager.isRobberOnTile(t))
+                continue;
+
             if(t.getToken()==diceValue){
                 for(Node n: t.getNodes()){
                     if(n.isOccupied()){
                         Player p= n.getBuilding().getOwner();
                         Resources r= t.getResource();
-                        p.addResource(r, 1);
+                        if (b instanceof City) {
+                            p.addResource(r, 2);
+                        } else {
+                            p.addResource(r, 1);
+                        }
                         logger.log(p.getPlayerId(), "gained 1 " + r + " from Node " + n.getNodeId());
                     }
                 }
