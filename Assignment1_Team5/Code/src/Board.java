@@ -14,7 +14,7 @@ public class Board {
 	private Road[] roads; //Roads on board
 
     private GameLogger logger; // Logger for game events
-    Random rand = new Random();
+    private final Random rand = new Random();
 
 	/**
 	 * Constructs a Board with tiles, nodes and roads
