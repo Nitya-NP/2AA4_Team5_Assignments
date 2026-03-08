@@ -13,6 +13,16 @@ public class RobberActionsManager {
 	private Tile currentTile;
 
 	/**
+	 * Random number generator.
+	 */
+	private final Random rand = new Random();
+
+	/**
+	 * All stealable resources
+	 */
+	private static final Resources[] STEAL_RESOURCES = {Resources.BRICK, Resources.GRAIN, Resources.LUMBER, Resources.ORE, Resources.WOOL};
+
+	/**
 	 * To initialize the robber to be on the desert tile initially
 	 */
 	public RobberActionsManager(Tile desertTile) {
@@ -25,20 +35,31 @@ public class RobberActionsManager {
 	 * @return True if discarded
 	 */
 	public boolean discardResourceCards(Player[] players) {
+		// to validate
+		if (players == null)
+			return false;
+
 		// to loop through the players
 		for (Player p : players) {
+			// to validate
+			if (p == null) 
+				continue;
+
 			int totalResources = p.getTotalResources();
 
 			// if the current player has more than 7 cards
 			if (totalResources > 7) {
 				int discardCardAmount = totalResources / 2;
-				Random rand = new Random();
-				Resources[] resources = {Resources.BRICK, Resources.GRAIN, Resources.LUMBER, Resources.ORE, Resources.WOOL};
 
 				// to remove half the resources the player has, randomly
 				for (int i = 0; i < discardCardAmount; i++) {
-					Resources toRemove = resources[rand.nextInt(resources.length)];
-					p.addResource(toRemove, -1);
+					// to find a resource that's available and then remove it
+					Resources toRemove;
+					do { 
+						toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
+					} while (!p.hasResources(toRemove, 1));
+
+					p.removeResource(toRemove, 1);
 				}
 			}
 		}
@@ -94,13 +115,15 @@ public class RobberActionsManager {
 	 */
 	public void stealResource(Player currentPlayer) {
 		// if they don't have resources
-		if (currentPlayer.getTotalResources() == 0)
+		if (currentPlayer == null || currentPlayer.getTotalResources() == 0)
 			return;
 
-		// take a random resource from them
-		Random rand = new Random();
-		Resources[] resources = {Resources.BRICK, Resources.GRAIN, Resources.LUMBER, Resources.ORE, Resources.WOOL};
-		Resources toRemove = resources[rand.nextInt(resources.length)];
-		currentPlayer.addResource(toRemove, -1);
+		// to find a resource that's available and then remove it
+		Resources toRemove;
+		do { 
+			toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
+		} while (!currentPlayer.hasResources(toRemove, 1));
+
+		currentPlayer.removeResource(toRemove, 1);
 	}
 }
