@@ -1,6 +1,8 @@
 public enum UserInput {
     ROLL,
     GO,
-    BUILD,
+    BUILD_SETTLEMENT,
+    BUILD_CITY,
+    BUILD_ROAD,
     LIST
 }

@@ -211,35 +211,6 @@ public class Board {
     }
 
     /**
-     * Simulates the player's turn
-     * Handles dice roll, resource production and builds a raod, settlement, or city
-     * If player has more than 7 resources, only building actions are attempted
-     * 
-     * @param player    the player whose turn it is
-     * @param diceValue the dice value (2-12)
-     */
-    public void takeTurn(Player player, int diceValue) {
-        logger.log(player.getPlayerId(), "rolled " + diceValue);
-
-        // Resource gain
-        produceResource(player, diceValue);
-
-        // Determine action
-        int action = 0;
-        if (player.getTotalResources() > 7) action= rand.nextInt(3); //player have to build something
-        else action= rand.nextInt(4); //player can pass it 
-
-        if (action == 0)
-            buildRoad(player); // Build Road
-        else if (action == 1)
-            buildSettlement(player); // Build Settlement
-        else if (action == 2)
-            buildCity(player); // Build City
-        else
-            logger.log(player.getPlayerId(), "passes"); // Pass
-    }
-
-    /**
      * Helper method
      * Handles resouce production for the player based on the dice roll
      * if dice value is 7, no resouce are gained
@@ -275,7 +246,7 @@ public class Board {
      * 
      * @param player the player
      */
-    private void buildRoad(Player player) {
+    public void buildRoad(Player player) {
 
         //Check if player has that resources to build road
         if(!player.hasResources(Resources.BRICK,1) ||
@@ -324,7 +295,7 @@ public class Board {
      * 
      * @param player
      */
-    private void buildCity(Player player) {
+    public void buildCity(Player player) {
         //check if player has this resources to build city
         if(!player.hasResources(Resources.ORE,3) ||
            !player.hasResources(Resources.GRAIN,2)){
@@ -356,7 +327,7 @@ public class Board {
      * 
      * @param player
      */
-    private void buildSettlement(Player player) {
+    public void buildSettlement(Player player) {
 
         //check if player has this resources to build settlement
         if(!player.hasResources(Resources.BRICK,1) ||

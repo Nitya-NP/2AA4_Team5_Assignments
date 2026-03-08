@@ -31,6 +31,10 @@ public class Game {
 	 */
 	private Dice dice;
 
+	private GameLogger logger;
+
+	private TurnManager manager;
+
 	/**
 	 * Constructs a new game with the players and board.
 	 * 
@@ -41,15 +45,17 @@ public class Game {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
+
 		this.dice = new MultiDice();
+		this.logger = new GameLogger();
+		this.manager = new TurnManager(board, logger, dice);
 	}
 
 	/**
 	 * Starts the game and runs till a player wins or max number of rounds is reached
 	 */
 	public void start() {
-		GameLogger logger = new GameLogger();
-		this.board = new Board(logger);
+		this.board = new Board(this.logger);
 
 		boolean gameOver = false; // to check if game over
 
@@ -73,22 +79,13 @@ public class Game {
 	 * Plays a single round of the game
 	 */
 	public void playRound() {
-		int diceValue = rollMultiDice(); // To roll the dice.
-
 		// To play a single round.
 		for (Player p : players) {
 			if (p != null) {
-				board.takeTurn(p, diceValue);
+				// maybe do smth like this?
+				//UserInput input = p.takeTurn();
+				//manager.manageTurn(p, input);
 			}
 		}
-	}
-
-	/**
-	 * To roll multiple dices.
-	 * 
-	 * @return sum of all dices rolled.
-	 */
-	public int rollMultiDice() {
-		return dice.roll();
 	}
 }

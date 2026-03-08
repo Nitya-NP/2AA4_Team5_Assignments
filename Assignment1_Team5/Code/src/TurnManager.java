@@ -42,6 +42,27 @@ public class TurnManager {
                     System.out.println("You must roll first.");
                 }
                 break;
+            case BUILD_SETTLEMENT:
+                if (currState == TurnState.DO_ACTION) {
+                    board.buildSettlement(player);
+                } else {
+                    System.out.println("You must roll first.");
+                }
+                break;
+            case BUILD_CITY:
+                if (currState == TurnState.DO_ACTION) {
+                    board.buildCity(player);
+                } else {
+                    System.out.println("You must roll first.");
+                }
+                break;
+            case BUILD_ROAD:
+                if (currState == TurnState.DO_ACTION) {
+                    board.buildRoad(player);
+                } else {
+                    System.out.println("You must roll first.");
+                }
+                break;
             
         }
     }
