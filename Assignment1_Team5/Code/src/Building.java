@@ -5,7 +5,7 @@
  * such as Settlements and Cities. Each building is owned by a Player
  * and has a specific point value associated with it.
  *
- *  @author Krisha Patel
+ *  @author Krisha Patel, Nitya Patel
  */
 public abstract class Building {
 	/**
@@ -28,4 +28,10 @@ public abstract class Building {
 	public Player getOwner() {
 		return owner;
 	}
+	
+	/**
+	 * Returns the points
+	 * @return points - each city is worth 2 victory points
+	 */
+	public abstract int getPoints();
 }

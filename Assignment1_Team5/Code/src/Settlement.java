@@ -25,6 +25,7 @@ public class Settlement extends Building {
 	 * Returns the points
 	 * @return points - each settlement is worth 1 victory point
 	 */
+	@Override
 	public int getPoints() {
 		return points;
 	}
