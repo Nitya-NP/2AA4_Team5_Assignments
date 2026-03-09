@@ -152,8 +152,6 @@ public abstract class Player {
 	 * Displays all resources currently owned by the player
 	 */
 	public void listResources(){
-		System.out.println("Player "+ playerId + " Resources: ");
-
 		for(Map.Entry<Resources, Integer> entry: resources.entrySet()){
 			System.out.println(entry.getKey()+": "+ entry.getValue());
 		}
