@@ -17,7 +17,7 @@ public abstract class Building {
 	 * 
 	 * @param owner - the player who owns the building
 	 */
-	public Building(Player owner) {
+	protected Building(Player owner) {
 		this.owner = owner;
 	}
 

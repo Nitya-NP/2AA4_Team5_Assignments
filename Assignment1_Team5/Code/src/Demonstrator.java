@@ -40,8 +40,8 @@ public class Demonstrator {
 
         // Create 4 players
         Player[] players = new Player[4];
-        players[0] = new HumanPlayer(1);
-        players[1] = new HumanPlayer(2);
+        players[0] = new HumanPlayer(1,logger);
+        players[1] = new HumanPlayer(2,logger);
         players[2] = new ComputerPlayer(3);
         players[3] = new ComputerPlayer(4);
 
@@ -52,7 +52,6 @@ public class Demonstrator {
         game.start();
 
         // Print final points
-        System.out.println("\n--- Game Over ---");
         for (Player p : players) {
             logger.log(p.getPlayerId() , " final points: " + p.getPoints());
         }

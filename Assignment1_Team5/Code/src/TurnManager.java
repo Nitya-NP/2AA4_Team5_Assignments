@@ -73,8 +73,7 @@ public class TurnManager {
 
                 break;
             case LIST:
-                logger.log(player.getPlayerId(), " Resources: ");
-                player.listResources();
+                logger.log(player.getPlayerId(), " Resources: " + player.listResources());
                 break;
             case GO:
                 if (currState == TurnState.DO_ACTION) {

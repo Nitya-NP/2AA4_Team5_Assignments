@@ -22,7 +22,7 @@ public abstract class Player {
 	 * 
 	 * @param playerId the player's unique ID
 	 */
-	public Player(int playerId) {
+	protected Player(int playerId) {
 		this.playerId = playerId;
 		this.points = 0;
 		this.resources = new HashMap<>();
@@ -151,10 +151,13 @@ public abstract class Player {
 	/**
 	 * Displays all resources currently owned by the player
 	 */
-	public void listResources(){
+	public String listResources(){
+		StringBuilder sb= new StringBuilder();
 		for(Map.Entry<Resources, Integer> entry: resources.entrySet()){
-			System.out.println(entry.getKey()+": "+ entry.getValue());
+			sb.append(entry.getKey()+": "+ entry.getValue());
 		}
+
+		return sb.toString();
 	}
 
 	//Abstract method to be implemented by Human & Computer 

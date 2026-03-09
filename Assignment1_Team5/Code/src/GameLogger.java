@@ -33,7 +33,7 @@ public class GameLogger {
      * @param action the action that the player is doing
      */
     public void log(int playerId, String action) {
-        logger.info(start(playerId) + action);
+        logger.info(()-> start(playerId) + action);
     }
 
     /**
