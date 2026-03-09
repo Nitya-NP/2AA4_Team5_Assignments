@@ -33,9 +33,7 @@ public class Road {
 	 * @return true if the node is connected, otherwise false
 	 */
 	public boolean isConnected(Node node) {
-		if (connectedNodes[0] == node || connectedNodes[1] == node)
-			return true;
-		return false;
+		return connectedNodes[0] == node || connectedNodes[1] == node; 
 	}
 
 	/**
