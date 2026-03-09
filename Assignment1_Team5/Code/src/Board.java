@@ -244,6 +244,7 @@ public class Board {
                     if(n.isOccupied()){
                         Player p= n.getBuilding().getOwner();
                         Resources r= t.getResource();
+						Building b = n.getBuilding();
                         if (b instanceof City) {
                             p.addResource(r, 2);
                         } else {
