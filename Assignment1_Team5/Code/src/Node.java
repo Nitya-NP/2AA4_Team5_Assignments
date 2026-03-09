@@ -17,7 +17,7 @@ public class Node {
 	 */
 	public Node(int id) {
 		this.nodeId = id;
-		adjacentNodes = new ArrayList<Node>();
+		adjacentNodes = new ArrayList<>();
 	}
 
 	/**
