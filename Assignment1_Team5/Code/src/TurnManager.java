@@ -45,7 +45,7 @@ public class TurnManager {
         switch(input) {
             case ROLL:
                 if (currState != TurnState.START_TURN) {
-                    System.out.println("You already rolled.");
+                    logger.log(player.getPlayerId(), "You already rolled.");
                     return;
                 }
 
@@ -81,28 +81,28 @@ public class TurnManager {
                     logger.log(player.getPlayerId(), "passes");
                     currState = TurnState.END_TURN;
                 } else {
-                    System.out.println("You must roll first.");
+                    logger.log(player.getPlayerId(), "You must roll first.");
                 }
                 break;
             case BUILD_SETTLEMENT:
                 if (currState == TurnState.DO_ACTION) {
                     board.buildSettlement(player);
                 } else {
-                    System.out.println("You must roll first.");
+                    logger.log(player.getPlayerId(), "You must roll first.");
                 }
                 break;
             case BUILD_CITY:
                 if (currState == TurnState.DO_ACTION) {
                     board.buildCity(player);
                 } else {
-                    System.out.println("You must roll first.");
+                    logger.log(player.getPlayerId(), "You must roll first.");
                 }
                 break;
             case BUILD_ROAD:
                 if (currState == TurnState.DO_ACTION) {
                     board.buildRoad(player);
                 } else {
-                    System.out.println("You must roll first.");
+                    logger.log(player.getPlayerId(), "You must roll first.");
                 }
                 break;
             
@@ -115,7 +115,7 @@ public class TurnManager {
 
         if (diceValue == 7) {
             currState = TurnState.ROBBER;
-        } else {
+        } else {    
             currState = TurnState.DO_ACTION;
         }
 

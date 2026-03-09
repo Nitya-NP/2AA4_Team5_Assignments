@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 /**
  * The GameLogger class is responsible for logging the actions of players during the game. 
  * It keeps track of the number of rounds, and provides a method to log player actions in required format.
@@ -6,6 +8,8 @@
 public class GameLogger {
     // Private attributes to keep track of the number of rounds
     private int rounds;
+
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     /**
      * Constructor for the GameLogger class that sets the rounds to 1.
@@ -29,7 +33,7 @@ public class GameLogger {
      * @param action the action that the player is doing
      */
     public void log(int playerId, String action) {
-        System.out.println(start(playerId) + action);
+        logger.info(start(playerId) + action);
     }
 
     /**
