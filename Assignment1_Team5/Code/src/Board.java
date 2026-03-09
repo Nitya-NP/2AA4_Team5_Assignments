@@ -241,7 +241,7 @@ public class Board {
             if (shouldSkipTile(t, diceValue)) {
                 continue;
             }
-            processTileForResource(t, diceValue);
+            processTileForResource(t);
         }
     }
 
@@ -256,9 +256,8 @@ public class Board {
      * Processes resource production for a tile
      * Each building adjacent to the tile produces resources
      * @param t Tile
-     * @param diceValue dice roll value
      */
-    private void processTileForResource(Tile t, int diceValue) {
+    private void processTileForResource(Tile t) {
         for (Node n : t.getNodes()) {
             if (n.isOccupied()) {
                 distributeResourceToPlayer(n, t.getResource());

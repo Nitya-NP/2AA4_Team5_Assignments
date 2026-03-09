@@ -73,6 +73,7 @@ public class TurnManager {
 
                 break;
             case LIST:
+                logger.log(player.getPlayerId(), " Resources: ");
                 player.listResources();
                 break;
             case GO:
