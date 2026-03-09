@@ -10,7 +10,9 @@ import java.io.IOException;
  * @author Nitya Patel
  */
 public class Demonstrator {
+    
     public static void main(String[] args) {
+        GameLogger logger= new GameLogger();
         int rounds = 0;
 
         //Reads the file
@@ -26,13 +28,13 @@ public class Demonstrator {
             }
         } 
         catch (IOException e) {
-            System.out.println("Error reading config file: " + e.getMessage());
+            logger.log(0,"Error reading config file: " + e.getMessage());
             return;
         }
 
         // Validate rounds
         if (rounds < 1 || rounds > 8192) {
-            System.out.println("Invalid number of rounds in config file. Must be between 1 and 8192.");
+            logger.log(0,"Invalid number of rounds in config file. Must be between 1 and 8192.");
             return;
         }
 
@@ -52,11 +54,17 @@ public class Demonstrator {
         // Print final points
         System.out.println("\n--- Game Over ---");
         for (Player p : players) {
-            System.out.println("Player " + p.getPlayerId() + " final points: " + p.getPoints());
+            logger.log(p.getPlayerId() , " final points: " + p.getPoints());
         }
     }
 }
  
+
+
+
+
+ 
+
 
 
 
