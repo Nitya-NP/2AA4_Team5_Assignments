@@ -245,7 +245,7 @@ public class Board {
                         Player p= n.getBuilding().getOwner();
                         Resources r= t.getResource();
 						Building b = n.getBuilding();
-                        if (b instanceof Cities) {
+                        if (b instanceof City) {
                             p.addResource(r, 2);
                         } else {
                             p.addResource(r, 1);
@@ -330,7 +330,7 @@ public class Board {
             player.removeResource(Resources.ORE,3);
             player.removeResource(Resources.GRAIN,2);
             
-            Building city = new Cities(player);
+            Building city = new City(player);
             n.setBuilding(city);
             player.addBuilding(city);
             logger.log(player.getPlayerId(), "upgraded to City at Node " + n.getNodeId());

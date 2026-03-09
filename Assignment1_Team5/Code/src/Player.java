@@ -46,7 +46,7 @@ public abstract class Player {
 	private void initBuildings() {
 		this.roads = 0;
 		buildings.put(Settlement.class, 0);
-		buildings.put(Cities.class, 0);
+		buildings.put(City.class, 0);
 
 	}
 
@@ -107,7 +107,7 @@ public abstract class Player {
 		// Add points according to rules
 		if (building instanceof Settlement) {
 			addPoints(1);
-		} else if (building instanceof Cities) {
+		} else if (building instanceof City) {
 			addPoints(2);
 		}
 
