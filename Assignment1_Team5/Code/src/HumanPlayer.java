@@ -8,7 +8,9 @@ import java.util.Scanner;
  */
 public class HumanPlayer extends Player {
 
-    private final Scanner scanner;
+    private Scanner scanner;
+    private GameLogger logger;
+
 
     //Tracks whether the player has already rolled the dice this turn
     private boolean hasRolled = false;
@@ -17,9 +19,10 @@ public class HumanPlayer extends Player {
      * Constructs a HumanPlayer with given player ID
      * @param playerId player id
      */
-    public HumanPlayer(int playerId) {
+    public HumanPlayer(int playerId, GameLogger logger) {
         super(playerId);
         this.scanner = new Scanner(System.in);
+        this.logger = logger;
     }
 
     /**
@@ -32,19 +35,19 @@ public class HumanPlayer extends Player {
     public UserInput takeTurn() {
 
         if (!hasRolled) {
-            System.out.println("Player " + getPlayerId() + " (Human): Enter 'roll':");
+            logger.log(getPlayerId(), "Human: Enter 'roll':");
             String input = scanner.nextLine().trim();
             
             if (input.equalsIgnoreCase("roll")) {
                 hasRolled = true;
                 return UserInput.ROLL;
             } else {
-                System.out.println("Invalid input. You must roll first. Try again.");
+                logger.log(getPlayerId(), "Invalid input. You must roll first. Try again.");
                 return takeTurn();
             }
         }
 
-        System.out.println("Enter command:");
+        logger.log(getPlayerId(), "Enter command:");
         String input = scanner.nextLine().trim();
 
         if (input.equalsIgnoreCase("go")) {
@@ -68,7 +71,7 @@ public class HumanPlayer extends Player {
             return UserInput.BUILD_ROAD;
         }
 
-        System.out.println("Invalid command. Try again.");
+        logger.log(getPlayerId(), "Invalid command. Try again.");
         return takeTurn();
     }
 }
