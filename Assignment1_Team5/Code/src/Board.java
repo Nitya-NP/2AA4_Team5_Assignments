@@ -6,7 +6,7 @@ import java.util.Random;
  * This mainly stores the board elements and provides access to them through getter methods.
  * It also manages the turns of players. 
  * 
- * @author Nitya Patel, Ranica Chawla, Raadhikka Gupta
+ * @author Nitya Patel, Ranica Chawla, Raadhikka Gupta, Krisha Patel
  */
 public class Board {
 	private Tile[] tiles; //Tiles on board
@@ -275,7 +275,8 @@ public class Board {
         }
 
         Node[] allNodes = getNode();
-        Node n1, n2;
+        Node n1;
+		Node n2;
         boolean validRoad = false;
         int attempts = 0;
 
