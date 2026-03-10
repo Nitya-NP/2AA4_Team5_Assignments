@@ -18,11 +18,6 @@ public class TurnManager {
      */
     private RobberActionsManager robberManager;
 
-    /**
-	 * Random number generator.
-	 */
-	private final Random rand = new Random();
-
     public TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager) {
         this.board = board;
         this.logger = logger;
@@ -34,77 +29,99 @@ public class TurnManager {
         currState = TurnState.START_TURN;
     
         while (currState != TurnState.END_TURN) {
-            // we want takeTurn to essentially get the users input (either go, build_city, etc.) <- it should return one of these enums
-            // u could also rename it maybe to match its functionality better
-            //UserInput input = player.takeTurn();
-            //manageTurn(player, input);
+            UserInput input = player.takeTurn();
+            manageTurn(player, input);
         }
     }
 
     private void manageTurn(Player player, UserInput input) {
         switch(input) {
             case ROLL:
-                if (currState != TurnState.START_TURN) {
-                    logger.log(player.getPlayerId(), "You already rolled.");
-                    return;
-                }
-
-                int diceValue = roll(player);
-
-                // when current state is robber
-                if (currState == TurnState.ROBBER) {
-                    // to discard half the cards
-                    robberManager.discardResourceCards();
-
-                    // to move the robber
-                    robberManager.moveRobber(board);
-
-                    // to steal resource
-                    Player victim = robberManager.chooseVictim(player);
-                    if (victim != null) {
-                        robberManager.stealResource(victim);
-                    }
-                }
-                
-                // resources can be produced
-                else {
-                    board.produceResource(player, diceValue);
-                }
-
+                handleRoll(player);
                 break;
             case LIST:
-                logger.log(player.getPlayerId(), " Resources: " + player.listResources());
+                handleList(player);
                 break;
             case GO:
-                if (currState == TurnState.DO_ACTION) {
-                    logger.log(player.getPlayerId(), "passes");
-                    currState = TurnState.END_TURN;
-                } else {
-                    logger.log(player.getPlayerId(), "You must roll first.");
-                }
+                handleGo(player);
                 break;
             case BUILD_SETTLEMENT:
-                if (currState == TurnState.DO_ACTION) {
-                    board.buildSettlement(player);
-                } else {
-                    logger.log(player.getPlayerId(), "You must roll first.");
-                }
+                handleBuildSettlement(player);
                 break;
             case BUILD_CITY:
-                if (currState == TurnState.DO_ACTION) {
-                    board.buildCity(player);
-                } else {
-                    logger.log(player.getPlayerId(), "You must roll first.");
-                }
+                handleBuildCity(player);
                 break;
             case BUILD_ROAD:
-                if (currState == TurnState.DO_ACTION) {
-                    board.buildRoad(player);
-                } else {
-                    logger.log(player.getPlayerId(), "You must roll first.");
-                }
+                handleBuildRoad(player);
                 break;
-            
+            default:
+                break;
+        }
+    }
+
+    private void handleRoll(Player player) {
+        if (currState != TurnState.START_TURN) {
+            logger.log(player.getPlayerId(), "You already rolled.");
+            return;
+        }
+
+        int diceValue = roll(player);
+
+        // when current state is robber
+        if (currState == TurnState.ROBBER) {
+            // to discard half the cards
+            robberManager.discardResourceCards();
+
+            // to move the robber
+            robberManager.moveRobber(board);
+
+            // to steal resource
+            Player victim = robberManager.chooseVictim(player);
+            if (victim != null) {
+                robberManager.stealResource(victim);
+            }
+        }
+        
+        // resources can be produced
+        else {
+            board.produceResource(player, diceValue);
+        }
+    }
+
+    private void handleList(Player player) {
+        logger.log(player.getPlayerId(), " Resources: " + player.listResources());
+    }
+
+    private void handleGo(Player player) {
+        if (currState == TurnState.DO_ACTION) {
+            logger.log(player.getPlayerId(), "passes");
+            currState = TurnState.END_TURN;
+        } else {
+            logger.log(player.getPlayerId(), "You must roll first.");
+        }
+    }
+
+    private void handleBuildSettlement(Player player) {
+        if (currState == TurnState.DO_ACTION) {
+            board.buildSettlement(player);
+        } else {
+            logger.log(player.getPlayerId(), "You must roll first.");
+        }
+    }
+
+    private void handleBuildCity(Player player) {
+        if (currState == TurnState.DO_ACTION) {
+            board.buildCity(player);
+        } else {
+            logger.log(player.getPlayerId(), "You must roll first.");
+        }
+    }
+
+    private void handleBuildRoad(Player player) {
+        if (currState == TurnState.DO_ACTION) {
+            board.buildRoad(player);
+        } else {
+            logger.log(player.getPlayerId(), "You must roll first.");
         }
     }
 
