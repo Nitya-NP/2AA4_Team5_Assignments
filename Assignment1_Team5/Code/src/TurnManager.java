@@ -93,36 +93,37 @@ public class TurnManager {
     }
 
     private void handleGo(Player player) {
-        if (currState == TurnState.DO_ACTION) {
-            logger.log(player.getPlayerId(), "passes");
-            currState = TurnState.END_TURN;
-        } else {
-            logger.log(player.getPlayerId(), "You must roll first.");
-        }
+        if (!isValidAction(player)) return;
+
+        logger.log(player.getPlayerId(), "passes");
+        currState = TurnState.END_TURN;
     }
 
     private void handleBuildSettlement(Player player) {
-        if (currState == TurnState.DO_ACTION) {
-            board.buildSettlement(player);
-        } else {
-            logger.log(player.getPlayerId(), "You must roll first.");
-        }
+        if (!isValidAction(player)) return;
+
+        board.buildSettlement(player);
     }
 
     private void handleBuildCity(Player player) {
-        if (currState == TurnState.DO_ACTION) {
-            board.buildCity(player);
-        } else {
-            logger.log(player.getPlayerId(), "You must roll first.");
-        }
+        if (!isValidAction(player)) return;
+
+        board.buildCity(player);
     }
 
     private void handleBuildRoad(Player player) {
-        if (currState == TurnState.DO_ACTION) {
-            board.buildRoad(player);
-        } else {
+        if (!isValidAction(player)) return;
+
+        board.buildRoad(player);
+    }
+
+    private boolean isValidAction(Player player) {
+        if (currState != TurnState.DO_ACTION) {
             logger.log(player.getPlayerId(), "You must roll first.");
+            return false;
         }
+
+        return true;
     }
 
     private int roll(Player player) {
