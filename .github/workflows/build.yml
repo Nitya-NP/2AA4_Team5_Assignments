@@ -22,25 +22,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create output folders
+      - name: Compile Java files
         run: |
           mkdir out
-          mkdir out_test
-
-      # Compile main source code
-      - name: Compile source files
-        run: |
           javac -d out $(Get-ChildItem -Recurse -Filter *.java Assignment1_Team5/Code/src | ForEach-Object { $_.FullName })
 
-      # Compile JUnit test files
-      - name: Compile test files
-        run: |
-          javac -cp "out;junit-platform-console-standalone.jar" -d out_test $(Get-ChildItem -Recurse -Filter *.java Assignment1_Team5/Code/test | ForEach-Object { $_.FullName })
-
-      # Download JUnit runner
+      # ADD THIS BEFORE compiling tests
       - name: Download JUnit Console
         run: |
           curl -L -o junit-platform-console-standalone.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+
+      #Compile tests
+      - name: Compile test files
+        run: |
+          mkdir out_test
+          javac -cp "out;junit-platform-console-standalone.jar" -d out_test $(Get-ChildItem -Recurse -Filter *.java Assignment1_Team5/Code/test | ForEach-Object { $_.FullName })
 
       # Run tests
       - name: Run JUnit Tests
