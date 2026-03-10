@@ -4,8 +4,6 @@
  * @author Ranica Chawla, Raadhikka Gupta
  */
 
-import java.util.Random;
-
 public class TurnManager {
     private TurnState currState;
 
