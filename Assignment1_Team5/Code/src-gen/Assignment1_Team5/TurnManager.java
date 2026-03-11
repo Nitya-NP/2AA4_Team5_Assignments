@@ -118,4 +118,11 @@ public class TurnManager {
 	 */
 	private void roll(Player player) {
 	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void handleGo(Player player) {
+	}
 }

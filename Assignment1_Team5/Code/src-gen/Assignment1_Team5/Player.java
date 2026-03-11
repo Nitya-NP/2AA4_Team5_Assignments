@@ -90,11 +90,8 @@ public abstract class Player {
 
 	/**
 	 * 
-	 * @param Player 
-	 * @param diceValue 
 	 */
-	public void takeTurn(Player Player, int diceValue) {
-	}
+	public abstract void takeTurn();
 
 	/**
 	 * 

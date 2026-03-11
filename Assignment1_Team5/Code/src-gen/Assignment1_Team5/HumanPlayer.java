@@ -21,6 +21,10 @@ public class HumanPlayer extends Player {
 	 * 
 	 */
 	private int hasRolled;
+	/**
+	 * 
+	 */
+	public PlayerCommand playercommand;
 
 	/**
 	 * 
