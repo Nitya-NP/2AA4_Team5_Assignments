@@ -23,19 +23,14 @@ public class StateWriter {
         "  ]\n" +
         "}";
 
-        try {
-
-            FileWriter file = new FileWriter("Assignment1_Team5/Code/visualize/state.json");
-
-            // Write the JSON string to the file
+       // try-with-resources ensures the FileWriter is closed automatically
+        try (FileWriter file = new FileWriter("Assignment1_Team5/Code/visualize/state.json")) {
             file.write(json);
-
-            // Close the file to ensure data is saved properly
-            file.close();
+            System.out.println("State saved successfully!");
         } catch (IOException e) {
-
             e.printStackTrace();
         }
 
     }
+
 }
