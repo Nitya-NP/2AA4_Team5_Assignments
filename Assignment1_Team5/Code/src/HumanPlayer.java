@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * Human player represents a real person playing Catan via console input.
@@ -18,6 +19,7 @@ public class HumanPlayer extends Player {
     /**
      * Constructs a HumanPlayer with given player ID
      * @param playerId player id
+     * @param logger Gamelogger for output
      */
     public HumanPlayer(int playerId, GameLogger logger) {
         super(playerId);
@@ -38,7 +40,7 @@ public class HumanPlayer extends Player {
             logger.log(getPlayerId(), "Human: Enter 'roll':");
             String input = scanner.nextLine().trim();
             
-            if (input.equalsIgnoreCase("roll")) {
+            if (Pattern.matches("^(?i)roll$", input)) {
                 hasRolled = true;
                 return UserInput.ROLL;
             } else {
@@ -50,28 +52,34 @@ public class HumanPlayer extends Player {
         logger.log(getPlayerId(), "Enter command:");
         String input = scanner.nextLine().trim();
 
-        if (input.equalsIgnoreCase("go")) {
+        // Check GO command
+        if (Pattern.matches("^(?i)go$", input)) {
             hasRolled = false;
             return UserInput.GO;
         }
 
-        if (input.equalsIgnoreCase("list")) {
+        // Check LIST command
+        if (Pattern.matches("^(?i)list$", input)) {
             return UserInput.LIST;
         }
 
-        if (input.toLowerCase().startsWith("build settlement")) {
+        // Check BUILD SETTLEMENT command
+        if (Pattern.matches("^(?i)build settlement \\d+$", input)) {
             return UserInput.BUILD_SETTLEMENT;
         }
 
-        if (input.toLowerCase().startsWith("build city")) {
+        // Check BUILD CITY command
+        if (Pattern.matches("^(?i)build city \\d+$", input)) {
             return UserInput.BUILD_CITY;
         }
 
-        if (input.toLowerCase().startsWith("build road")) {
+        // Check BUILD ROAD command
+        if (Pattern.matches("^(?i)build road \\d+,\\d+$", input)) {
             return UserInput.BUILD_ROAD;
         }
 
         logger.log(getPlayerId(), "Invalid command. Try again.");
         return takeTurn();
+
     }
 }
