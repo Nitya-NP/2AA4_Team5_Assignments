@@ -1,4 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,7 +23,7 @@ public class BuildingLogicTest {
     public void placeSettlementOnBoard() {
         // Build board and player
         Board board = new Board(new GameLogger());
-        Player player = new Player(1);
+        Player player = new ComputerPlayer(1);
 
         // Construct new settlement
 		Building settlement = new Settlement(player);
@@ -43,17 +47,17 @@ public class BuildingLogicTest {
     public void placeCityOnBoard() {
         // Build board and player
         Board board = new Board(new GameLogger());
-        Player player = new Player(1);
+        Player player = new ComputerPlayer(1);
 
         // Construct new city
-		Building city = new Cities(player);
+		Building city = new City(player);
 
         // Place city on first node
         Node[] nodes = board.getNode();
         nodes[0].setBuilding(city);
 
         // Check that node contains a city
-        assertTrue(nodes[0].isOccupied() && nodes[0].getBuilding() instanceof Cities);
+        assertTrue(nodes[0].isOccupied() && nodes[0].getBuilding() instanceof City);
         // Test the city is owned by the player
         assertEquals(player, nodes[0].getBuilding().getOwner());
 
@@ -67,11 +71,11 @@ public class BuildingLogicTest {
     public void placeRoadOnBoard() {
         // Build board and player
         Board board = new Board(new GameLogger());
-        Player player = new Player(1);
+        Player player = new ComputerPlayer(1);
 
         // Construct new road
         Node[] nodes = board.getNode();
-		Roads road = new Roads(new Node[] { nodes[0], nodes[1] }, player);
+		Road road = new Road(new Node[] { nodes[0], nodes[1] }, player);
 
         // Place road on board
         board.getRoad()[0] = road;
@@ -91,7 +95,7 @@ public class BuildingLogicTest {
     public void shouldUpgradeSettlementToCity() {
         // Build board and player
         Board board = new Board(new GameLogger());
-        Player player = new Player(1);
+        Player player = new ComputerPlayer(1);
 
         Node[] nodes = board.getNode();
 
@@ -101,23 +105,20 @@ public class BuildingLogicTest {
         }
 
         // Give player resources to force doing an action
-        player.addResource(Resources.BRICK, 8);
+        player.addResource(Resources.ORE, 60);
+        player.addResource(Resources.GRAIN, 70);
 
         boolean upgraded = false;
 
-        // Take a significant amount of turns to ensure that the city upgrade action occurs at least once
-        for (int i = 0; i < 30; i++) {
-            board.takeTurn(player, 3);
-            player.addResource(Resources.BRICK, 8);
+        RobberActionsManager robberManager = new RobberActionsManager(board, new Player[] { player });
+		board.setRobberManager(robberManager);
 
-            // Check if the settlement was upgraded on this iteration
-            for (Node node: nodes) {
-                if (node.isOccupied() && node.getBuilding() instanceof Cities && node.getBuilding().getOwner() == player) {
-                    upgraded = true;
-                }
-            }
-
-            if (upgraded) {
+        TurnManager turnManager = new TurnManager(board, new GameLogger(), new MultiDice(), robberManager);
+        // Attempt to upgrade the settlement at the first node to a city
+        for (int i = 0; i < 20; i++) {
+            turnManager.executeTurn(player);
+            if (nodes[0].getBuilding() instanceof City) {
+                upgraded = true;
                 break;
             }
         }
@@ -139,6 +140,7 @@ public class BuildingLogicTest {
         for (Node node : nodes) {
             // Ensure all nodes remain unoccupied
             assertFalse(node.isOccupied());
+            assertNull(node.getBuilding());
         }
     }
 

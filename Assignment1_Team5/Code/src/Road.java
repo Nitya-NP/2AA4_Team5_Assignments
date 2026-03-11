@@ -24,6 +24,7 @@ public class Road {
 		this.connectedNodes = new Node[2];
 		this.connectedNodes[0] = nodes[0];
 		this.connectedNodes[1] = nodes[1];
+		this.owner = owner;
 	}
 
 	/**
