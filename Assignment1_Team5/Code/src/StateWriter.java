@@ -24,7 +24,7 @@ public class StateWriter {
         "}";
 
        // try-with-resources ensures the FileWriter is closed automatically
-        try (FileWriter file = new FileWriter("Assignment1_Team5/Code/visualize/state.json")) {
+        try (FileWriter file = new FileWriter("../visualize/state.json")) {
             file.write(json);
         } catch (IOException e) {
             System.out.println("Failed to save state: " + e);
