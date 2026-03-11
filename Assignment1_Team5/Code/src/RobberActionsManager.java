@@ -137,7 +137,7 @@ public class RobberActionsManager {
 		} while (newTile == currentTile);
 		
 		currentTile = newTile;
-		System.out.println("Robber moved to tile " + currentTile);
+		System.out.println("Robber moved to tile " + currentTile.getTileId());
 		return true;
 	}
 
