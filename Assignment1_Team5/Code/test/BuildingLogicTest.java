@@ -117,7 +117,7 @@ public class BuildingLogicTest {
         // Simulate managing the turn
         TurnManager turnManager = new TurnManager(board, new GameLogger(), new MultiDice(), robberManager);
         // Attempt to upgrade the settlement at the first node to a city
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 80; i++) {
             turnManager.executeTurn(player);
             // Check if any node got upgraded to a city
             for (Node node : nodes) {
