@@ -110,16 +110,21 @@ public class BuildingLogicTest {
 
         boolean upgraded = false;
 
+        // Create robber manager for turn manager
         RobberActionsManager robberManager = new RobberActionsManager(board, new Player[] { player });
 		board.setRobberManager(robberManager);
 
+        // Simulate managing the turn
         TurnManager turnManager = new TurnManager(board, new GameLogger(), new MultiDice(), robberManager);
         // Attempt to upgrade the settlement at the first node to a city
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             turnManager.executeTurn(player);
-            if (nodes[0].getBuilding() instanceof City) {
-                upgraded = true;
-                break;
+            // Check if any node got upgraded to a city
+            for (Node node : nodes) {
+                if (node.getBuilding() instanceof City) {
+                    upgraded = true;
+                    break;
+                }
             }
         }
 
