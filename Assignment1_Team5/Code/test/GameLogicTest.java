@@ -9,20 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class GameLogicTest {
     /**
-     * Simple test player used because Player is abstract
-     */
-    class TestPlayer extends Player {
-        public TestPlayer(int id) {
-            super(id);
-        }
-
-        @Override
-        public UserInput takeTurn() {
-            return UserInput.ROLL;
-        }
-    }
-
-    /**
      * To test that the Dice rolls are within the expected ranges.
      */
     @Test
@@ -45,7 +31,7 @@ public class GameLogicTest {
         // Create players
         Player[] players = new Player[4];
         for (int i = 0; i < 4; i++) {
-            players[i] = new TestPlayer(i+1);
+            players[i] = new ComputerPlayer(i+1);
         }
 
         // Build and test game creation
@@ -60,8 +46,8 @@ public class GameLogicTest {
     public void testMinRounds() {
         // Create players 
         Player[] players = new Player[2];
-        players[0] = new  TestPlayer(1);
-        players[1] = new  TestPlayer(2);
+        players[0] = new  ComputerPlayer(1);
+        players[1] = new  ComputerPlayer(2);
 
         // Build game, start playing, and verify if it ran
         Game game = new Game(players, 1);
@@ -76,8 +62,8 @@ public class GameLogicTest {
     public void testMaxRounds() {
         // Create players 
         Player[] players = new Player[2];
-        players[0] = new  TestPlayer(1);
-        players[1] = new  TestPlayer(2);
+        players[0] = new  ComputerPlayer(1);
+        players[1] = new  ComputerPlayer(2);
 
         // Build game, start playing, and verify if it ran
         Game game = new Game(players, 8192);
@@ -92,7 +78,7 @@ public class GameLogicTest {
     public void testResourceDistribution_notSeven() {
         GameLogger log = new GameLogger();
         Board board = new Board(log);
-        Player player = new TestPlayer(1);
+        Player player = new ComputerPlayer(1);
         Player[] players = { player };
         RobberActionsManager robber = new RobberActionsManager(board, players);
         board.setRobberManager(robber);
@@ -112,7 +98,7 @@ public class GameLogicTest {
     public void testResourceDistribution_seven() {
         GameLogger log = new GameLogger();
         Board board = new Board(log);
-        Player player = new TestPlayer(1);
+        Player player = new ComputerPlayer(1);
         Player[] players = { player };
         RobberActionsManager robber = new RobberActionsManager(board, players);
         board.setRobberManager(robber);
@@ -131,8 +117,8 @@ public class GameLogicTest {
     @Test
     public void testConsoleOutput() {
         Player[] players = new Player[2];
-        players[0] = new TestPlayer(1);
-        players[1] = new TestPlayer(2);
+        players[0] = new ComputerPlayer(1);
+        players[1] = new ComputerPlayer(2);
 
         // To verify output is created
         Game game = new Game(players, 1);
