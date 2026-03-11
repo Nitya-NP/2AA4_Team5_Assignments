@@ -43,9 +43,9 @@ public class TurnManager {
         // Continue to manage the turn until the player decides to end it by passing
         while (currState != TurnState.END_TURN) {
             // Get the player's input for their action during the turn
-            UserInput input = player.takeTurn();
+            PlayerCommand command = player.takeTurn();
             // Manage the player's action based on their action
-            manageTurn(player, input);
+            manageTurn(player, command);
         }
     }
 
@@ -55,7 +55,9 @@ public class TurnManager {
      * @param player The player whose turn is being managed
      * @param input The action chosen by the player
      */
-    private void manageTurn(Player player, UserInput input) {
+    private void manageTurn(Player player, PlayerCommand command) {
+        UserInput input = command.getAction();
+
         // Handle the player's action based on their input
         switch(input) {
             case ROLL:
@@ -72,15 +74,15 @@ public class TurnManager {
                 break;
             case BUILD_SETTLEMENT:
                 // Handle the build settlement action to build a settlement for the player
-                handleBuildSettlement(player);
+                handleBuildSettlement(player, command.getNodeOne());
                 break;
             case BUILD_CITY:
                 // Handle the build city action to upgrade a settlement to a city for the player
-                handleBuildCity(player);
+                handleBuildCity(player, command.getNodeOne());
                 break;
             case BUILD_ROAD:
                 // Handle the build road action to build a road for the player
-                handleBuildRoad(player);
+                handleBuildRoad(player, command.getNodeOne(), command.getNodeTwo());
                 break;
             default:
                 logger.log(player.getPlayerId(), "Invalid action.");
@@ -153,36 +155,40 @@ public class TurnManager {
     /**
      * Handles the build settlement action for the player to build a settlement on the board.
      * @param player The current player
+     * @param nodeId the location to build the settlement
      */
-    private void handleBuildSettlement(Player player) {
+    private void handleBuildSettlement(Player player, int nodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildSettlement(player);
+        board.buildSettlement(player, nodeId);
     }
 
     /**
      * Handles the build city action for the player to upgrade a settlement to a city on the board.
-     * @param player
+     * @param player The current player
+     * @param nodeId the location to build the city
      */
-    private void handleBuildCity(Player player) {
+    private void handleBuildCity(Player player, int nodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildCity(player);
+        board.buildCity(player, nodeId);
     }
 
     /**
      * Handles the build road action for the player to build a road on the board.
      * @param player
+     * @param fromNodeId the first node provided by player
+     * @param toNodeId the second node provided by player
      */
-    private void handleBuildRoad(Player player) {
+    private void handleBuildRoad(Player player, int fromNodeId, int toNodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildRoad(player);
+        board.buildRoad(player, fromNodeId, toNodeId);
     }
 
     /**
      * Checks if the player's action is valid based on the current state of the turn.
-     * @param player
+     * @param player The current player
      * @return true if the action is valid, false otherwise
      */
     private boolean isValidAction(Player player) {
