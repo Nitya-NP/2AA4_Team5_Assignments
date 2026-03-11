@@ -79,24 +79,25 @@ public class PlayerLogicTest {
 
 	}
 
-	/**
+		/**
 	 * Test that points after taking a turn are at least as much as before
 	 */
 	@Test
 	public void testPointsAfterBuilding() {
-		GameLogger logger = new GameLogger();
-		Board board = new Board(logger);
+		Player[] player = new Player[1];
+		player[0]= new ComputerPlayer(1);
+    	GameLogger logger = new GameLogger();
+    	Board board = new Board(logger);
 		Dice d= new MultiDice();
-		TurnManager t= new TurnManager(board, logger, d, null);
+		RobberActionsManager robberManager = new RobberActionsManager(board,player);
+		board.setRobberManager(robberManager);
+		TurnManager t= new TurnManager(board, logger, d, robberManager);
 
+		int before = player[0].getPoints();
 
-		Player player = new ComputerPlayer(1);
+		t.executeTurn(player[0]);
 
-		int before = player.getPoints();
-
-		t.executeTurn(player);
-
-		int after = player.getPoints();
+		int after = player[0].getPoints();
 
 		assertTrue(after >= before);
 	}
@@ -106,29 +107,27 @@ public class PlayerLogicTest {
 	 */
 	@Test
 	public void testPlayerBuildsIfResourcesHigh() {
+		Player[] player = new Player[1];
+		player[0]= new ComputerPlayer(1);
     	GameLogger logger = new GameLogger();
     	Board board = new Board(logger);
 		Dice d= new MultiDice();
-		TurnManager t= new TurnManager(board, logger, d, null);
+		RobberActionsManager robberManager = new RobberActionsManager(board,player);
+		board.setRobberManager(robberManager);
+		TurnManager t= new TurnManager(board, logger, d, robberManager);
     
-    	Player player = new ComputerPlayer(1);
+    	
 
-    	player.addResource(Resources.LUMBER, 4);
-    	player.addResource(Resources.BRICK, 4);
-    	player.addResource(Resources.WOOL, 2);
+    	player[0].addResource(Resources.LUMBER, 4);
+    	player[0].addResource(Resources.BRICK, 4);
+    	player[0].addResource(Resources.WOOL, 2);
     
-    	int beforePoints = player.getPoints();
+    	int beforePoints = player[0].getPoints();
     
-    	t.executeTurn(player);
+    	t.executeTurn(player[0]);
     
-    	int afterPoints = player.getPoints();
+    	int afterPoints = player[0].getPoints();
 
     	assertTrue(afterPoints >= beforePoints);
 	}
- 
-
-
-
-
-
 }
