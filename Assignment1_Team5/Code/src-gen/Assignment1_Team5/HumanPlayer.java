@@ -17,4 +17,16 @@ public class HumanPlayer extends Player {
 	 * 
 	 */
 	public UserInput userinput;
+	/**
+	 * 
+	 */
+	private int hasRolled;
+
+	/**
+	 * 
+	 * @param playerId 
+	 * @param logger 
+	 */
+	public void HumanPlayer(int playerId, GameLogger logger) {
+	}
 }

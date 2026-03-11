@@ -129,4 +129,41 @@ public class Board {
 	 */
 	private boolean settlementDistance(Node node) {
 	}
+
+	/**
+	 * 
+	 * @param robberManager 
+	 */
+	public void setRobberManager(RobberActionsManager robberManager) {
+	}
+
+	/**
+	 * 
+	 * @param players 
+	 */
+	public void placeInitialSettlements(Player players) {
+	}
+
+	/**
+	 * 
+	 * @param t 
+	 * @return 
+	 */
+	private boolean shouldSkipTile(Tile t) {
+	}
+
+	/**
+	 * 
+	 * @param t 
+	 */
+	private void processTileForResource(Tile t) {
+	}
+
+	/**
+	 * 
+	 * @param n 
+	 * @param r 
+	 */
+	private void distributeResourceToPlayer(Node n, Resources r) {
+	}
 }

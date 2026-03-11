@@ -33,6 +33,10 @@ public class Game {
 	 * 
 	 */
 	public TurnManager turnmanager;
+	/**
+	 * 
+	 */
+	public GameLogger gamelogger;
 
 	/**
 	 * 

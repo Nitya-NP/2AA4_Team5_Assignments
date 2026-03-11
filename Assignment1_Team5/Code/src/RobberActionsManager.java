@@ -75,9 +75,10 @@ public class RobberActionsManager {
 						toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
 					} while (!p.hasResources(toRemove, 1));
 
-					System.out.println("Player " + p.getPlayerId() + " discards " + discardCardAmount + " cards");
 					p.removeResource(toRemove, 1);
 				}
+
+				System.out.println("Player " + p.getPlayerId() + " discards " + discardCardAmount + " cards");
 			}
 		}
 

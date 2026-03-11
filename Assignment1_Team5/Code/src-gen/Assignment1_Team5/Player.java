@@ -95,4 +95,35 @@ public abstract class Player {
 	 */
 	public void takeTurn(Player Player, int diceValue) {
 	}
+
+	/**
+	 * 
+	 */
+	public void addRoad() {
+	}
+
+	/**
+	 * 
+	 * @param resource 
+	 * @param amount 
+	 * @return 
+	 */
+	public boolean removeResource(Resources resource, int amount) {
+	}
+
+	/**
+	 * 
+	 * @param resource 
+	 * @param amount 
+	 * @return 
+	 */
+	public boolean hasResources(Resources resource, int amount) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public String listResources() {
+	}
 }

@@ -13,6 +13,10 @@ public class Road {
 	 * 
 	 */
 	private Node[] connectedNodes;
+	/**
+	 * 
+	 */
+	private Player owner;
 
 	/**
 	 * 
@@ -35,5 +39,12 @@ public class Road {
 	 * @param owner 
 	 */
 	public void Roads(Node nodes, Player owner) {
+	}
+
+	/**
+	 * 
+	 * @return 
+	 */
+	public Player getOwner() {
 	}
 }

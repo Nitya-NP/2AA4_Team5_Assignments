@@ -12,7 +12,7 @@ public class TurnManager {
 	/**
 	 * 
 	 */
-	public TurnManagerStates currentState;
+	private TurnManagerStates currentState;
 	/**
 	 * 
 	 */
@@ -21,17 +21,35 @@ public class TurnManager {
 	 * 
 	 */
 	public RobberActionsManager robberactionsmanager;
-
 	/**
 	 * 
 	 */
-	public void TurnManager() {
+	private Board board;
+	/**
+	 * 
+	 */
+	private GameLogger logger;
+	/**
+	 * 
+	 */
+	private Dice dice;
+
+	/**
+	 * 
+	 * @param board 
+	 * @param logger 
+	 * @param dice 
+	 * @param robberManager 
+	 */
+	public void TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager) {
 	}
 
 	/**
 	 * 
+	 * @param input 
+	 * @param player 
 	 */
-	public void manageTurn() {
+	public void manageTurn(UserInput input, Player player) {
 	}
 
 	/**
@@ -39,5 +57,65 @@ public class TurnManager {
 	 * @return 
 	 */
 	public int rollMultiDice() {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	public void executeTurn(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void handleRoll(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void handleList(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param nodeId 
+	 */
+	private void handleBuildSettlement(Player player, int nodeId) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param nodeId 
+	 */
+	private void handleBuildCity(Player player, int nodeId) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param fromNodeId 
+	 * @param toNodeId 
+	 */
+	private void handleBuildRoad(Player player, int fromNodeId, int toNodeId) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void isValidAction(Player player) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 */
+	private void roll(Player player) {
 	}
 }

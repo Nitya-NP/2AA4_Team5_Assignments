@@ -13,6 +13,18 @@ public class RobberActionsManager {
 	 * 
 	 */
 	private Tile currentTile;
+	/**
+	 * 
+	 */
+	private Player[] players;
+	/**
+	 * 
+	 */
+	private int rand;
+	/**
+	 * 
+	 */
+	private Resources[] STEAL_RESOURCES;
 
 	/**
 	 * 
@@ -23,10 +35,10 @@ public class RobberActionsManager {
 
 	/**
 	 * 
-	 * @param newTile 
+	 * @param board 
 	 * @return 
 	 */
-	public boolean moveRobber(Tile newTile) {
+	public boolean moveRobber(Board board) {
 	}
 
 	/**
@@ -39,7 +51,32 @@ public class RobberActionsManager {
 	/**
 	 * 
 	 * @param currentPlayer 
+	 * @param victimPlayer 
 	 */
-	public void stealResource(Player currentPlayer) {
+	public void stealResource(Player currentPlayer, Player victimPlayer) {
+	}
+
+	/**
+	 * 
+	 * @param board 
+	 * @param players 
+	 */
+	public void RobberActionsManager(Board board, Player players) {
+	}
+
+	/**
+	 * 
+	 * @param currentPlayer 
+	 * @return 
+	 */
+	public Player chooseVictim(Player currentPlayer) {
+	}
+
+	/**
+	 * 
+	 * @param  
+	 * @return 
+	 */
+	public boolean isRobberOnTile(Tile ) {
 	}
 }

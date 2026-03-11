@@ -13,4 +13,15 @@ public class ComputerPlayer extends Player {
 	 * 
 	 */
 	private int randomInt;
+	/**
+	 * 
+	 */
+	private boolean hadRolled;
+
+	/**
+	 * 
+	 * @param playerId 
+	 */
+	public void ComputerPlayer(int playerId) {
+	}
 }
