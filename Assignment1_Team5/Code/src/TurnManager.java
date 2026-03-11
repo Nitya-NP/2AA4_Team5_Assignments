@@ -67,6 +67,7 @@ public class TurnManager {
 
         // when current state is robber
         if (currState == TurnState.ROBBER) {
+            logger.log(player.getPlayerId(), "Robber activated!");
             // to discard half the cards
             robberManager.discardResourceCards();
 
@@ -76,8 +77,11 @@ public class TurnManager {
             // to steal resource
             Player victim = robberManager.chooseVictim(player);
             if (victim != null) {
-                robberManager.stealResource(victim);
+                logger.log(player.getPlayerId(), "Stealing from player " + victim.getPlayerId());
+                robberManager.stealResource(victim, player);
             }
+
+            currState = TurnState.DO_ACTION;
         }
         
         // resources can be produced

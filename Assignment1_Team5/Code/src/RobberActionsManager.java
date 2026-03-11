@@ -64,6 +64,7 @@ public class RobberActionsManager {
 
 			// if the current player has more than 7 cards
 			if (totalResources > 7) {
+				System.out.println("Checking players for discard...");
 				int discardCardAmount = totalResources / 2;
 
 				// to remove half the resources the player has, randomly
@@ -74,6 +75,7 @@ public class RobberActionsManager {
 						toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
 					} while (!p.hasResources(toRemove, 1));
 
+					System.out.println("Player " + p.getPlayerId() + " discards " + discardCardAmount + " cards");
 					p.removeResource(toRemove, 1);
 				}
 			}
@@ -135,6 +137,7 @@ public class RobberActionsManager {
 		} while (newTile == currentTile);
 		
 		currentTile = newTile;
+		System.out.println("Robber moved to tile " + currentTile);
 		return true;
 	}
 
@@ -165,7 +168,7 @@ public class RobberActionsManager {
 	 * 
 	 * @param victimPlayer the player to steal from
 	 */
-	public void stealResource(Player victimPlayer) {
+	public void stealResource(Player victimPlayer, Player currentPlayer) {
 		// if they don't have resources
 		if (victimPlayer == null || victimPlayer.getTotalResources() == 0)
 			return;
@@ -176,6 +179,8 @@ public class RobberActionsManager {
 			toRemove = STEAL_RESOURCES[rand.nextInt(STEAL_RESOURCES.length)];
 		} while (!victimPlayer.hasResources(toRemove, 1));
 
+		System.out.println("Stealing resource from player " + victimPlayer.getPlayerId());
 		victimPlayer.removeResource(toRemove, 1);
+		currentPlayer.addResource(toRemove, 1);
 	}
 }
