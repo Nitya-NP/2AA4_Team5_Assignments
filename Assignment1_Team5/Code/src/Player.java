@@ -171,6 +171,6 @@ public abstract class Player {
 	}
 
 	// Abstract method to be implemented by Human & Computer
-	public abstract UserInput takeTurn();
+	public abstract PlayerCommand takeTurn();
 
 }

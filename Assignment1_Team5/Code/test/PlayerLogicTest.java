@@ -73,10 +73,6 @@ public class PlayerLogicTest {
 	@Test
 	public void testRoadAddsZeroPoint(){
 		Player player=new ComputerPlayer(1);
-		Node n1= new Node(1);
-		Node n2= new Node(2);
-
-		Road road= new Road(new Node[]{n1,n2}, player);
 		player.addRoad();
 
 		assertEquals(0,player.getPoints());
