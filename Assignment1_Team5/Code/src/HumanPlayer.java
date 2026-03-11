@@ -12,14 +12,11 @@ public class HumanPlayer extends Player {
     private Scanner scanner;
     private GameLogger logger;
 
-
-    //Tracks whether the player has already rolled the dice this turn
+    // Tracks whether the player has already rolled the dice this turn
     private boolean hasRolled = false;
 
     /**
      * Constructs a HumanPlayer with given player ID
-     * @param playerId player id
-     * @param logger Gamelogger for output
      */
     public HumanPlayer(int playerId, GameLogger logger) {
         super(playerId);
@@ -29,20 +26,17 @@ public class HumanPlayer extends Player {
 
     /**
      * Gets the next action from human player
-     * The player must roll first before performing any other action.
-     * 
-     * @return UserInput enum representing the player's chosen action
      */
     @Override
-    public UserInput takeTurn() {
+    public PlayerCommand takeTurn() {
 
         if (!hasRolled) {
             logger.log(getPlayerId(), "Human: Enter 'roll':");
             String input = scanner.nextLine().trim();
-            
+
             if (Pattern.matches("^(?i)roll$", input)) {
                 hasRolled = true;
-                return UserInput.ROLL;
+                return new PlayerCommand(UserInput.ROLL, 0, 0);
             } else {
                 logger.log(getPlayerId(), "Invalid input. You must roll first. Try again.");
                 return takeTurn();
@@ -52,34 +46,43 @@ public class HumanPlayer extends Player {
         logger.log(getPlayerId(), "Enter command:");
         String input = scanner.nextLine().trim();
 
-        // Check GO command
+        // GO
         if (Pattern.matches("^(?i)go$", input)) {
             hasRolled = false;
-            return UserInput.GO;
+            return new PlayerCommand(UserInput.GO, 0, 0);
         }
 
-        // Check LIST command
+        // LIST
         if (Pattern.matches("^(?i)list$", input)) {
-            return UserInput.LIST;
+            return new PlayerCommand(UserInput.LIST, 0, 0);
         }
 
-        // Check BUILD SETTLEMENT command
+        // BUILD SETTLEMENT
         if (Pattern.matches("^(?i)build settlement \\d+$", input)) {
-            return UserInput.BUILD_SETTLEMENT;
+            String[] parts = input.split(" ");
+            int node = Integer.parseInt(parts[2]);
+            return new PlayerCommand(UserInput.BUILD_SETTLEMENT, node, 0);
         }
 
-        // Check BUILD CITY command
+        // BUILD CITY
         if (Pattern.matches("^(?i)build city \\d+$", input)) {
-            return UserInput.BUILD_CITY;
+            String[] parts = input.split(" ");
+            int node = Integer.parseInt(parts[2]);
+            return new PlayerCommand(UserInput.BUILD_CITY, node, 0);
         }
 
-        // Check BUILD ROAD command
+        // BUILD ROAD
         if (Pattern.matches("^(?i)build road \\d+,\\d+$", input)) {
-            return UserInput.BUILD_ROAD;
+            String[] parts = input.split(" ");
+            String[] nodes = parts[2].split(",");
+
+            int node1 = Integer.parseInt(nodes[0]);
+            int node2 = Integer.parseInt(nodes[1]);
+
+            return new PlayerCommand(UserInput.BUILD_ROAD, node1, node2);
         }
 
         logger.log(getPlayerId(), "Invalid command. Try again.");
         return takeTurn();
-
     }
 }
