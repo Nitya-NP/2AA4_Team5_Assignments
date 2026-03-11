@@ -1,5 +1,4 @@
 
-import java.util.Random;
 
 /**
  * The board class represents the game board in the Catan game
@@ -16,7 +15,6 @@ public class Board {
 
     private GameLogger logger; // Logger for game events
     private RobberActionsManager robberManager; // Robber on board
-    private final Random rand = new Random();
 
     /**
      * Constructs a Board with tiles, nodes and roads
@@ -229,7 +227,7 @@ public class Board {
      */
     public void placeInitialSettlements(Player[] players) {
 
-        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15],nodes[20], nodes[25], nodes[30], nodes[35] };
+        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[20], nodes[25], nodes[30], nodes[35] };
 
         for (int i = 0; i < players.length; i++) {
 
@@ -248,7 +246,8 @@ public class Board {
             second.setBuilding(s2);
             player.addBuilding(s2);
 
-            logger.log(player.getPlayerId(),"placed initial settlements at Node "+ first.getNodeId() + " and Node " + second.getNodeId());
+            logger.log(player.getPlayerId(),
+                    "placed initial settlements at Node " + first.getNodeId() + " and Node " + second.getNodeId());
 
             // create two roads
             Road r1 = new Road(new Node[] { first, nodes[(first.getNodeId() + 1) % nodes.length] }, player);
@@ -260,7 +259,8 @@ public class Board {
             player.addRoad();
             player.addRoad();
 
-            logger.log(player.getPlayerId(),"built initial roads from Node "+ first.getNodeId() + " and " + second.getNodeId());
+            logger.log(player.getPlayerId(),
+                    "built initial roads from Node " + first.getNodeId() + " and " + second.getNodeId());
         }
     }
 
@@ -277,7 +277,7 @@ public class Board {
             return;
         }
 
-        for (Tile t: tiles) {
+        for (Tile t : tiles) {
             if (shouldSkipTile(t, diceValue)) {
                 continue;
             }
@@ -295,6 +295,7 @@ public class Board {
     /**
      * Processes resource production for a tile
      * Each building adjacent to the tile produces resources
+     * 
      * @param t Tile
      */
     private void processTileForResource(Tile t) {
@@ -308,7 +309,8 @@ public class Board {
     /**
      * Gives resources to the player owning the building on the node
      * settlements produce 1 resource, cities produce 2.
-     * @param n Node 
+     * 
+     * @param n Node
      * @param r Resource
      */
     private void distributeResourceToPlayer(Node n, Resources r) {
@@ -324,14 +326,18 @@ public class Board {
     /**
      * Helper method
      * Attempts to build a road for the player.
-     * Randomly selects two nodes and checks if the road can be legally built.
+     * two nodes and checks if the road can be legally built.
      * adds road to the board if successful and in the player's building
      * 
-     * @param player the player
+     * @param player  the player
+     * @param nodeId1
+     * @param nodeId2
      */
-    public void buildRoad(Player player) {
+    public void buildRoad(Player player, int nodeId1, int nodeId2) {
 
-        // Check if player has that resources to build road
+        Node n1 = nodes[nodeId1];
+        Node n2 = nodes[nodeId2];
+
         if (!player.hasResources(Resources.BRICK, 1) ||
                 !player.hasResources(Resources.LUMBER, 1)) {
 
@@ -339,49 +345,36 @@ public class Board {
             return;
         }
 
-        Node[] allNodes = getNode();
-        Node n1;
-        Node n2;
-        boolean validRoad = false;
-        int attempts = 0;
+        if (n1 != n2 && isRoadConnected(player, n1, n2)) {
 
-        do {
-            n1 = allNodes[rand.nextInt(allNodes.length)];
-            n2 = allNodes[rand.nextInt(allNodes.length)];
-            attempts++;
-            if (n1 != n2 && isRoadConnected(player, n1, n2)) {
-                validRoad = true;
-                break;
-            }
-        } while (attempts < 10);
-
-        if (validRoad) {
-
-            // remove resources
             player.removeResource(Resources.BRICK, 1);
             player.removeResource(Resources.LUMBER, 1);
 
             Road road = new Road(new Node[] { n1, n2 }, player);
-            player.addRoad();
             addRoadToBoard(road);
-            logger.log(player.getPlayerId(),
-                    "built Road between Node " + n1.getNodeId() + " and Node " + n2.getNodeId());
-        } else {
-            logger.log(player.getPlayerId(), "failed to build a valid road.");
-        }
+            player.addRoad();
 
+            logger.log(player.getPlayerId(),
+                    "built Road between Node " + nodeId1 + " and Node " + nodeId2);
+
+        } else {
+            logger.log(player.getPlayerId(), "Invalid road placement");
+        }
     }
 
     /**
      * helper method
      * Attempts to build a City for the player by upgrading the settlement.
-     * Randomly selects a node and checks if it is settlement.
+     * Checks the node if it is settlement.
      * upgrades the settlement into city to the player's buildings and the board
      * 
      * @param player
+     * @param nodeId
      */
-    public void buildCity(Player player) {
-        // check if player has this resources to build city
+    public void buildCity(Player player, int nodeId) {
+
+        Node n = nodes[nodeId];
+
         if (!player.hasResources(Resources.ORE, 3) ||
                 !player.hasResources(Resources.GRAIN, 2)) {
 
@@ -389,32 +382,37 @@ public class Board {
             return;
         }
 
-        Node n = getNode()[rand.nextInt(nodes.length)];
-        if (n.isOccupied() && n.getBuilding() instanceof Settlement && n.getBuilding().getOwner() == player) {
+        if (n.isOccupied() &&
+                n.getBuilding() instanceof Settlement &&
+                n.getBuilding().getOwner() == player) {
 
             player.removeResource(Resources.ORE, 3);
             player.removeResource(Resources.GRAIN, 2);
 
-            Building city = new City(player);
+            City city = new City(player);
             n.setBuilding(city);
             player.addBuilding(city);
-            logger.log(player.getPlayerId(), "upgraded to City at Node " + n.getNodeId());
-        } else {
-            logger.log(player.getPlayerId(), "City upgrade failed.");
-        }
 
+            logger.log(player.getPlayerId(),
+                    "upgraded to City at Node " + nodeId);
+
+        } else {
+            logger.log(player.getPlayerId(), "City upgrade failed");
+        }
     }
 
     /**
      * Attempts to build a Settlement for the player.
-     * Randomly selects a node and checks if it is empty.
+     * Checks the node if it is empty.
      * adds the settlement to the player's buildings and the board
      * 
      * @param player
+     * @nodeId
      */
-    public void buildSettlement(Player player) {
+    public void buildSettlement(Player player, int nodeId) {
 
-        // check if player has this resources to build settlement
+        Node n = nodes[nodeId];
+
         if (!player.hasResources(Resources.BRICK, 1) ||
                 !player.hasResources(Resources.LUMBER, 1) ||
                 !player.hasResources(Resources.WOOL, 1) ||
@@ -424,23 +422,23 @@ public class Board {
             return;
         }
 
-        Node n = getNode()[rand.nextInt(nodes.length)];
         if (!n.isOccupied() && !settlementDistance(n)) {
 
-            // remove resources
             player.removeResource(Resources.BRICK, 1);
             player.removeResource(Resources.LUMBER, 1);
             player.removeResource(Resources.WOOL, 1);
             player.removeResource(Resources.GRAIN, 1);
 
-            Building settlement = new Settlement(player);
+            Settlement settlement = new Settlement(player);
             n.setBuilding(settlement);
             player.addBuilding(settlement);
-            logger.log(player.getPlayerId(), "built Settlement at Node " + n.getNodeId());
-        } else {
-            logger.log(player.getPlayerId(), "Settlement failed");
-        }
 
+            logger.log(player.getPlayerId(),
+                    "built Settlement at Node " + nodeId);
+
+        } else {
+            logger.log(player.getPlayerId(), "Invalid settlement location");
+        }
     }
 
 }
