@@ -228,14 +228,39 @@ public class Board {
      * Places initial settlements for all players
      */
     public void placeInitialSettlements(Player[] players) {
-        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15] };
+
+        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15],nodes[20], nodes[25], nodes[30], nodes[35] };
+
         for (int i = 0; i < players.length; i++) {
+
             Player player = players[i];
-            Node n = startingNodes[i % startingNodes.length];
-            Settlement settlement = new Settlement(player);
-            n.setBuilding(settlement);
-            player.addBuilding(settlement);
-            logger.log(player.getPlayerId(), "placed initial Settlement at Node " + n.getNodeId());
+
+            Node first = startingNodes[i];
+            Node second = startingNodes[i + players.length];
+
+            // first settlement
+            Settlement s1 = new Settlement(player);
+            first.setBuilding(s1);
+            player.addBuilding(s1);
+
+            // second settlement
+            Settlement s2 = new Settlement(player);
+            second.setBuilding(s2);
+            player.addBuilding(s2);
+
+            logger.log(player.getPlayerId(),"placed initial settlements at Node "+ first.getNodeId() + " and Node " + second.getNodeId());
+
+            // create two roads
+            Road r1 = new Road(new Node[] { first, nodes[(first.getNodeId() + 1) % nodes.length] }, player);
+            Road r2 = new Road(new Node[] { second, nodes[(second.getNodeId() + 1) % nodes.length] }, player);
+
+            addRoadToBoard(r1);
+            addRoadToBoard(r2);
+
+            player.addRoad();
+            player.addRoad();
+
+            logger.log(player.getPlayerId(),"built initial roads from Node "+ first.getNodeId() + " and " + second.getNodeId());
         }
     }
 
