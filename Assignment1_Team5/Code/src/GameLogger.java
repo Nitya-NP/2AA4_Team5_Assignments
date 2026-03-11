@@ -1,5 +1,7 @@
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.logging.SimpleFormatter;
 /**
  * The GameLogger class is responsible for logging the actions of players during the game. 
  * It keeps track of the number of rounds, and provides a method to log player actions in required format.
@@ -8,14 +10,39 @@ import java.util.logging.Logger;
 public class GameLogger {
     // Private attributes to keep track of the number of rounds
     private int rounds;
-
-    private Logger logger = Logger.getLogger(getClass().getName());
+    private final Logger logger;
 
     /**
      * Constructor for the GameLogger class that sets the rounds to 1.
      */
     public GameLogger() {
         this.rounds = 1;
+
+        // Get a dedicated logger for this class
+        logger = Logger.getLogger(GameLogger.class.getName());
+
+        // Disable all parent handlers to prevent double printing
+        logger.setUseParentHandlers(false);
+
+        // Remove any existing handlers (safety)
+        for (var h : logger.getHandlers()) {
+            logger.removeHandler(h);
+        }
+
+        // Add a single console handler with custom formatter
+        ConsoleHandler handler = new ConsoleHandler();
+        handler.setLevel(Level.ALL);
+        handler.setFormatter(new SimpleFormatter() {
+            @Override
+            public synchronized String format(java.util.logging.LogRecord record) {
+                return record.getMessage() + "\n"; // ONLY print the message
+            }
+        });
+
+        logger.addHandler(handler);
+        logger.setLevel(Level.ALL);
+
+        
     }
 
     /**

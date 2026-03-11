@@ -19,8 +19,8 @@ public class PlayerLogicTest {
 	@Test
 	public void testPlayerSwitchingTurns() {
 		Player[] players= new Player[2];
-		players[0] =new Player(1);
-		players[1]=new Player(2);
+		players[0] =new ComputerPlayer(1);
+		players[1]=new ComputerPlayer(2);
 
 		Game game= new Game(players,1);
 
@@ -46,7 +46,7 @@ public class PlayerLogicTest {
 	 */
 	@Test
 	public void testSettlementAddsOnePoint(){
-		Player player=new Player(1);
+		Player player=new ComputerPlayer(1);
 		Building s=new Settlement(player);
 		player.addBuilding(s);
 
@@ -59,8 +59,8 @@ public class PlayerLogicTest {
 	 */
 	@Test
 	public void testCityAddsTwoPoint(){
-		Player player=new Player(1);
-		Building c=new Cities(player);
+		Player player=new ComputerPlayer(1);
+		Building c=new City(player);
 		player.addBuilding(c);
 
 		assertEquals(2, player.getPoints());
@@ -72,12 +72,12 @@ public class PlayerLogicTest {
 	 */
 	@Test
 	public void testRoadAddsZeroPoint(){
-		Player player=new Player(1);
+		Player player=new ComputerPlayer(1);
 		Node n1= new Node(1);
 		Node n2= new Node(2);
 
-		Roads road= new Roads(new Node[]{n1,n2}, player);
-		player.addBuilding(road);
+		Road road= new Road(new Node[]{n1,n2}, player);
+		player.addRoad();
 
 		assertEquals(0,player.getPoints());
 
@@ -90,12 +90,15 @@ public class PlayerLogicTest {
 	public void testPointsAfterBuilding() {
 		GameLogger logger = new GameLogger();
 		Board board = new Board(logger);
+		Dice d= new MultiDice();
+		TurnManager t= new TurnManager(board, logger, d, null);
 
-		Player player = new Player(1);
+
+		Player player = new ComputerPlayer(1);
 
 		int before = player.getPoints();
 
-		board.takeTurn(player, 6);
+		t.executeTurn(player);
 
 		int after = player.getPoints();
 
@@ -109,8 +112,10 @@ public class PlayerLogicTest {
 	public void testPlayerBuildsIfResourcesHigh() {
     	GameLogger logger = new GameLogger();
     	Board board = new Board(logger);
+		Dice d= new MultiDice();
+		TurnManager t= new TurnManager(board, logger, d, null);
     
-    	Player player = new Player(1);
+    	Player player = new ComputerPlayer(1);
 
     	player.addResource(Resources.LUMBER, 4);
     	player.addResource(Resources.BRICK, 4);
@@ -118,7 +123,7 @@ public class PlayerLogicTest {
     
     	int beforePoints = player.getPoints();
     
-    	board.takeTurn(player, 6);
+    	t.executeTurn(player);
     
     	int afterPoints = player.getPoints();
 

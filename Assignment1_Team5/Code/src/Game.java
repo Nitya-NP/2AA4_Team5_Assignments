@@ -55,10 +55,11 @@ public class Game {
 	public void start() {
 		// build the board, robber, and turn manager
 		this.board = new Board(this.logger);
+		board.placeInitialSettlements(players);
 		RobberActionsManager robberManager = new RobberActionsManager(board, players);
 		board.setRobberManager(robberManager);
 		this.manager = new TurnManager(board, logger, dice, robberManager);
-
+		
 		boolean gameOver = false; // to check if game over
 
 		// Continue to play rounds till the game ends

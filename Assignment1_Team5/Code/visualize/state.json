@@ -1,0 +1,8 @@
+{
+  "roads": [
+    { "a": 11, "b": 12, "owner": "RED" }
+  ],
+  "buildings": [
+    { "node": 12, "owner": "RED", "type": "SETTLEMENT" }
+  ]
+}

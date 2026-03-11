@@ -225,6 +225,21 @@ public class Board {
     }
 
     /**
+     * Places initial settlements for all players
+     */
+    public void placeInitialSettlements(Player[] players) {
+        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15] };
+        for (int i = 0; i < players.length; i++) {
+            Player player = players[i];
+            Node n = startingNodes[i % startingNodes.length];
+            Settlement settlement = new Settlement(player);
+            n.setBuilding(settlement);
+            player.addBuilding(settlement);
+            logger.log(player.getPlayerId(), "placed initial Settlement at Node " + n.getNodeId());
+        }
+    }
+
+    /**
      * Handles resouce production for the player based on the dice roll
      * if dice value is 7, no resouce are gained
      * 

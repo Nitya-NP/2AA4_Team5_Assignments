@@ -14,7 +14,8 @@ public abstract class Player {
 	private int playerId; // Unique identifier of the player
 	private int points; // Current points
 	private Map<Resources, Integer> resources; // Stores the number of resources player owns
-	private Map<Class<? extends Building>, Integer> buildings; // Stores buildings owned by the player (Settlement, Cities)
+	private Map<Class<? extends Building>, Integer> buildings; // Stores buildings owned by the player (Settlement,
+																// Cities)
 	private int roads;
 
 	/**
@@ -139,9 +140,11 @@ public abstract class Player {
 	}
 
 	/**
-	 * Checks whether the player has atleast a specified amount of resources to build something
-	 * @param r the resource type to check
-	 * @param amount minimum amount required 
+	 * Checks whether the player has atleast a specified amount of resources to
+	 * build something
+	 * 
+	 * @param r      the resource type to check
+	 * @param amount minimum amount required
 	 * @return true if player has enough, false otherwise
 	 */
 	public boolean hasResources(Resources r, int amount) {
@@ -151,16 +154,23 @@ public abstract class Player {
 	/**
 	 * Displays all resources currently owned by the player
 	 */
-	public String listResources(){
-		StringBuilder sb= new StringBuilder();
-		for(Map.Entry<Resources, Integer> entry: resources.entrySet()){
-			sb.append(entry.getKey()+": "+ entry.getValue());
+	public String listResources() {
+		StringBuilder sb = new StringBuilder();
+		// Iterate over ALL resource types to ensure they are shown
+		for (Resources r : Resources.values()) {
+			int amount = resources.getOrDefault(r, 0);
+			sb.append(r).append(": ").append(amount).append(", ");
+		}
+
+		// Remove the last comma and space
+		if (sb.length() > 2) {
+			sb.setLength(sb.length() - 2);
 		}
 
 		return sb.toString();
 	}
 
-	//Abstract method to be implemented by Human & Computer 
+	// Abstract method to be implemented by Human & Computer
 	public abstract UserInput takeTurn();
 
 }
