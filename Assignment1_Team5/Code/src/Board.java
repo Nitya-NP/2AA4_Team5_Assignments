@@ -226,34 +226,58 @@ public class Board {
      * Places initial settlements for all players
      */
     public void placeInitialSettlements(Player[] players) {
-        // Define nodes for settlements (each player gets 2)
+        // Nodes for settlements
         Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[20], nodes[25], nodes[30],
                 nodes[35] };
 
-        // Define the 8 specific node pairs for roads
-        Node[][] roadPairs = { { nodes[0], nodes[1] }, { nodes[1], nodes[2] }, { nodes[2], nodes[3] }, { nodes[3], nodes[4] }, { nodes[4], nodes[5] }, { nodes[5], nodes[16] }, { nodes[6], nodes[7] }, { nodes[10], nodes[11] } };
+        // Node pairs for roads, two per player
+        Node[][] roadPairs = {
+                { nodes[0], nodes[1] }, 
+                { nodes[5], nodes[16] },  
 
-        // Place settlements
+                { nodes[10], nodes[11] }, 
+                { nodes[15], nodes[4] },
+
+                { nodes[25], nodes[26] },
+                { nodes[30], nodes[31] }, 
+
+                { nodes[38], nodes[39] }, 
+                { nodes[33], nodes[32] } 
+        };
+
+        // Place settlements exactly as before
         for (int i = 0; i < players.length; i++) {
             Player player = players[i];
 
             Node firstSettlementNode = settlementNodes[i];
             Node secondSettlementNode = settlementNodes[i + players.length];
 
-            // Place first settlement
+            // First settlement
             Settlement s1 = new Settlement(player);
             firstSettlementNode.setBuilding(s1);
             player.addBuilding(s1);
 
-            // Place second settlement
+            // Second settlement
             Settlement s2 = new Settlement(player);
             secondSettlementNode.setBuilding(s2);
             player.addBuilding(s2);
 
             logger.log(player.getPlayerId(),
-                    "placed initial settlements at Node " + firstSettlementNode.getNodeId() + " and Node "
-                            + secondSettlementNode.getNodeId());
+                    "placed initial settlements at Node " + firstSettlementNode.getNodeId() +
+                            " and Node " + secondSettlementNode.getNodeId());
+
+            // Each player gets 2 roads (index = i*2 and i*2+1)
+            for (int j = i * 2; j < i * 2 + 2; j++) {
+                Node[] pair = roadPairs[j];
+                Road road = new Road(pair, player);
+                addRoadToBoard(road);
+                player.addRoad();
+
+                logger.log(player.getPlayerId(),
+                        "built road between Node " + pair[0].getNodeId() + " and Node " + pair[1].getNodeId());
+            }
         }
+    }
 
         // Build roads using the exact node pairs
         for (Node[] pair : roadPairs) {
