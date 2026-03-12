@@ -270,22 +270,22 @@ public class Board {
      */
     public void placeInitialSettlements(Player[] players) {
         // Nodes for settlements
-        Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[33], nodes[25], nodes[30],
-                nodes[38] };
+        Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[38], nodes[1], nodes[15], nodes[11],
+                nodes[35] };
 
         // Node pairs for roads, two per player
         Node[][] roadPairs = {
                 { nodes[0], nodes[1] },  //r
-                { nodes[33], nodes[32]  },  
+                { nodes[1], nodes[2]  },  
 
                 {  nodes[5], nodes[13]},  //b
-                { nodes[25], nodes[26]  },
+                { nodes[13], nodes[15]  },
 
                 { nodes[10], nodes[11] }, //o
-                { nodes[30], nodes[31] }, 
+                { nodes[11], nodes[12] }, 
 
                 { nodes[38], nodes[39] }, //w
-                { nodes[15], nodes[14]} 
+                { nodes[39], nodes[35]} 
         };
 
         // Place settlements exactly as before
