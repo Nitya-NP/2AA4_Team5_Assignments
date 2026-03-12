@@ -35,7 +35,7 @@ public class GameLogicTest {
         }
 
         // Build and test game creation
-        Game game = new Game(players, 10);
+        Game game = new Game(players, 10, new GameLogger());
         assertNotNull(game);
     }
 
@@ -50,7 +50,7 @@ public class GameLogicTest {
         players[1] = new  ComputerPlayer(2);
 
         // Build game, start playing, and verify if it ran
-        Game game = new Game(players, 1);
+        Game game = new Game(players, 1, new GameLogger());
         game.start();
         assertTrue(true);
     }
@@ -66,7 +66,7 @@ public class GameLogicTest {
         players[1] = new  ComputerPlayer(2);
 
         // Build game, start playing, and verify if it ran
-        Game game = new Game(players, 8192);
+        Game game = new Game(players, 8192, new GameLogger());
         game.start();
         assertTrue(true);
     }
@@ -121,7 +121,7 @@ public class GameLogicTest {
         players[1] = new ComputerPlayer(2);
 
         // To verify output is created
-        Game game = new Game(players, 1);
+        Game game = new Game(players, 1, new GameLogger());
         game.start();
         assertNotNull(game);
     }

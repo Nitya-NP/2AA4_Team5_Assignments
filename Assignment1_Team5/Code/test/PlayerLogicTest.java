@@ -22,7 +22,7 @@ public class PlayerLogicTest {
 		players[0] =new ComputerPlayer(1);
 		players[1]=new ComputerPlayer(2);
 
-		Game game= new Game(players,1);
+		Game game= new Game(players,1, new GameLogger());
 
 		int p1Points= players[0].getPoints();
 		int p2Points= players[1].getPoints();
