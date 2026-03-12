@@ -192,7 +192,9 @@ class CatanBoardVisualizer:
         # We don't need actual players for visualization
         players = [
             Player(Color.BLUE),
-            Player(Color.RED)
+            Player(Color.RED),
+            Player(Color.ORANGE),
+            Player(Color.WHITE)
         ]
 
         # Create game with the map

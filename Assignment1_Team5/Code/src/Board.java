@@ -320,17 +320,6 @@ public class Board {
                         "built road between Node " + pair[0].getNodeId() + " and Node " + pair[1].getNodeId());
             }
         }
-
-        // Build roads using the exact node pairs
-        for (Node[] pair : roadPairs) {
-            Player player = players[0]; // assign to first player (or choose logic for ownership)
-            Road road = new Road(pair, player);
-            addRoadToBoard(road);
-            player.addRoad();
-
-            logger.log(player.getPlayerId(),
-                    "built road between Node " + pair[0].getNodeId() + " and Node " + pair[1].getNodeId());
-        }
     }
     
     /**
