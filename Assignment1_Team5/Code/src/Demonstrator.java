@@ -47,7 +47,7 @@ public class Demonstrator {
         players[3] = new ComputerPlayer(4);
 
         // Create game with players and rounds
-        Game game = new Game(players, rounds);
+        Game game = new Game(players, rounds, logger);
 
         // Start the game
         game.start();

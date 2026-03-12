@@ -41,12 +41,12 @@ public class Game {
 	 * @param players the players in the game
 	 * @param board   the board on which the game will be played
 	 */
-	public Game(Player[] players, int maxRounds) {
+	public Game(Player[] players, int maxRounds, GameLogger logger) {
 		this.roundsPlayed = 0;
 		this.maxRounds = maxRounds;
 		this.players = players;
 		this.dice = new MultiDice();
-		this.logger = new GameLogger();
+		this.logger = logger;
 	}
 
 	/**
