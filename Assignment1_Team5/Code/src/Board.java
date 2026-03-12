@@ -222,27 +222,28 @@ public class Board {
         }
     }
 
+
     /**
      * Places initial settlements for all players
      */
     public void placeInitialSettlements(Player[] players) {
         // Nodes for settlements
-        Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[20], nodes[25], nodes[30],
-                nodes[35] };
+        Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[33], nodes[25], nodes[30],
+                nodes[38] };
 
         // Node pairs for roads, two per player
         Node[][] roadPairs = {
-                { nodes[0], nodes[1] }, 
-                { nodes[5], nodes[16] },  
+                { nodes[0], nodes[1] },  //r
+                { nodes[33], nodes[32]  },  
 
-                { nodes[10], nodes[11] }, 
-                { nodes[15], nodes[4] },
+                {  nodes[5], nodes[16]},  //b
+                { nodes[25], nodes[26]  },
 
-                { nodes[25], nodes[26] },
+                { nodes[10], nodes[11] }, //o
                 { nodes[30], nodes[31] }, 
 
-                { nodes[38], nodes[39] }, 
-                { nodes[33], nodes[32] } 
+                { nodes[38], nodes[39] }, //w
+                { nodes[15], nodes[4]} 
         };
 
         // Place settlements exactly as before
@@ -277,7 +278,6 @@ public class Board {
                         "built road between Node " + pair[0].getNodeId() + " and Node " + pair[1].getNodeId());
             }
         }
-    }
 
         // Build roads using the exact node pairs
         for (Node[] pair : roadPairs) {
