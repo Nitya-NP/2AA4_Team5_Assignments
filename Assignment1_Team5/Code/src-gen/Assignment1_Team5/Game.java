@@ -28,15 +28,15 @@ public class Game {
 	/**
 	 * 
 	 */
-	public Dice dice;
-	/**
-	 * 
-	 */
 	public TurnManager turnmanager;
 	/**
 	 * 
 	 */
 	public GameLogger gamelogger;
+	/**
+	 * 
+	 */
+	public StateWriter statewriter;
 
 	/**
 	 * 

@@ -33,6 +33,14 @@ public class TurnManager {
 	 * 
 	 */
 	private Dice dice;
+	/**
+	 * 
+	 */
+	public Dice dice;
+	/**
+	 * 
+	 */
+	public StateWriter statewriter;
 
 	/**
 	 * 
