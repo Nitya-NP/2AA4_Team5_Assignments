@@ -132,33 +132,51 @@ class CatanBoardVisualizer:
         return catan_map
 
     def _apply_state_to_board(self, board: Board):
-        """Apply roads and buildings from JSON state to the board."""
+        if self.state_data is None:
+            return
 
-        # For buildings
         for building_data in self.state_data.get("buildings", []):
+            if building_data["type"].upper() != "SETTLEMENT":
+                continue
+    
             node_id = building_data["node"]
-            color = self._parse_color(building_data["owner"])
-            building_type = building_data["type"]
+            owner = building_data["owner"]
+            color = self._parse_color(owner)
 
-            if building_type == "SETTLEMENT":
-                board.build_settlement(
-                    color,
-                    node_id,
-                    initial_build_phase=True
-                )
-            elif building_type == "CITY":
-                # Note: build_city assumes a settlement already exists there
-                # For visualization from JSON, we need to build settlement first
-                board.build_settlement(color, node_id, initial_build_phase=True)
-                board.build_city(color, node_id)
-            else:
-                raise ValueError(f"Unknown building type: {building_type}")
+            board.build_settlement(
+                color,
+                node_id,
+                initial_build_phase=True
+            )
 
-        # For roads
+        for building_data in self.state_data.get("buildings", []):
+            if building_data["type"].upper() != "CITY":
+                continue
+    
+            node_id = building_data["node"]
+            owner = building_data["owner"]
+            color = self._parse_color(owner)
+
+            board.build_city(color, node_id)
+
         for road_data in self.state_data.get("roads", []):
-            edge = (road_data["a"], road_data["b"])
-            color = self._parse_color(road_data["owner"])
+            a = road_data["a"]
+            b = road_data["b"]
+
+            owner = road_data["owner"]
+            color = self._parse_color(owner)
+            edge = (a, b)
+    
             board.build_road(color, edge)
+
+        # Robber
+        robber_tile_id = self.state_data.get("robber_coordinate")
+    
+        if robber_tile_id is not None:
+            for coordinate, tile in board.map.land_tiles.items():
+                if tile.id == robber_tile_id:
+                    board.robber_coordinate = coordinate
+                    break
 
     def build_game(self) -> Game:
         """
