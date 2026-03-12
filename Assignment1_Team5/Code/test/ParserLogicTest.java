@@ -1,5 +1,3 @@
-import java.io.StringReader;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

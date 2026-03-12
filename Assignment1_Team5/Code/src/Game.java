@@ -62,6 +62,7 @@ public class Game {
 		
 		boolean gameOver = false; // to check if game over
 
+		StateWriter.writeState(board, robberManager); 
 		// Continue to play rounds till the game ends
 		while (!gameOver && roundsPlayed < maxRounds) {
 			playRound();

@@ -1,12 +1,23 @@
 {
+  "robberTile": 2,
   "roads": [
-    { "a": 11, "b": 12, "owner": "RED" },
-    { "a": 6, "b": 23, "owner": "BLUE" },
-    { "a": 23, "b": 22, "owner": "BLUE" }
+    { "a": 0, "b": 1, "owner": 1 },
+    { "a": 20, "b": 21, "owner": 1 },
+    { "a": 5, "b": 6, "owner": 2 },
+    { "a": 25, "b": 26, "owner": 2 },
+    { "a": 10, "b": 11, "owner": 3 },
+    { "a": 30, "b": 31, "owner": 3 },
+    { "a": 15, "b": 16, "owner": 4 },
+    { "a": 35, "b": 36, "owner": 4 }
   ],
   "buildings": [
-    { "node": 12, "owner": "RED", "type": "SETTLEMENT" },
-    { "node": 6, "owner": "BLUE", "type": "CITY" },
-    { "node": 22, "owner": "BLUE", "type": "SETTLEMENT" }
+    { "node": 0, "owner": 1, "type": "settlement" },
+    { "node": 5, "owner": 2, "type": "settlement" },
+    { "node": 10, "owner": 3, "type": "settlement" },
+    { "node": 15, "owner": 4, "type": "settlement" },
+    { "node": 20, "owner": 1, "type": "settlement" },
+    { "node": 25, "owner": 2, "type": "settlement" },
+    { "node": 30, "owner": 3, "type": "settlement" },
+    { "node": 35, "owner": 4, "type": "settlement" }
   ]
 }

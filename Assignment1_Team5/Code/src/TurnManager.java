@@ -115,6 +115,7 @@ public class TurnManager {
 
             // Move the robber
             robberManager.moveRobber(board);
+            StateWriter.writeState(board, robberManager); 
 
             // Steal a resource from another player
             Player victim = robberManager.chooseVictim(player);
@@ -161,6 +162,7 @@ public class TurnManager {
         if (!isValidAction(player)) return;
 
         board.buildSettlement(player, nodeId);
+        StateWriter.writeState(board, robberManager); 
     }
 
     /**
@@ -172,6 +174,7 @@ public class TurnManager {
         if (!isValidAction(player)) return;
 
         board.buildCity(player, nodeId);
+        StateWriter.writeState(board, robberManager); 
     }
 
     /**
@@ -184,6 +187,7 @@ public class TurnManager {
         if (!isValidAction(player)) return;
 
         board.buildRoad(player, fromNodeId, toNodeId);
+        StateWriter.writeState(board, robberManager); 
     }
 
     /**

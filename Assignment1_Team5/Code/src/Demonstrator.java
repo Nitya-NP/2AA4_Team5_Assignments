@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Demonstrator {
     
     public static void main(String[] args) {
-        StateWriter.writeState();
+
         GameLogger logger= new GameLogger();
         int rounds = 0;
 
