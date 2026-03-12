@@ -17,8 +17,8 @@ public class StateWriter {
             sb.append("{\n");
             
             // Robber
-            Tile robberTile = robberManager.getCurrentTile();
-            sb.append("  \"robberTile\": ").append(robberTile != null ? robberTile.getTileId() : -1).append(",\n");
+            Tile robber_coordinate = robberManager.getCurrentTile();
+            sb.append("  \"robber_coordinate\": ").append(robber_coordinate != null ? robber_coordinate.getTileId() : -1).append(",\n");
             
             // Roads
             sb.append("  \"roads\": [\n");
@@ -27,7 +27,10 @@ public class StateWriter {
                 if (road != null) {
                     if (!first)  sb.append(",\n");
                     Node[] nodes = road.getConnectedNodes();
-                    sb.append("    { \"a\": ").append(nodes[0].getNodeId()).append(", \"b\": ").append(nodes[1].getNodeId()) .append(", \"owner\": ").append(road.getOwner().getPlayerId()).append(" }");
+                    String color = getPlayerColor(road.getOwner().getPlayerId());
+                    sb.append("    { \"a\": ").append(nodes[0].getNodeId())
+                      .append(", \"b\": ").append(nodes[1].getNodeId())
+                      .append(", \"owner\": \"").append(color).append("\" }");
                     first = false;
                 }
             }
@@ -42,14 +45,15 @@ public class StateWriter {
                     
                     Building b = node.getBuilding();
                     String type;
+                    String color = getPlayerColor(b.getOwner().getPlayerId());
                     
                     if (b instanceof City) {
-                        type = "city";
+                        type = "CITY";
                     } else {
-                        type = "settlement";
+                        type = "SETTLEMENT";
                     }
                     
-                    sb.append("    { \"node\": ").append(node.getNodeId()).append(", \"owner\": ").append(b.getOwner().getPlayerId()).append(", \"type\": \"").append(type).append("\" }");
+                    sb.append("{ \"node\": ").append(node.getNodeId()).append(", \"owner\": \"").append(color).append("\"").append(", \"type\": \"").append(type).append("\" }");
                     
                     first = false;
                 }
@@ -64,6 +68,21 @@ public class StateWriter {
             
         } catch (IOException e) {
             System.out.println("Failed to save state: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Converts player ID to color string
+     * @param playerId The player ID (1-4)
+     * @return Color string for visualization
+     */
+    private static String getPlayerColor(int playerId) {
+        switch(playerId) {
+            case 1: return "RED";
+            case 2: return "BLUE";
+            case 3: return "ORANGE";
+            case 4: return "WHITE";
+            default: return "GRAY";
         }
     }
 }
