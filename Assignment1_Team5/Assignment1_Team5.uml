@@ -360,6 +360,7 @@
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_SUJeEAk8EfGkCqdwnqGgsQ" name="maxRounds">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_MspR4B2nEfGfmtgNIOvw4A" name="logger" type="_QPSz8AlIEfG7YPFQnEXf6w"/>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_R37GIP35EfCpcYr7ez_t7A" name="ResourcesToIntegerMapEntry">

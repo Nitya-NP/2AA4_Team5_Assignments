@@ -54,7 +54,8 @@ public class Game {
 	 * 
 	 * @param players 
 	 * @param maxRounds 
+	 * @param logger 
 	 */
-	public void Game(Player players, int maxRounds) {
+	public void Game(Player players, int maxRounds, GameLogger logger) {
 	}
 }
