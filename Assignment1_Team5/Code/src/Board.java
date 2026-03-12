@@ -226,44 +226,47 @@ public class Board {
      * Places initial settlements for all players
      */
     public void placeInitialSettlements(Player[] players) {
+        // Define nodes for settlements (each player gets 2)
+        Node[] settlementNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[20], nodes[25], nodes[30],
+                nodes[35] };
 
-        Node[] startingNodes = { nodes[0], nodes[5], nodes[10], nodes[15], nodes[20], nodes[25], nodes[30], nodes[35] };
+        // Define the 8 specific node pairs for roads
+        Node[][] roadPairs = { { nodes[0], nodes[1] }, { nodes[1], nodes[2] }, { nodes[2], nodes[3] }, { nodes[3], nodes[4] }, { nodes[4], nodes[5] }, { nodes[5], nodes[16] }, { nodes[6], nodes[7] }, { nodes[10], nodes[11] } };
 
+        // Place settlements
         for (int i = 0; i < players.length; i++) {
-
             Player player = players[i];
 
-            Node first = startingNodes[i];
-            Node second = startingNodes[i + players.length];
+            Node firstSettlementNode = settlementNodes[i];
+            Node secondSettlementNode = settlementNodes[i + players.length];
 
-            // first settlement
+            // Place first settlement
             Settlement s1 = new Settlement(player);
-            first.setBuilding(s1);
+            firstSettlementNode.setBuilding(s1);
             player.addBuilding(s1);
 
-            // second settlement
+            // Place second settlement
             Settlement s2 = new Settlement(player);
-            second.setBuilding(s2);
+            secondSettlementNode.setBuilding(s2);
             player.addBuilding(s2);
 
             logger.log(player.getPlayerId(),
-                    "placed initial settlements at Node " + first.getNodeId() + " and Node " + second.getNodeId());
+                    "placed initial settlements at Node " + firstSettlementNode.getNodeId() + " and Node "
+                            + secondSettlementNode.getNodeId());
+        }
 
-            // create two roads
-            Road r1 = new Road(new Node[] { first, nodes[(first.getNodeId() + 1) % nodes.length] }, player);
-            Road r2 = new Road(new Node[] { second, nodes[(second.getNodeId() + 1) % nodes.length] }, player);
-
-            addRoadToBoard(r1);
-            addRoadToBoard(r2);
-
-            player.addRoad();
+        // Build roads using the exact node pairs
+        for (Node[] pair : roadPairs) {
+            Player player = players[0]; // assign to first player (or choose logic for ownership)
+            Road road = new Road(pair, player);
+            addRoadToBoard(road);
             player.addRoad();
 
             logger.log(player.getPlayerId(),
-                    "built initial roads from Node " + first.getNodeId() + " and " + second.getNodeId());
+                    "built road between Node " + pair[0].getNodeId() + " and Node " + pair[1].getNodeId());
         }
     }
-
+    
     /**
      * Handles resouce production for the player based on the dice roll
      * if dice value is 7, no resouce are gained
