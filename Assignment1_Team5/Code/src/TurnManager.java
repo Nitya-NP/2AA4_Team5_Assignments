@@ -13,6 +13,9 @@ public class TurnManager {
     private GameLogger logger;
     private Dice dice;
 
+    /**
+     * To manage the undo/redo commands entered by the player
+     */
     private CommandManager commandManager;
 
     /**
@@ -88,9 +91,11 @@ public class TurnManager {
                 handleBuildRoad(player, command.getNodeOne(), command.getNodeTwo());
                 break;
             case UNDO:
+                // Handle the undo action for the player
                 commandManager.undo();
                 break;
             case REDO:
+                // Handle the redo action for the player
                 commandManager.redo();
                 break;
             default:
