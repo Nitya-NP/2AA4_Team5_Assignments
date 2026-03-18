@@ -56,9 +56,12 @@ public class Game {
 		// build the board, robber, and turn manager
 		this.board = new Board(this.logger);
 		board.placeInitialSettlements(players);
+
 		RobberActionsManager robberManager = new RobberActionsManager(board, players);
 		board.setRobberManager(robberManager);
-		this.manager = new TurnManager(board, logger, dice, robberManager);
+
+		CommandManager commandManager = new CommandManager();
+		this.manager = new TurnManager(board, logger, dice, robberManager, commandManager);
 		
 		boolean gameOver = false; // to check if game over
 

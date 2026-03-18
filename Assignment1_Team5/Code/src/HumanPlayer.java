@@ -22,6 +22,11 @@ public class HumanPlayer extends Player {
         super(playerId);
         this.scanner = new Scanner(System.in);
         this.logger = logger;
+
+        this.addResource(Resources.LUMBER, 20000);
+        this.addResource(Resources.BRICK, 20000);
+        this.addResource(Resources.WOOL, 20000);
+        this.addResource(Resources.GRAIN, 20000);
     }
 
     /**
@@ -80,6 +85,16 @@ public class HumanPlayer extends Player {
             int node2 = Integer.parseInt(nodes[1]);
 
             return new PlayerCommand(UserInput.BUILD_ROAD, node1, node2);
+        }
+
+        // UNDO ACTION
+        if (Pattern.matches("^(?i)undo$", input)) {
+            return new PlayerCommand(UserInput.UNDO, 0, 0);
+        }
+
+        // REDO ACTION
+        if (Pattern.matches("^(?i)redo$", input)) {
+            return new PlayerCommand(UserInput.REDO, 0, 0);
         }
 
         logger.log(getPlayerId(), "Invalid command. Try again.");
