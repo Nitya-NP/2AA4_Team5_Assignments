@@ -8,29 +8,19 @@ package Assignment1_Team5;
 /**
  * 
  */
-public enum UserInput {
+public interface Command {
 	/**
 	 * 
 	 */
-	ROLL,
+	public void execute();
+
 	/**
 	 * 
 	 */
-	GO,
+	public void redo();
+
 	/**
 	 * 
 	 */
-	BUILD,
-	/**
-	 * 
-	 */
-	LIST,
-	/**
-	 * 
-	 */
-	UNDO,
-	/**
-	 * 
-	 */
-	REDO;
+	public void undo();
 }

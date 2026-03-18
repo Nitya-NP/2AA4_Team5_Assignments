@@ -8,29 +8,18 @@ package Assignment1_Team5;
 /**
  * 
  */
-public enum UserInput {
+public class BuildCityCommand {
 	/**
 	 * 
 	 */
-	ROLL,
+	private int nodeId;
+
 	/**
 	 * 
+	 * @param board 
+	 * @param player 
+	 * @param nodeId 
 	 */
-	GO,
-	/**
-	 * 
-	 */
-	BUILD,
-	/**
-	 * 
-	 */
-	LIST,
-	/**
-	 * 
-	 */
-	UNDO,
-	/**
-	 * 
-	 */
-	REDO;
+	public void BuildCityCommand(Board board, Player player, int nodeId) {
+	}
 }

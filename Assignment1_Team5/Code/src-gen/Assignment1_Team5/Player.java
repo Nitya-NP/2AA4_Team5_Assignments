@@ -25,6 +25,18 @@ public abstract class Player {
 	 * 
 	 */
 	private ResourcesToIntegerMapEntry[] resourcesMap;
+	/**
+	 * 
+	 */
+	public BuildSettlementCommand buildsettlementcommand;
+	/**
+	 * 
+	 */
+	public BuildCityCommand buildcitycommand;
+	/**
+	 * 
+	 */
+	public BuildRoadCommand buildroadcommand;
 
 	/**
 	 * 
@@ -122,5 +134,18 @@ public abstract class Player {
 	 * @return 
 	 */
 	public String listResources() {
+	}
+
+	/**
+	 * 
+	 * @param building 
+	 */
+	public void removeBuilding(Building building) {
+	}
+
+	/**
+	 * 
+	 */
+	public void removeRoad() {
 	}
 }

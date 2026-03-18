@@ -29,6 +29,18 @@ public class Board {
 	 * 
 	 */
 	public GameLogger gamelogger;
+	/**
+	 * 
+	 */
+	public BuildSettlementCommand buildsettlementcommand;
+	/**
+	 * 
+	 */
+	public BuildCityCommand buildcitycommand;
+	/**
+	 * 
+	 */
+	public BuildRoadCommand buildroadcommand;
 
 	/**
 	 * 
@@ -165,5 +177,30 @@ public class Board {
 	 * @param r 
 	 */
 	private void distributeResourceToPlayer(Node n, Resources r) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param nodeId1 
+	 * @param nodeId2 
+	 */
+	public void removeRoad(Player player, int nodeId1, int nodeId2) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param nodeId 
+	 */
+	public void removeCity(Player player, int nodeId) {
+	}
+
+	/**
+	 * 
+	 * @param player 
+	 * @param nodeId 
+	 */
+	public void removeSettlement(Player player, int nodeId) {
 	}
 }

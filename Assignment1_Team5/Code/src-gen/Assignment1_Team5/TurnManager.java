@@ -41,6 +41,10 @@ public class TurnManager {
 	 * 
 	 */
 	public StateWriter statewriter;
+	/**
+	 * 
+	 */
+	public CommandManager commandmanager;
 
 	/**
 	 * 

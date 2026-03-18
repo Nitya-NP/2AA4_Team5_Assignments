@@ -8,29 +8,38 @@ package Assignment1_Team5;
 /**
  * 
  */
-public enum UserInput {
+public class CommandManager {
 	/**
 	 * 
 	 */
-	ROLL,
+	private int currentCommand;
 	/**
 	 * 
 	 */
-	GO,
+	public Command[] command;
+
 	/**
 	 * 
 	 */
-	BUILD,
+	public void CommandManager() {
+	}
+
+	/**
+	 * 
+	 * @param command 
+	 */
+	public void executeCommand(Command command) {
+	}
+
 	/**
 	 * 
 	 */
-	LIST,
+	public void undo() {
+	}
+
 	/**
 	 * 
 	 */
-	UNDO,
-	/**
-	 * 
-	 */
-	REDO;
+	public void redo() {
+	}
 }

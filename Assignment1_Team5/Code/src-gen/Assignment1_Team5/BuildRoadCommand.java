@@ -8,29 +8,23 @@ package Assignment1_Team5;
 /**
  * 
  */
-public enum UserInput {
+public class BuildRoadCommand {
 	/**
 	 * 
 	 */
-	ROLL,
+	private int nodeId1;
 	/**
 	 * 
 	 */
-	GO,
+	private int nodeId2;
+
 	/**
 	 * 
+	 * @param board 
+	 * @param player 
+	 * @param nodeId1 
+	 * @param nodeId2 
 	 */
-	BUILD,
-	/**
-	 * 
-	 */
-	LIST,
-	/**
-	 * 
-	 */
-	UNDO,
-	/**
-	 * 
-	 */
-	REDO;
+	public void BuildRoadCommand(Board board, Player player, int nodeId1, int nodeId2) {
+	}
 }
