@@ -13,6 +13,8 @@ public class TurnManager {
     private GameLogger logger;
     private Dice dice;
 
+    private CommandManager commandManager;
+
     /**
      * To manage the robber actions when activated
      */
@@ -25,11 +27,12 @@ public class TurnManager {
      * @param dice in order to roll the dice when the player chooses to roll
      * @param robberManager to manage the robber actions when activated
      */
-    public TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager) {
+    public TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager, CommandManager commandManager) {
         this.board = board;
         this.logger = logger;
         this.dice = dice;
         this.robberManager = robberManager;
+        this.commandManager = commandManager;
     }
     
     /**
@@ -83,6 +86,12 @@ public class TurnManager {
             case BUILD_ROAD:
                 // Handle the build road action to build a road for the player
                 handleBuildRoad(player, command.getNodeOne(), command.getNodeTwo());
+                break;
+            case UNDO:
+                commandManager.undo();
+                break;
+            case REDO:
+                commandManager.redo();
                 break;
             default:
                 logger.log(player.getPlayerId(), "Invalid action.");
@@ -161,7 +170,8 @@ public class TurnManager {
     private void handleBuildSettlement(Player player, int nodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildSettlement(player, nodeId);
+        Command cmd = new BuildSettlementCommand(board, player, nodeId);
+        commandManager.executeCommand(cmd);
         StateWriter.writeState(board, robberManager); 
     }
 
@@ -173,7 +183,8 @@ public class TurnManager {
     private void handleBuildCity(Player player, int nodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildCity(player, nodeId);
+        Command cmd = new BuildCityCommand(board, player, nodeId);
+        commandManager.executeCommand(cmd);
         StateWriter.writeState(board, robberManager); 
     }
 
@@ -186,7 +197,8 @@ public class TurnManager {
     private void handleBuildRoad(Player player, int fromNodeId, int toNodeId) {
         if (!isValidAction(player)) return;
 
-        board.buildRoad(player, fromNodeId, toNodeId);
+        Command cmd = new BuildRoadCommand(board, player, fromNodeId, toNodeId);
+        commandManager.executeCommand(cmd);
         StateWriter.writeState(board, robberManager); 
     }
 

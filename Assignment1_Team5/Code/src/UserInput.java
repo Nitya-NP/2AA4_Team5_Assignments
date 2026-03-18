@@ -4,5 +4,7 @@ public enum UserInput {
     BUILD_SETTLEMENT,
     BUILD_CITY,
     BUILD_ROAD,
-    LIST
+    LIST,
+    UNDO,
+    REDO
 }
