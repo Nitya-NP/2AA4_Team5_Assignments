@@ -111,7 +111,29 @@ public abstract class Player {
 		} else if (building instanceof City) {
 			addPoints(2);
 		}
+	}
 
+	/**
+	 * Removes a building to the player based on its class name
+	 * Also updates points where applicable
+	 * 
+	 * @param building
+	 */
+	public void removeBuilding(Building building) {
+		Class<? extends Building> type = building.getClass();
+	
+		int current = buildings.getOrDefault(type, 0);
+	
+		if (current > 0) {
+			buildings.put(type, current - 1);
+		}
+	
+		// Adjust points
+		if (building instanceof Settlement) {
+			this.points -= 1;
+		} else if (building instanceof City) {
+			this.points -= 2;
+		}
 	}
 
 	/**
@@ -119,6 +141,13 @@ public abstract class Player {
 	 */
 	public void addRoad() {
 		this.roads++;
+	}
+
+	/**
+	 * Removes a road to player count
+	 */
+	public void removeRoad() {
+		this.roads--;
 	}
 
 	/**
