@@ -421,6 +421,49 @@ public class Board {
     }
 
     /**
+     * Helper method
+     * Attempts to unbuild a road for the player.
+     * two nodes and checks if the road can be legally built.
+     * removes road from the board if successful and in the player's building
+     * 
+     * @param player  the player
+     * @param nodeId1
+     * @param nodeId2
+     */
+    public void removeRoad(Player player, int nodeId1, int nodeId2) {
+        Node n1 = nodes[nodeId1];
+        Node n2 = nodes[nodeId2];
+    
+        for (Road road : roads) {
+            if (road != null &&
+                road.getOwner() == player &&
+                road.isConnected(n1) &&
+                road.isConnected(n2)) {
+                    
+                    // Remove road from the board
+                    for (int i = 0; i < roads.length; i++) {
+                        if (roads[i] == road) {
+                            roads[i] = null;
+                            break;
+                        }
+                    }
+    
+                // Update player
+                player.removeRoad();
+    
+                // Refund resources
+                player.addResource(Resources.BRICK, 1);
+                player.addResource(Resources.LUMBER, 1);
+    
+                logger.log(player.getPlayerId(),
+                    "UNDO: removed Road between Node " + nodeId1 + " and Node " + nodeId2);
+    
+                return;
+            }
+        }
+    }
+
+    /**
      * helper method
      * Attempts to build a City for the player by upgrading the settlement.
      * Checks the node if it is settlement.
@@ -456,6 +499,31 @@ public class Board {
 
         } else {
             logger.log(player.getPlayerId(), "City upgrade failed");
+        }
+    }
+
+    public void removeCity(Player player, int nodeId) {
+        Node n = nodes[nodeId];
+    
+        if (n.isOccupied() &&
+            n.getBuilding() instanceof City &&
+            n.getBuilding().getOwner() == player) {
+    
+            // Remove city
+            Building city = n.getBuilding();
+            player.removeBuilding(city);
+    
+            // Replace with settlement
+            Settlement settlement = new Settlement(player);
+            n.setBuilding(settlement);
+            player.addBuilding(settlement);
+    
+            // Refund resources
+            player.addResource(Resources.ORE, 3);
+            player.addResource(Resources.GRAIN, 2);
+    
+            logger.log(player.getPlayerId(),
+                "UNDO: unbuilt City to Settlement at Node " + nodeId);
         }
     }
 
@@ -499,4 +567,28 @@ public class Board {
         }
     }
 
+    public void removeSettlement(Player player, int nodeId) {
+        Node n = nodes[nodeId];
+    
+        if (n.isOccupied() &&
+            n.getBuilding() instanceof Settlement &&
+            n.getBuilding().getOwner() == player) {
+    
+            // Remove building from node
+            Building building = n.getBuilding();
+            n.setBuilding(null);
+    
+            // Remove from player's building list
+            player.removeBuilding(building);
+    
+            // Give resources back
+            player.addResource(Resources.BRICK, 1);
+            player.addResource(Resources.LUMBER, 1);
+            player.addResource(Resources.WOOL, 1);
+            player.addResource(Resources.GRAIN, 1);
+    
+            logger.log(player.getPlayerId(),
+                "UNDO: removed Settlement at Node " + nodeId);
+        }
+    }
 }
