@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  */
 public abstract class DiceRollSubject {
-    private List<DiceRollObserver> observers= new ArrayList<>();
+    private List<DiceRollObserver> observers= Collections.synchronizedList(new ArrayList<>());
 
     /**
      * Add an observer to get notifications
@@ -36,7 +37,9 @@ public abstract class DiceRollSubject {
      */
     protected void notifyObservers(int diceValue){
         for(DiceRollObserver ob: observers){
-            ob.onDiceRolled(diceValue);
+            if(ob!=null){
+                ob.onDiceRolled(diceValue);
+            }
         }
     }
     
