@@ -25,6 +25,18 @@ public class Tile {
 	 * 
 	 */
 	public Node[] node;
+	/**
+	 * 
+	 */
+	public DiceRollObserver dicerollobserver;
+	/**
+	 * 
+	 */
+	public RobberActionsManager robber;
+	/**
+	 * 
+	 */
+	public GameLogger logger;
 
 	/**
 	 * 
@@ -68,5 +80,47 @@ public class Tile {
 	 * @param nodes 
 	 */
 	public void setNodes(Node nodes) {
+	}
+
+	/**
+	 * 
+	 * @param diceValue 
+	 */
+	public void onDiceRolled(int diceValue) {
+	}
+
+	/**
+	 * 
+	 * @param diceValue 
+	 * @return 
+	 */
+	public boolean shouldSkipTile(int diceValue) {
+	}
+
+	/**
+	 * 
+	 * @param n 
+	 */
+	private void distributeResourceToPlayer(Node n) {
+	}
+
+	/**
+	 * 
+	 */
+	private void distributeResources() {
+	}
+
+	/**
+	 * 
+	 * @param robber 
+	 */
+	public void setRobberManager(RobberActionsManager robber) {
+	}
+
+	/**
+	 * 
+	 * @param logger 
+	 */
+	public void setLogger(GameLogger logger) {
 	}
 }

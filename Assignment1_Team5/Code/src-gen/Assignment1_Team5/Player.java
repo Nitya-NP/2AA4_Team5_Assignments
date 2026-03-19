@@ -107,12 +107,6 @@ public abstract class Player {
 
 	/**
 	 * 
-	 */
-	public void addRoad() {
-	}
-
-	/**
-	 * 
 	 * @param resource 
 	 * @param amount 
 	 * @return 

@@ -96,14 +96,6 @@ public class Board {
 	/**
 	 * 
 	 * @param player 
-	 * @param diceValue 
-	 */
-	private void produceResource(Player player, int diceValue) {
-	}
-
-	/**
-	 * 
-	 * @param player 
 	 */
 	private void buildRoad(Player player) {
 	}
@@ -158,29 +150,6 @@ public class Board {
 
 	/**
 	 * 
-	 * @param t 
-	 * @return 
-	 */
-	private boolean shouldSkipTile(Tile t) {
-	}
-
-	/**
-	 * 
-	 * @param t 
-	 */
-	private void processTileForResource(Tile t) {
-	}
-
-	/**
-	 * 
-	 * @param n 
-	 * @param r 
-	 */
-	private void distributeResourceToPlayer(Node n, Resources r) {
-	}
-
-	/**
-	 * 
 	 * @param player 
 	 * @param nodeId1 
 	 * @param nodeId2 
@@ -202,5 +171,19 @@ public class Board {
 	 * @param nodeId 
 	 */
 	public void removeSettlement(Player player, int nodeId) {
+	}
+
+	/**
+	 * 
+	 * @param dice 
+	 */
+	public void registerTileWithDice(MultiDice dice) {
+	}
+
+	/**
+	 * 
+	 * @param players 
+	 */
+	public void placeInitialSettlement(Player[] players) {
 	}
 }

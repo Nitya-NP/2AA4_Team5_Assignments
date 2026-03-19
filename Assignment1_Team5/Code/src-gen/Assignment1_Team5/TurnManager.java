@@ -32,7 +32,7 @@ public class TurnManager {
 	/**
 	 * 
 	 */
-	private Dice dice;
+	private MultiDice dice;
 	/**
 	 * 
 	 */

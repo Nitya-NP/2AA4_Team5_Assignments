@@ -8,22 +8,30 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class MultiDice extends DiceRollSubject implements Dice {
+public abstract class DiceRollSubject {
 	/**
 	 * 
 	 */
-	private Dice[] dice;
+	public DiceRollObserver[] observers;
 
 	/**
 	 * 
-	 * @param dice 
+	 * @param ob 
 	 */
-	public void addDice(Dice dice) {
+	public void addObserver(DiceRollObserver ob) {
 	}
 
 	/**
 	 * 
+	 * @param ob 
 	 */
-	public void MultiDice() {
+	public void removeObserver(DiceRollObserver ob) {
+	}
+
+	/**
+	 * 
+	 * @param diceValue 
+	 */
+	protected void notifyObservers(int diceValue) {
 	}
 }

@@ -8,22 +8,10 @@ package Assignment1_Team5;
 /**
  * 
  */
-public class MultiDice extends DiceRollSubject implements Dice {
+public interface DiceRollObserver {
 	/**
 	 * 
+	 * @param diceValue 
 	 */
-	private Dice[] dice;
-
-	/**
-	 * 
-	 * @param dice 
-	 */
-	public void addDice(Dice dice) {
-	}
-
-	/**
-	 * 
-	 */
-	public void MultiDice() {
-	}
+	public void onDiceRolled(int diceValue);
 }

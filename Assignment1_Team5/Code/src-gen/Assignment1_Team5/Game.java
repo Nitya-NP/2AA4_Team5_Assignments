@@ -37,6 +37,10 @@ public class Game {
 	 * 
 	 */
 	public StateWriter statewriter;
+	/**
+	 * 
+	 */
+	public MultiDice dice;
 
 	/**
 	 * 
