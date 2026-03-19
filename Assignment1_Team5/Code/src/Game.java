@@ -29,7 +29,7 @@ public class Game {
 	/**
 	 * The Dice to play the game.
 	 */
-	private Dice dice;
+	private MultiDice dice;
 
 	private GameLogger logger;
 
@@ -59,7 +59,8 @@ public class Game {
 
 		RobberActionsManager robberManager = new RobberActionsManager(board, players);
 		board.setRobberManager(robberManager);
-
+		board.registerTileWithDice(dice);
+		
 		CommandManager commandManager = new CommandManager();
 		this.manager = new TurnManager(board, logger, dice, robberManager, commandManager);
 		

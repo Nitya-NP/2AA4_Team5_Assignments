@@ -11,7 +11,7 @@ public class TurnManager {
     // Attributes needed to manage the turn
     private Board board;
     private GameLogger logger;
-    private Dice dice;
+    private MultiDice dice;
 
     /**
      * To manage the undo/redo commands entered by the player
@@ -30,7 +30,7 @@ public class TurnManager {
      * @param dice in order to roll the dice when the player chooses to roll
      * @param robberManager to manage the robber actions when activated
      */
-    public TurnManager(Board board, GameLogger logger, Dice dice, RobberActionsManager robberManager, CommandManager commandManager) {
+    public TurnManager(Board board, GameLogger logger, MultiDice dice, RobberActionsManager robberManager, CommandManager commandManager) {
         this.board = board;
         this.logger = logger;
         this.dice = dice;
@@ -141,11 +141,7 @@ public class TurnManager {
             // After handling the robber actions, allow the player to take their action
             currState = TurnState.DO_ACTION;
         }
-        
-        // Produce resources based on the dice value if the player rolls a number other than 7
-        else {
-            board.produceResource(player, diceValue);
-        }
+    
     }
 
     /**
