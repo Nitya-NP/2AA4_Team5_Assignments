@@ -322,64 +322,6 @@ public class Board {
         }
     }
     
-    /**
-     * Handles resouce production for the player based on the dice roll
-     * if dice value is 7, no resouce are gained
-     * 
-     * @param player    the player gaining resource
-     * @param diceValue dice roll value
-     */
-    public void produceResource(Player player, int diceValue) {
-        if (diceValue == 7) {
-            logger.log(player.getPlayerId(), "rolled 7 (no resources)");
-            return;
-        }
-
-        for (Tile t : tiles) {
-            if (shouldSkipTile(t, diceValue)) {
-                continue;
-            }
-            processTileForResource(t);
-        }
-    }
-
-    /**
-     * Determines if a Tile should be skipped during resoruce production
-     */
-    private boolean shouldSkipTile(Tile t, int diceValue) {
-        return robberManager.isRobberOnTile(t) || t.getToken() != diceValue;
-    }
-
-    /**
-     * Processes resource production for a tile
-     * Each building adjacent to the tile produces resources
-     * 
-     * @param t Tile
-     */
-    private void processTileForResource(Tile t) {
-        for (Node n : t.getNodes()) {
-            if (n.isOccupied()) {
-                distributeResourceToPlayer(n, t.getResource());
-            }
-        }
-    }
-
-    /**
-     * Gives resources to the player owning the building on the node
-     * settlements produce 1 resource, cities produce 2.
-     * 
-     * @param n Node
-     * @param r Resource
-     */
-    private void distributeResourceToPlayer(Node n, Resources r) {
-        Player owner = n.getBuilding().getOwner();
-        Building b = n.getBuilding();
-
-        int amount = (b instanceof City) ? 2 : 1;
-        owner.addResource(r, amount);
-
-        logger.log(owner.getPlayerId(), "gained " + amount + " " + r + " from Node " + n.getNodeId());
-    }
 
     /**
      * Helper method
@@ -589,6 +531,20 @@ public class Board {
     
             logger.log(player.getPlayerId(),
                 "UNDO: removed Settlement at Node " + nodeId);
+        }
+    }
+
+      /**
+     * Registers all tiles with the dice so they recive dice roll notifications
+     * Also sets up the robber and logger for each tile
+     * 
+     * @param dice The MultiDice object that tiles will observe
+     */
+    public void registerTileWithDice(MultiDice dice) {
+        for (Tile t : tiles) {
+            t.setRobberManager(robberManager);
+            t.setLogger(logger);
+            dice.addObserver(t);
         }
     }
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * It holds a list of Dice objects and allows adding new dice to the list. 
  * The roll method will roll all the dice in the list and return the total result.
  */
-public class MultiDice implements Dice {
+public class MultiDice extends DiceRollSubject implements Dice {
 	// List to hold the dice
 	private List<Dice> diceList;
 
@@ -39,6 +39,7 @@ public class MultiDice implements Dice {
 		for (Dice die : diceList) {
 			sum += die.roll();
 		}
+		notifyObservers(sum); 
 		return sum;
 	}
 }
