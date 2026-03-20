@@ -37,6 +37,10 @@ public class Tile {
 	 * 
 	 */
 	public GameLogger logger;
+	/**
+	 * 
+	 */
+	public GameLogger gamelogger;
 
 	/**
 	 * 
