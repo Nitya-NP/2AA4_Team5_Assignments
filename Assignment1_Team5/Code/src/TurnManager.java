@@ -107,12 +107,16 @@ public class TurnManager {
                 // Handle the undo action for the player
                 if (!commandManager.undo()) {
                     logger.log(player.getPlayerId(), "No commnd to undo");
+                } else {
+                    StateWriter.writeState(board, robberManager);
                 }
                 break;
             case REDO:
                 // Handle the redo action for the player
                 if (!commandManager.redo()) {
                     logger.log(player.getPlayerId(), "No commnd to redo");
+                } else {
+                    StateWriter.writeState(board, robberManager);
                 }
                 break;
             default:

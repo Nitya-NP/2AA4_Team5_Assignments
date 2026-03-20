@@ -23,11 +23,6 @@ public class HumanPlayer extends Player {
         super(playerId);
         this.scanner = new Scanner(System.in);
         this.logger = logger;
-
-        this.addResource(Resources.LUMBER, 20000);
-        this.addResource(Resources.BRICK, 20000);
-        this.addResource(Resources.WOOL, 20000);
-        this.addResource(Resources.GRAIN, 20000);
     }
 
     /**
