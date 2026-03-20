@@ -41,10 +41,10 @@ public class Demonstrator {
 
         // Create 4 players
         Player[] players = new Player[4];
-        players[0] = new RuleBasedAI(1, logger);
+        
+        players[0] = new HumanPlayer(1,logger);
         players[1] = new HumanPlayer(2,logger);
-        players[2] = new HumanPlayer(3,logger);
-       
+        players[2] = new RuleBasedAI(3, logger);
         players[3] = new ComputerPlayer(4);
 
         // Create game with players and rounds

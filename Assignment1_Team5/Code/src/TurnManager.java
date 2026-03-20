@@ -1,5 +1,6 @@
 /**
- * This class controls the actions that occurs during a player's turn in the game.
+ * This class controls the actions that occurs during a player's turn in the
+ * game.
  * 
  * @author Ranica Chawla, Raadhikka Gupta
  */
@@ -24,28 +25,39 @@ public class TurnManager {
     private RobberActionsManager robberManager;
 
     /**
-     * Constructor for the TurnManager class in order to initialize the board, logger, dice, and robber manager.
-     * @param board the game board
-     * @param logger the game logger to log actions and events during the turn
-     * @param dice in order to roll the dice when the player chooses to roll
+     * Constructor for the TurnManager class in order to initialize the board,
+     * logger, dice, and robber manager.
+     * 
+     * @param board         the game board
+     * @param logger        the game logger to log actions and events during the
+     *                      turn
+     * @param dice          in order to roll the dice when the player chooses to
+     *                      roll
      * @param robberManager to manage the robber actions when activated
      */
-    public TurnManager(Board board, GameLogger logger, MultiDice dice, RobberActionsManager robberManager, CommandManager commandManager) {
+    public TurnManager(Board board, GameLogger logger, MultiDice dice, RobberActionsManager robberManager,
+            CommandManager commandManager) {
         this.board = board;
         this.logger = logger;
         this.dice = dice;
         this.robberManager = robberManager;
         this.commandManager = commandManager;
     }
-    
+
     /**
-     * Executes a player's turn by managing the sequence of actions based on the current state of the turn.
+     * Executes a player's turn by managing the sequence of actions based on the
+     * current state of the turn.
+     * 
      * @param player The current player whose turn is being executed
      */
     public void executeTurn(Player player) {
         // Start the turn by setting the current state to START_TURN
         currState = TurnState.START_TURN;
-        
+
+        if (player instanceof RuleBasedAI) {
+            ((RuleBasedAI) player).startTurn();
+        }
+
         // Continue to manage the turn until the player decides to end it by passing
         while (currState != TurnState.END_TURN) {
             // Get the player's input for their action during the turn
@@ -56,16 +68,17 @@ public class TurnManager {
     }
 
     /**
-     * Manages the player's action during their turn based on their input. 
+     * Manages the player's action during their turn based on their input.
      * The player can choose to roll, list resources, pass, or build structures.
+     * 
      * @param player The player whose turn is being managed
-     * @param input The action chosen by the player
+     * @param input  The action chosen by the player
      */
     private void manageTurn(Player player, PlayerCommand command) {
         UserInput input = command.getAction();
 
         // Handle the player's action based on their input
-        switch(input) {
+        switch (input) {
             case ROLL:
                 // Handle the roll action
                 handleRoll(player);
@@ -105,10 +118,13 @@ public class TurnManager {
     }
 
     /**
-     * Handles the roll action for the player. 
-     * If the player rolls a 7, the robber is activated and the player must discard half of their resource cards, 
-     * move the robber, and steal a resource from another player. 
-     * If the player rolls any other number, resources are produced based on the dice value.
+     * Handles the roll action for the player.
+     * If the player rolls a 7, the robber is activated and the player must discard
+     * half of their resource cards,
+     * move the robber, and steal a resource from another player.
+     * If the player rolls any other number, resources are produced based on the
+     * dice value.
+     * 
      * @param player The player who is rolling the dice
      */
     private void handleRoll(Player player) {
@@ -122,14 +138,14 @@ public class TurnManager {
         int diceValue = roll(player);
 
         // If the player rolls a 7, activate the robber and manage the robber actions
-        if (currState == TurnState.ROBBER) {
+        if (diceValue==7) {
             logger.log(player.getPlayerId(), "Robber activated!");
             // Discard half the cards
             robberManager.discardResourceCards();
 
             // Move the robber
             robberManager.moveRobber(board);
-            StateWriter.writeState(board, robberManager); 
+            StateWriter.writeState(board, robberManager);
 
             // Steal a resource from another player
             Player victim = robberManager.chooseVictim(player);
@@ -141,11 +157,17 @@ public class TurnManager {
             // After handling the robber actions, allow the player to take their action
             currState = TurnState.DO_ACTION;
         }
+        else{
+            currState=TurnState.DO_ACTION;
+        }
+        
     
+
     }
 
     /**
      * Handles the list action for the player to show their current resources.
+     * 
      * @param player The current player
      */
     private void handleList(Player player) {
@@ -154,57 +176,69 @@ public class TurnManager {
 
     /**
      * Handles the go action for the player to end their turn.
+     * 
      * @param player The current player
      */
     private void handleGo(Player player) {
-        if (!isValidAction(player)) return;
+        if (!isValidAction(player))
+            return;
 
         logger.log(player.getPlayerId(), "passes");
         currState = TurnState.END_TURN;
     }
 
     /**
-     * Handles the build settlement action for the player to build a settlement on the board.
+     * Handles the build settlement action for the player to build a settlement on
+     * the board.
+     * 
      * @param player The current player
      * @param nodeId the location to build the settlement
      */
     private void handleBuildSettlement(Player player, int nodeId) {
-        if (!isValidAction(player)) return;
+        if (!isValidAction(player))
+            return;
 
         Command cmd = new BuildSettlementCommand(board, player, nodeId);
         commandManager.executeCommand(cmd);
-        StateWriter.writeState(board, robberManager); 
+        StateWriter.writeState(board, robberManager);
     }
 
     /**
-     * Handles the build city action for the player to upgrade a settlement to a city on the board.
+     * Handles the build city action for the player to upgrade a settlement to a
+     * city on the board.
+     * 
      * @param player The current player
      * @param nodeId the location to build the city
      */
     private void handleBuildCity(Player player, int nodeId) {
-        if (!isValidAction(player)) return;
+        if (!isValidAction(player))
+            return;
 
         Command cmd = new BuildCityCommand(board, player, nodeId);
         commandManager.executeCommand(cmd);
-        StateWriter.writeState(board, robberManager); 
+        StateWriter.writeState(board, robberManager);
     }
 
     /**
      * Handles the build road action for the player to build a road on the board.
+     * 
      * @param player
      * @param fromNodeId the first node provided by player
-     * @param toNodeId the second node provided by player
+     * @param toNodeId   the second node provided by player
      */
     private void handleBuildRoad(Player player, int fromNodeId, int toNodeId) {
-        if (!isValidAction(player)) return;
+        if (!isValidAction(player))
+            return;
 
         Command cmd = new BuildRoadCommand(board, player, fromNodeId, toNodeId);
         commandManager.executeCommand(cmd);
-        StateWriter.writeState(board, robberManager); 
+        StateWriter.writeState(board, robberManager);
     }
 
     /**
-     * Checks if the player's action is valid based on the current state of the turn.
+     * Checks if the player's action is valid based on the current state of the
+     * turn.
+     * 
      * @param player The current player
      * @return true if the action is valid, false otherwise
      */
@@ -218,19 +252,21 @@ public class TurnManager {
     }
 
     /**
-     * Rolls the dice for the player and updates the current state of the turn based on the dice value.
+     * Rolls the dice for the player and updates the current state of the turn based
+     * on the dice value.
+     * 
      * @param player the player who is rolling the dice
      * @return the value of the rolled dice
      */
     private int roll(Player player) {
-        //  Roll the dice and log the result
+        // Roll the dice and log the result
         int diceValue = dice.roll();
         logger.log(player.getPlayerId(), "rolled " + diceValue);
 
         // If the player rolls a 7, activate the robber
         if (diceValue == 7) {
             currState = TurnState.ROBBER;
-        } else {    
+        } else {
             // If the player rolls any other number, allow them to take their action
             currState = TurnState.DO_ACTION;
         }
