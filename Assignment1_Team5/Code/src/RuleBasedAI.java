@@ -13,6 +13,7 @@ public class RuleBasedAI extends ComputerPlayer {
     private ActionEvaluator actionEvaluator;
     private ConstraintChecker constraintChecker;
     private Random random = new Random();
+    private boolean hasRolled = false;  
 
     /**
      * Constructs a new RuleBasedAI player
@@ -57,6 +58,11 @@ public class RuleBasedAI extends ComputerPlayer {
      */
     @Override
     public PlayerCommand takeTurn() {
+
+        if (!hasRolled) {
+            hasRolled = true;
+            return new PlayerCommand(UserInput.ROLL, 0, 0);
+        }
     
         PlayerCommand command = constraintChecker.check();
         if (command != null) {
@@ -80,6 +86,9 @@ public class RuleBasedAI extends ComputerPlayer {
         }
 
         AIAction chosen = bestActions.get(random.nextInt(bestActions.size()));
+        if (chosen.action == UserInput.GO) {
+            hasRolled = false;
+        }
         
         return new PlayerCommand(chosen.action, chosen.node1, chosen.node2);
     }

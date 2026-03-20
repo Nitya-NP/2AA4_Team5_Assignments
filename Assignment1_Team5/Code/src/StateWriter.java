@@ -62,7 +62,7 @@ public class StateWriter {
             
             sb.append("}");
             
-            FileWriter file = new FileWriter("../visualize/state.json");
+            FileWriter file = new FileWriter("C:\\Users\\nitve\\OneDrive\\Documents\\2AA4_Team5_Assignments\\Assignment1_Team5\\Code\\visualize\\state.json");
             file.write( sb.toString());
             file.close();
             

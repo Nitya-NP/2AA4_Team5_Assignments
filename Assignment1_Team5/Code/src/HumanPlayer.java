@@ -14,6 +14,7 @@ public class HumanPlayer extends Player {
 
     // Tracks whether the player has already rolled the dice this turn
     private boolean hasRolled = false;
+    
 
     /**
      * Constructs a HumanPlayer with given player ID

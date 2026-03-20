@@ -53,36 +53,42 @@ public class Game {
 	 * Starts the game and runs till a player wins or max number of rounds is reached
 	 */
 	public void start() {
-		// build the board, robber, and turn manager
-		this.board = new Board(this.logger);
-		board.placeInitialSettlements(players);
+    // build the board, robber, and turn manager
+    this.board = new Board(this.logger);
+    board.placeInitialSettlements(players);
+    
+    for (Player p : players) {
+        if (p instanceof RuleBasedAI) {
+            ((RuleBasedAI) p).setBoard(board);
+            ((RuleBasedAI) p).setAllPlayers(players);
+        }
+	
+    }
+    
+    RobberActionsManager robberManager = new RobberActionsManager(board, players);
+    board.setRobberManager(robberManager);
+    board.registerTileWithDice(dice);
+    
+    CommandManager commandManager = new CommandManager();
+    this.manager = new TurnManager(board, logger, dice, robberManager, commandManager);
+    
+    boolean gameOver = false; // to check if game over
 
-		RobberActionsManager robberManager = new RobberActionsManager(board, players);
-		board.setRobberManager(robberManager);
-		board.registerTileWithDice(dice);
-		
-		CommandManager commandManager = new CommandManager();
-		this.manager = new TurnManager(board, logger, dice, robberManager, commandManager);
-		
-		boolean gameOver = false; // to check if game over
+    // Continue to play rounds till the game ends
+    while (!gameOver && roundsPlayed < maxRounds) {
+        playRound();
+        roundsPlayed++;
 
-		StateWriter.writeState(board, robberManager); 
-		// Continue to play rounds till the game ends
-		while (!gameOver && roundsPlayed < maxRounds) {
-			playRound();
-			roundsPlayed++;
-
-			// Check if any player (not null) has reached the score to win
-			for (Player p : players) {
-				if (p != null && p.getPoints() >= 10) {
-					gameOver = true;
-					break;
-				}
-			}
-			logger.endTurn(); // To end the turn and increment the round counter in the logger.
-		}
-	}
-
+        // Check if any player (not null) has reached the score to win
+        for (Player p : players) {
+            if (p != null && p.getPoints() >= 10) {
+                gameOver = true;
+                break;
+            }
+        }
+        logger.endTurn(); // To end the turn and increment the round counter in the logger.
+    }
+}
 	/**
 	 * Plays a single round of the game
 	 */
