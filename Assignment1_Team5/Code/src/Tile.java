@@ -80,7 +80,7 @@ public class Tile implements DiceRollObserver{
         }
 
 		//Distribute resources
-        System.out.println("Tile " + tileID + " producing " + resource + "!");
+        System.out.println("Tile " + tileID + " producing " + resource);
         distributeResources();
 	}
 
@@ -124,11 +124,12 @@ public class Tile implements DiceRollObserver{
         }
     }
 
-	// Setter methods for dependencies
+	// Setter methods for robber
     public void setRobberManager(RobberActionsManager robber) {
         this.robber = robber;
     }
 
+	//Setter mehtods for logger
     public void setLogger(GameLogger logger) {
         this.logger = logger;
     }

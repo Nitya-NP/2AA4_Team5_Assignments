@@ -61,6 +61,7 @@ public class GameLogger {
      */
     public void log(int playerId, String action) {
         logger.info(()-> start(playerId) + action);
+        
     }
 
     /**

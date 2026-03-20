@@ -1,5 +1,5 @@
 {
-  "robber_coordinate": 16,
+  "robber_coordinate": 6,
   "roads": [
     { "a": 0, "b": 1, "owner": "RED" },
     { "a": 1, "b": 2, "owner": "RED" },
@@ -8,7 +8,9 @@
     { "a": 10, "b": 11, "owner": "ORANGE" },
     { "a": 11, "b": 12, "owner": "ORANGE" },
     { "a": 38, "b": 39, "owner": "WHITE" },
-    { "a": 39, "b": 35, "owner": "WHITE" }
+    { "a": 39, "b": 35, "owner": "WHITE" },
+    { "a": 4, "b": 12, "owner": "ORANGE" },
+    { "a": 3, "b": 4, "owner": "ORANGE" }
   ],
   "buildings": [
 { "node": 0, "owner": "RED", "type": "SETTLEMENT" },
