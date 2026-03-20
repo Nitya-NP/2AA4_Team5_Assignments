@@ -83,9 +83,24 @@ public class GameLogicTest {
         RobberActionsManager robber = new RobberActionsManager(board, players);
         board.setRobberManager(robber);
 
+        Tile targetTile = null;
+        for (Tile tile : board.getTile()) {
+            if (tile.getToken() == 8 && tile.getResource() != Resources.NOTHING) {
+                targetTile = tile;
+                break;
+            }
+        }
+        assertNotNull(targetTile);
+
+        Node node = targetTile.getNodes()[0];
+        node.setBuilding(new Settlement(player));
+
+        targetTile.setRobberManager(robber);
+        targetTile.setLogger(log);
+
         // Compares if the old resource matches new one
         int prev = player.getTotalResources();
-        board.produceResource(player, 8);
+        targetTile.onDiceRolled(8);
         int curr = player.getTotalResources();
 
         assertTrue(curr >= prev); 
@@ -103,9 +118,24 @@ public class GameLogicTest {
         RobberActionsManager robber = new RobberActionsManager(board, players);
         board.setRobberManager(robber);
 
+        Tile targetTile = null;
+        for (Tile tile : board.getTile()) {
+            if (tile.getToken() == 8 && tile.getResource() != Resources.NOTHING) {
+                targetTile = tile;
+                break;
+            }
+        }
+        assertNotNull(targetTile);
+
+        Node node = targetTile.getNodes()[0];
+        node.setBuilding(new Settlement(player));
+
+        targetTile.setRobberManager(robber);
+        targetTile.setLogger(log);
+
         // Compares if the old resource matches new one
         int prev = player.getTotalResources();
-        board.produceResource(player, 7);
+        targetTile.onDiceRolled(7);
         int curr = player.getTotalResources();
 
         assertEquals(prev, curr);
