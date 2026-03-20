@@ -42,20 +42,24 @@ public class CommandManager {
     /**
      * Undoes the most recently executed command.
      */
-    public void undo() {
+    public boolean undo() {
         if (currentCommand >= 0) {
             commandBuffer.get(currentCommand).undo();
             currentCommand--;
+            return true;
         }
+        return false;
     }
 
     /**
      * Redoes the next command in the history if available.
      */
-    public void redo() {
+    public boolean redo() {
         if (currentCommand < commandBuffer.size() - 1) {
             currentCommand++;
             commandBuffer.get(currentCommand).redo();
+            return true;
         }
+        return false;
     }
 }

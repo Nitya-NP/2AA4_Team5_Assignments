@@ -105,11 +105,15 @@ public class TurnManager {
                 break;
             case UNDO:
                 // Handle the undo action for the player
-                commandManager.undo();
+                if (!commandManager.undo()) {
+                    logger.log(player.getPlayerId(), "No commnd to undo");
+                }
                 break;
             case REDO:
                 // Handle the redo action for the player
-                commandManager.redo();
+                if (!commandManager.redo()) {
+                    logger.log(player.getPlayerId(), "No commnd to redo");
+                }
                 break;
             default:
                 logger.log(player.getPlayerId(), "Invalid action.");

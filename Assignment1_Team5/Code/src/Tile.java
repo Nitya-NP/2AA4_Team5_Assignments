@@ -75,12 +75,12 @@ public class Tile implements DiceRollObserver{
 		if(shouldSkipTile(diceValue)) return;
 
 		if(resource == Resources.NOTHING) {
-            System.out.println("Tile " + tileID + " is desert - no resources");
+            //System.out.println("Tile " + tileID + " is desert - no resources");
             return;
         }
 
 		//Distribute resources
-        System.out.println("Tile " + tileID + " producing " + resource);
+        //System.out.println("Tile " + tileID + " producing " + resource);
         distributeResources();
 	}
 
