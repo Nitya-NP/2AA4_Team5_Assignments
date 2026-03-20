@@ -115,7 +115,7 @@ public class BuildingLogicTest {
 		board.setRobberManager(robberManager);
 
         // Simulate managing the turn
-        TurnManager turnManager = new TurnManager(board, new GameLogger(), new MultiDice(), robberManager);
+        TurnManager turnManager = new TurnManager(board, new GameLogger(), new MultiDice(), robberManager, new CommandManager());
         // Attempt to upgrade the settlement at the first node to a city
         for (int i = 0; i < 80; i++) {
             turnManager.executeTurn(player);

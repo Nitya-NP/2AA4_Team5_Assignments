@@ -88,10 +88,9 @@ public class PlayerLogicTest {
 		player[0]= new ComputerPlayer(1);
     	GameLogger logger = new GameLogger();
     	Board board = new Board(logger);
-		Dice d= new MultiDice();
 		RobberActionsManager robberManager = new RobberActionsManager(board,player);
 		board.setRobberManager(robberManager);
-		TurnManager t= new TurnManager(board, logger, d, robberManager);
+		TurnManager t= new TurnManager(board, logger, new MultiDice(), robberManager, new CommandManager());
 
 		int before = player[0].getPoints();
 
@@ -111,12 +110,9 @@ public class PlayerLogicTest {
 		player[0]= new ComputerPlayer(1);
     	GameLogger logger = new GameLogger();
     	Board board = new Board(logger);
-		Dice d= new MultiDice();
 		RobberActionsManager robberManager = new RobberActionsManager(board,player);
 		board.setRobberManager(robberManager);
-		TurnManager t= new TurnManager(board, logger, d, robberManager);
-    
-    	
+		TurnManager t= new TurnManager(board, logger, new MultiDice(), robberManager, new CommandManager());
 
     	player[0].addResource(Resources.LUMBER, 4);
     	player[0].addResource(Resources.BRICK, 4);
