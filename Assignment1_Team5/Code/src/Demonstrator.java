@@ -17,7 +17,7 @@ public class Demonstrator {
         int rounds = 0;
 
         //Reads the file
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\nitve\\OneDrive\\Documents\\2AA4_Team5_Assignments\\Assignment1_Team5\\Code\\src\\turns.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("turns.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();
