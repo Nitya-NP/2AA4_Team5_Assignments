@@ -33,13 +33,15 @@ public class CommandManager {
 
 	/**
 	 * 
+	 * @return 
 	 */
-	public void undo() {
+	public boolean undo() {
 	}
 
 	/**
 	 * 
+	 * @return 
 	 */
-	public void redo() {
+	public boolean redo() {
 	}
 }

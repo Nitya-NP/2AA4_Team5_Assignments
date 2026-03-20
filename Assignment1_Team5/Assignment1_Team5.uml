@@ -849,8 +849,16 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_mB2eoCLhEfG-iZhKuvm9iQ" name="executeCommand">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_oJVvkCLhEfG-iZhKuvm9iQ" name="command" type="_-TkLgCLgEfG-iZhKuvm9iQ"/>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_qbKoQCLhEfG-iZhKuvm9iQ" name="undo"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_r61EMCLhEfG-iZhKuvm9iQ" name="redo"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qbKoQCLhEfG-iZhKuvm9iQ" name="undo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_d-kKcCSeEfGU4YVZ7Bs5Bw" name="Parameter1" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_r61EMCLhEfG-iZhKuvm9iQ" name="redo">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_frtBsCSeEfGU4YVZ7Bs5Bw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_w5SiQCLhEfG-iZhKuvm9iQ" name="BuildSettlementCommand">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_yvJQoCLhEfG-iZhKuvm9iQ" name="nodeId" visibility="private">
