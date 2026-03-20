@@ -68,7 +68,7 @@ public class Tile implements DiceRollObserver{
 	public void onDiceRolled(int diceValue) {
 
 		if(this.token!=diceValue){
-			System.out.println("Tile "+tileID +" skipped - token "+ token + " != " +diceValue);
+			//System.out.println("Tile "+tileID +" skipped - token "+ token + " != " +diceValue);
 			return; 
 		}
 
